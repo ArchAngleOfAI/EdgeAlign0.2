@@ -42,8 +42,34 @@ _None recorded yet._
 
 _None recorded yet._
 
+## Training smoke test (`smoke_train.py`)
+
+- Purpose: verify the forward/backward/optimizer loop works for the
+  Qwen3-0.6B architecture on this cluster/env, and compare random-init
+  vs. loading real pretrained weights, all else held equal.
+- Fixed setup: seq_len=1024, batch_size=1, lr=5e-5 flat (AdamW, no
+  schedule), 10 steps, fp32, seed=0, same fixed synthetic random-token
+  batch (`torch.randint` over full vocab) reused every step in both
+  runs — not real text.
+- `--pretrained` flag switches `from_config` (random init) →
+  `from_pretrained` (real checkpoint weights) with nothing else
+  changed, for apples-to-apples comparison.
+- **Result caveat:** the pretrained run's initial loss (13.60) is
+  *higher* than the random-init run's (12.12). This is expected, not a
+  bug: the data is pure random noise tokens, so a random-init model's
+  near-uniform output distribution sits close to the uniform baseline
+  (`ln(151936) ≈ 11.9`), while a pretrained model's confident language
+  priors make it more "surprised" by pure noise. Any comparison of
+  these two modes should switch to real text data to be meaningful.
+- GPU choice: GPU 4 (initially requested) was OOM at the time (~37GB/40GB
+  already used by another job) — ran on GPU 7 instead (idle). GPU
+  availability on this shared cluster changes run to run; always check
+  `nvidia-smi` first.
+
 ## Changelog (durable, high-level only)
 
 - 2026-09-18: Repo initialized (`git init`, branch renamed to `main`).
   `AGENT.md`, `MEMORY.md`, `SHORT_MEMORY.md` scaffolded per user's
   standing instructions.
+- 2026-09-18: `smoke_train.py` added and run (random-init and
+  pretrained variants) on GPU 7. See "Training smoke test" above.

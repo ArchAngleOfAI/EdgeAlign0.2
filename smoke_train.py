@@ -1,9 +1,10 @@
-"""Smoke test: 10 training steps on Qwen3-0.6B architecture, random-init weights.
+"""Smoke test: 10 training steps on Qwen3-0.6B architecture.
 
-Loads only the model's config/architecture from the local checkpoint dir
-(no pretrained weights), then runs a handful of optimizer steps on
-synthetic random token batches to verify the forward/backward/optimizer
-loop works end-to-end on this GPU/env.
+By default loads only the model's config/architecture from the local
+checkpoint dir (no pretrained weights, random init). With --pretrained,
+loads the actual pretrained weights from the same checkpoint instead,
+everything else (seed, synthetic batch, hyperparameters) held identical,
+so the two runs are a direct random-init-vs-pretrained comparison.
 
 Assumptions made (not specified by the user — flagged here, adjust if wrong):
 - dtype: float32 (not the checkpoint's declared bf16), to isolate the
@@ -11,8 +12,11 @@ Assumptions made (not specified by the user — flagged here, adjust if wrong):
 - Same fixed random batch is reused across all 10 steps (rather than a
   fresh random batch each step), so a decreasing loss is a meaningful
   signal that backprop/optimizer are actually working.
-- Fixed seed (0) for reproducibility.
+- Fixed seed (0) for reproducibility, and used for both the model init
+  (random-init case) and the synthetic data generation in both cases.
 """
+
+import argparse
 
 import torch
 from transformers import AutoConfig, AutoModelForCausalLM
@@ -25,11 +29,19 @@ NUM_STEPS = 10
 SEED = 0
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--pretrained", action="store_true",
+                         help="Load pretrained weights instead of random init.")
+    args = parser.parse_args()
+
     torch.manual_seed(SEED)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     config = AutoConfig.from_pretrained(MODEL_PATH)
-    model = AutoModelForCausalLM.from_config(config, torch_dtype=torch.float32)
+    if args.pretrained:
+        model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, dtype=torch.float32)
+    else:
+        model = AutoModelForCausalLM.from_config(config, dtype=torch.float32)
     model.to(device)
     model.train()
 
@@ -38,7 +50,8 @@ def main():
     input_ids = torch.randint(0, config.vocab_size, (BATCH_SIZE, SEQ_LEN), device=device)
     labels = input_ids.clone()
 
-    print(f"device={device}, vocab_size={config.vocab_size}, "
+    print(f"mode={'pretrained' if args.pretrained else 'random-init'}, "
+          f"device={device}, vocab_size={config.vocab_size}, "
           f"seq_len={SEQ_LEN}, batch_size={BATCH_SIZE}, lr={LR}")
     print(f"model params: {sum(p.numel() for p in model.parameters()):,}")
 
