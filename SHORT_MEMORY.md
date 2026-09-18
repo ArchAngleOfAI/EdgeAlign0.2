@@ -41,8 +41,17 @@ once something becomes durable project knowledge instead of active state.
   bug. Committed as `58aa973` (scaffolding + first script version);
   `--pretrained` flag change not yet committed.
 
+- 2026-09-18: Added `--data fineweb-edu` to `smoke_train.py` — real
+  text from `HuggingFaceFW/fineweb-edu` (`sample-10BT`, first shard
+  only), read via direct `fsspec`+`pyarrow` row-group access (NOT
+  `datasets` streaming — that downloaded the whole ~2GB shard first;
+  see MEMORY.md for why). Fresh seq_len=1024 chunk per step. Ran
+  random-init variant on GPU 4 (idle at check time): loss 12.07 → 10.82
+  over 10 steps. Not yet committed. Haven't run `--pretrained` on real
+  data yet — didn't assume the user wants that repeated, will ask/wait.
+
 ## Open Questions (updated)
 
-- Confirm whether future runs should use real text data instead of
-  synthetic random tokens — the pretrained-vs-random-init loss
-  comparison is only really meaningful on real text.
+- Whether to also run `--pretrained --data fineweb-edu` for a
+  pretrained-vs-random-init comparison on real text (more meaningful
+  than the earlier synthetic-noise comparison).
