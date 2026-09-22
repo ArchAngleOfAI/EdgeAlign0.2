@@ -50,8 +50,111 @@ once something becomes durable project knowledge instead of active state.
   over 10 steps. Not yet committed. Haven't run `--pretrained` on real
   data yet — didn't assume the user wants that repeated, will ask/wait.
 
+## DEAD job (started 2026-09-18 21:05, found dead 2026-09-22)
+
+- `distill_softprompt.py --steps 100000 --batch-size 4 --checkpoint-every 10000`
+  was running on GPU 6 (PID 2669321), log at `logs/distill_100k.log`
+  (gitignored, not in repo). On 2026-09-22 found PID no longer exists;
+  log frozen at step 17262/100000 since 2026-09-21 20:23 UTC (~22h before
+  discovery) with no error visible in the tail -- cause of death not
+  investigated. Only checkpoint on disk is `embedding2_step10000.pt`
+  (steps 10000->17262 lost). That checkpoint uses the OLD save schema
+  (`embedding2_state_dict` only) and is INCOMPATIBLE with the current
+  `--resume` code (now also expects `lm_head_state_dict` and
+  `last_layer_state_dict` -- see below), so it can't be resumed from
+  as-is. Not yet decided whether to archive/delete it or investigate
+  the crash; ask the user before touching it.
+
+## KD alignment confirmed correct (2026-09-22)
+
+- User asked whether the teacher-stream vs. student-stream position
+  offset (student has 100 soft-prefix tokens before the real prompt) was
+  handled correctly in the KD loss. Traced it through: causal-LM logits
+  at position p always predict position p+1, so `receiver_forward`'s
+  slice `logits_full[:, 100:, :]` lines up index-for-index with
+  `teacher_logits` by construction -- no shift bug. Full derivation is
+  in the conversation, not duplicated in code comments.
+
+## Soft-prompt-length sweep (2026-09-22)
+
+- Built `sweep_softprompt_length.py`: no training, pretrained weights
+  only, measures initial KD loss for soft-prompt length 1..200
+  (averaged over 5 FineWeb-Edu prompts). Rolls out the full length-200
+  softprompt ONCE per prompt (causal, so prefixes are reusable) rather
+  than 200 separate rollouts.
+- **Counterintuitive finding**: KD loss does NOT decrease with longer
+  soft-prompts pre-training. It rises sharply from L=1 (~0.073) to a
+  peak around L=40-50 (~0.54), then plateaus/slowly declines to ~0.46
+  by L=200 -- never recovering to anywhere near the L=1 level. Plot:
+  `kd_loss_vs_softprompt_length.png`. Likely cause (not confirmed):
+  embedding2 starts as a clone of the tied embedding table, so a
+  1-token soft-prefix barely perturbs the receiver's input relative to
+  the teacher, but the untrained autoregressive rollout compounds
+  drift over more steps, plus growing RoPE-position offset for the real
+  prompt tokens. Whether training fixes this is untested.
+
+## Trainable set expanded (2026-09-22, per user request)
+
+- `qwen_dual_embedding.build_softprompt_generator` now also trains the
+  student encoder's LM_head and its transformer's LAST decoder layer,
+  in addition to `embedding2`. LM_head was TIED to `embed_tokens`
+  (Embedding1, tie_word_embeddings=True, confirmed same data_ptr) in
+  this checkpoint -- untied it first (own cloned Parameter) per user's
+  explicit choice, so Embedding1 (real-token input embedding) stays
+  frozen exactly as the 2026-09-18 correction intended. Verified via a
+  real backward pass: embed_tokens and layer 26 get no grad, lm_head +
+  layer 27 + embedding2 all do. New trainable count: 326,895,872 (was
+  155,582,464).
+- `distill_softprompt.py`'s optimizer/checkpoint/resume all updated to
+  cover the 3 trainable pieces (was just embedding2).
+
+## Gradient accumulation added, NO gradient checkpointing (2026-09-22)
+
+- New `--grad-accum-steps` flag; `--steps` counts OPTIMIZER steps, each
+  running `grad_accum_steps` micro-batches (backward scaled by 1/N)
+  before one `optimizer.step()`. Global batch size = batch-size *
+  grad-accum-steps.
+- Gradient checkpointing was explicitly NOT implemented after
+  measuring it wouldn't help: `model.gradient_checkpointing_enable()`
+  forces `use_cache=False` in HF, which would silently break
+  `generate_softprompt`'s KV-cache-based rollout (confirmed
+  empirically -- past_key_values comes back None, each step would lose
+  all prior context). Checkpointing only the receiver (which has no
+  cache dependency) was measured to save just ~0.5GB / 1.6% of peak
+  memory (30.44GB -> 29.96GB at batch=4) since the encoder rollout
+  dominates peak memory (~86%) and isn't checkpointable this way. User
+  confirmed: skip GC, grad-accum-only is fine (receiver has zero
+  trainable params anyway, so accumulation only ever touches the
+  encoder side by construction).
+- Added explicit `torch.OutOfMemoryError` handling per micro-batch:
+  logs step/micro-batch index + allocated/reserved memory before
+  re-raising, so an OOM is unambiguous in the log instead of a bare
+  traceback.
+
+## Active job: bs64/ga16 test (started 2026-09-22, in progress)
+
+- `distill_softprompt.py --steps 63 --batch-size 4 --grad-accum-steps 16`
+  on GPU 7 (only sufficiently idle GPU at launch time; GPU 4 got grabbed
+  by another user's job mid-session), with
+  `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` (mitigates the
+  fragmentation-driven OOM warnings seen during benchmarking -- peaked
+  at 33.07GB allocated on a near-idle GPU with only ~4.4GB used by
+  others, i.e. margin was already thin). 63 steps x 16 micro-batches =
+  1008 micro-batches, rounded up from the user's "1000 step test"
+  (clarified to mean ~1000 micro-batches, not 1000 optimizer steps --
+  1000 optimizer steps would have been ~3.4 days). Log:
+  `logs/global_bs64_ga16_test.log` (gitignored). Benchmarked
+  ~18.5s/micro-batch -> ETA ~5.2 hours from launch. Check
+  `ps aux | grep distill_softprompt` and tail the log if picking this up
+  fresh; still need to plot the kd_loss curve to PNG once it finishes
+  and report final OOM status.
+
 ## Open Questions (updated)
 
 - Whether to also run `--pretrained --data fineweb-edu` for a
   pretrained-vs-random-init comparison on real text (more meaningful
   than the earlier synthetic-noise comparison).
+- Whether the counterintuitive soft-prompt-length sweep result also
+  holds AFTER training (untested).
+- What to do with the dead 100k job's orphaned, schema-incompatible
+  checkpoint (`checkpoints/embedding2_step10000.pt`).

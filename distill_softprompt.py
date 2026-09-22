@@ -46,6 +46,8 @@ manageable for a first correctness check. NUM_STEPS=10, matching the
 "smoke test" scale used throughout this session so far.
 """
 
+import os
+
 import torch
 import torch.nn.functional as F
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -58,6 +60,8 @@ NUM_SOFT_TOKENS = 100
 LR = 5e-5
 NUM_STEPS = 10
 KD_TEMPERATURE = 1.0
+CHECKPOINT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "checkpoints")
+CHECKPOINT_EVERY = 10_000
 
 
 def generate_softprompt(encoder_model, embedding2, prompt_ids, num_soft_tokens):
@@ -101,7 +105,32 @@ def receiver_forward(receiver_model, softprompt, prompt_ids):
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--steps", type=int, default=NUM_STEPS,
+                         help="Number of OPTIMIZER steps (each consists of --grad-accum-steps "
+                              "micro-batches accumulated before a single optimizer.step()).")
+    parser.add_argument("--batch-size", type=int, default=1,
+                         help="Per-micro-batch size.")
+    parser.add_argument("--grad-accum-steps", type=int, default=1,
+                         help="Micro-batches accumulated per optimizer step. Global batch size "
+                              "= batch-size * grad-accum-steps. Only student_encoder's trainable "
+                              "params (embedding2, lm_head, last layer) ever accumulate gradients "
+                              "-- teacher and receiver are fully frozen, so this is inherently "
+                              "grad accumulation on the encoder side only.")
+    parser.add_argument("--checkpoint-every", type=int, default=CHECKPOINT_EVERY)
+    parser.add_argument("--resume", type=str, default=None,
+                         help="Path to a checkpoint .pt file to resume from.")
+    args = parser.parse_args()
+    num_steps = args.steps
+    batch_size = args.batch_size
+    grad_accum_steps = args.grad_accum_steps
+    checkpoint_every = args.checkpoint_every
+    os.makedirs(CHECKPOINT_DIR, exist_ok=True)
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if device.type == "cuda":
+        torch.cuda.reset_peak_memory_stats(device)
 
     student_encoder, embedding2, w1, frozen_count, trainable_count = \
         build_softprompt_generator(device)
@@ -115,36 +144,95 @@ def main():
     teacher.eval()
     receiver.eval()
 
-    optimizer = torch.optim.AdamW([embedding2.weight], lr=LR)
+    # Trainable set (2026-09-22): embedding2 + the student encoder's untied
+    # LM_head + its transformer's last decoder layer -- see
+    # qwen_dual_embedding.build_softprompt_generator for what's frozen vs not.
+    trainable_params = (
+        [embedding2.weight, student_encoder.lm_head.weight]
+        + list(student_encoder.model.layers[-1].parameters())
+    )
+    optimizer = torch.optim.AdamW(trainable_params, lr=LR)
+
+    start_step = 0
+    previous_checkpoint_path = None
+    if args.resume:
+        ckpt = torch.load(args.resume, map_location=device)
+        embedding2.load_state_dict(ckpt["embedding2_state_dict"])
+        student_encoder.lm_head.load_state_dict(ckpt["lm_head_state_dict"])
+        student_encoder.model.layers[-1].load_state_dict(ckpt["last_layer_state_dict"])
+        optimizer.load_state_dict(ckpt["optimizer_state_dict"])
+        start_step = ckpt["step"]
+        previous_checkpoint_path = args.resume
+        print(f"resumed from {args.resume} at step {start_step}")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-    batch_iter = fineweb_edu_batches(tokenizer, PROMPT_LEN, batch_size=1)
+    batch_iter = fineweb_edu_batches(tokenizer, PROMPT_LEN, batch_size=batch_size)
 
-    print(f"device={device}, prompt_len={PROMPT_LEN}, num_soft_tokens={NUM_SOFT_TOKENS}, "
-          f"lr={LR}, kd_temperature={KD_TEMPERATURE}")
+    global_batch_size = batch_size * grad_accum_steps
+    print(f"device={device}, prompt_len={PROMPT_LEN}, batch_size={batch_size}, "
+          f"grad_accum_steps={grad_accum_steps}, global_batch_size={global_batch_size}, "
+          f"num_soft_tokens={NUM_SOFT_TOKENS}, lr={LR}, kd_temperature={KD_TEMPERATURE}, "
+          f"checkpoint_every={checkpoint_every}")
     print(f"frozen params (x2 instances + encoder backbone): ~{frozen_count:,} each  "
-          f"trainable (Embedding2): {trainable_count:,}")
+          f"trainable (embedding2 + lm_head + last layer): {trainable_count:,}")
 
-    for step in range(1, NUM_STEPS + 1):
-        prompt_ids = next(batch_iter).to(device)
-
-        softprompt = generate_softprompt(student_encoder, embedding2, prompt_ids, NUM_SOFT_TOKENS)
-
-        with torch.no_grad():
-            teacher_logits = teacher(input_ids=prompt_ids).logits
-
-        student_logits = receiver_forward(receiver, softprompt, prompt_ids)
-
-        student_log_probs = F.log_softmax(student_logits / KD_TEMPERATURE, dim=-1)
-        teacher_probs = F.softmax(teacher_logits / KD_TEMPERATURE, dim=-1)
-        kl_per_token = F.kl_div(student_log_probs, teacher_probs, reduction="none").sum(dim=-1)
-        loss = kl_per_token.mean()
-
+    for step in range(start_step + 1, num_steps + 1):
         optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+        accum_loss = 0.0
 
-        print(f"step {step:2d}/{NUM_STEPS}  kd_loss={loss.item():.6f}")
+        for micro_step in range(grad_accum_steps):
+            try:
+                prompt_ids = next(batch_iter).to(device)
+
+                softprompt = generate_softprompt(student_encoder, embedding2, prompt_ids, NUM_SOFT_TOKENS)
+
+                with torch.no_grad():
+                    teacher_logits = teacher(input_ids=prompt_ids).logits
+
+                student_logits = receiver_forward(receiver, softprompt, prompt_ids)
+
+                student_log_probs = F.log_softmax(student_logits / KD_TEMPERATURE, dim=-1)
+                teacher_probs = F.softmax(teacher_logits / KD_TEMPERATURE, dim=-1)
+                kl_per_token = F.kl_div(student_log_probs, teacher_probs, reduction="none").sum(dim=-1)
+                micro_loss = kl_per_token.mean()
+
+                # Scaled so the accumulated .grad matches the mean loss over the
+                # whole global batch, not the sum over micro-batches.
+                (micro_loss / grad_accum_steps).backward()
+                accum_loss += micro_loss.item()
+            except torch.OutOfMemoryError as e:
+                if device.type == "cuda":
+                    allocated = torch.cuda.memory_allocated(device) / 1e9
+                    reserved = torch.cuda.memory_reserved(device) / 1e9
+                    print(f"OOM at step {step}/{num_steps} micro-batch {micro_step + 1}/"
+                          f"{grad_accum_steps}: allocated={allocated:.2f}GB reserved={reserved:.2f}GB "
+                          f"error={e}", flush=True)
+                raise
+
+        optimizer.step()
+        loss_value = accum_loss / grad_accum_steps
+
+        print(f"step {step:3d}/{num_steps}  kd_loss={loss_value:.6f}"
+              + (f"  (avg over {grad_accum_steps} micro-batches)" if grad_accum_steps > 1 else ""))
+
+        if step % checkpoint_every == 0:
+            ckpt_path = os.path.join(CHECKPOINT_DIR, f"embedding2_step{step}.pt")
+            torch.save({
+                "step": step,
+                "embedding2_state_dict": embedding2.state_dict(),
+                "lm_head_state_dict": student_encoder.lm_head.state_dict(),
+                "last_layer_state_dict": student_encoder.model.layers[-1].state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+            }, ckpt_path)
+            if previous_checkpoint_path is not None and os.path.exists(previous_checkpoint_path):
+                os.remove(previous_checkpoint_path)
+            previous_checkpoint_path = ckpt_path
+            print(f"saved checkpoint: {ckpt_path} (previous checkpoint deleted)")
+
+    if device.type == "cuda":
+        allocated = torch.cuda.max_memory_allocated(device) / 1e9
+        reserved = torch.cuda.max_memory_reserved(device) / 1e9
+        print(f"peak GPU memory: allocated={allocated:.2f} GB  reserved={reserved:.2f} GB")
 
     print("done.")
 
