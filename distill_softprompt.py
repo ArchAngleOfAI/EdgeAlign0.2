@@ -106,6 +106,15 @@ def receiver_forward(receiver_model, softprompt, prompt_ids):
 
 def main():
     import argparse
+    import sys
+
+    # Redirected stdout (e.g. `> log.txt`) is fully block-buffered by
+    # default, not line-buffered -- with short per-step lines that can mean
+    # NO output reaches the log file until thousands of lines have
+    # accumulated, or the process exits. Force line buffering so progress
+    # (and a crash traceback) shows up in the log as it happens.
+    sys.stdout.reconfigure(line_buffering=True)
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--steps", type=int, default=NUM_STEPS,
                          help="Number of OPTIMIZER steps (each consists of --grad-accum-steps "
