@@ -169,3 +169,18 @@ once something becomes durable project knowledge instead of active state.
   ~0.2 per-batch noise). 3 trainable layers: held-out 0.708->0.438 in 57
   steps vs 1 layer 0.708->0.615. BPTT supplies 97% of embedding2 grad and
   amplifies early-token grads; LR 1e-3 is unstable.
+
+## Stability vs soft-prompt length (2026-09-29, done)
+
+- `diagnostics/stability_vs_length.py` (+ `run_stability.sh`): 30 steps on
+  one fixed batch per run, L in {8,16} x LR {5e-5,1e-3} x clip {off, 1.0}.
+  Write-up in `stability_report.md`, logs in `diagnostics/results/stability_*.log`.
+- The 4 L=100 runs were CANCELLED by the user; test 4 run B (20 steps) is the
+  only L=100 reference. Not yet run: L=100 with clipping.
+- Findings: LR 1e-3 jump shrinks with length (+0.56 L=100, +0.18 L=16,
+  +0.06 L=8); clip max_norm=1.0 did NOT remove the L=16 jump; clipping did
+  not slow training-batch learning at 5e-5. At LR 1e-3 the mean held-out
+  gain (~-0.2) hides 4/8 batches getting worse (held-out losses converge to
+  a narrow ~0.16-0.32 band).
+- GPU 0 threw a CUDA hardware error ("invalid access of peer GPU memory ...
+  hardware error") on 2026-09-29 -- avoid it; GPU 5 was used.
