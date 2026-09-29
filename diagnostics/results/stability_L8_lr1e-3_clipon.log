@@ -1,0 +1,34 @@
+L=8 lr=0.001 clip=max_norm=1.0 steps=30 batch=(4, 128) trainable=326,895,872
+held-out BEFORE: 0.406463  per-batch=[0.156151, 0.137173, 0.147463, 0.22477, 0.213532, 0.961285, 1.266214, 0.145116]
+step  1  kd_loss=0.234664  grad_norm_preclip=1.6984e+01  nan_or_inf=False
+step  2  kd_loss=0.151439  grad_norm_preclip=2.3417e+02  nan_or_inf=False
+step  3  kd_loss=0.117847  grad_norm_preclip=1.3893e+00  nan_or_inf=False
+step  4  kd_loss=0.091709  grad_norm_preclip=1.4186e+00  nan_or_inf=False
+step  5  kd_loss=0.141052  grad_norm_preclip=7.2139e-01  nan_or_inf=False
+step  6  kd_loss=0.171842  grad_norm_preclip=5.9808e-01  nan_or_inf=False
+step  7  kd_loss=0.198596  grad_norm_preclip=4.4091e-01  nan_or_inf=False
+step  8  kd_loss=0.195577  grad_norm_preclip=1.1037e+00  nan_or_inf=False
+step  9  kd_loss=0.228507  grad_norm_preclip=4.5903e-01  nan_or_inf=False
+step 10  kd_loss=0.180267  grad_norm_preclip=4.9238e-01  nan_or_inf=False
+step 11  kd_loss=0.224365  grad_norm_preclip=6.8600e-01  nan_or_inf=False
+step 12  kd_loss=0.219924  grad_norm_preclip=7.2347e-01  nan_or_inf=False
+step 13  kd_loss=0.210764  grad_norm_preclip=6.4640e-01  nan_or_inf=False
+step 14  kd_loss=0.202280  grad_norm_preclip=5.1117e-01  nan_or_inf=False
+step 15  kd_loss=0.195886  grad_norm_preclip=4.0055e-01  nan_or_inf=False
+step 16  kd_loss=0.191515  grad_norm_preclip=4.0374e-01  nan_or_inf=False
+step 17  kd_loss=0.187594  grad_norm_preclip=3.9879e-01  nan_or_inf=False
+step 18  kd_loss=0.183601  grad_norm_preclip=3.4733e-01  nan_or_inf=False
+step 19  kd_loss=0.179768  grad_norm_preclip=3.0497e-01  nan_or_inf=False
+step 20  kd_loss=0.176159  grad_norm_preclip=2.8490e-01  nan_or_inf=False
+step 21  kd_loss=0.172679  grad_norm_preclip=2.7087e-01  nan_or_inf=False
+step 22  kd_loss=0.169311  grad_norm_preclip=2.5488e-01  nan_or_inf=False
+step 23  kd_loss=0.166117  grad_norm_preclip=2.3342e-01  nan_or_inf=False
+step 24  kd_loss=0.163211  grad_norm_preclip=2.1073e-01  nan_or_inf=False
+step 25  kd_loss=0.160695  grad_norm_preclip=2.0530e-01  nan_or_inf=False
+step 26  kd_loss=0.158485  grad_norm_preclip=2.1550e-01  nan_or_inf=False
+step 27  kd_loss=0.156396  grad_norm_preclip=2.2165e-01  nan_or_inf=False
+step 28  kd_loss=0.154325  grad_norm_preclip=2.1791e-01  nan_or_inf=False
+step 29  kd_loss=0.152253  grad_norm_preclip=2.0477e-01  nan_or_inf=False
+step 30  kd_loss=0.150258  grad_norm_preclip=1.7613e-01  nan_or_inf=False
+held-out AFTER:  0.191078  per-batch=[0.18332, 0.18755, 0.156781, 0.197165, 0.183701, 0.204768, 0.208657, 0.206685]
+SUMMARY_JSON {"run": "stability_L8_lr1e-3_clipon", "L": 8, "lr": 0.001, "clip": true, "steps": 30, "loss_step1": 0.234663724899292, "loss_min": 0.09170863032341003, "loss_min_step": 4, "loss_final": 0.15025757253170013, "max_rise": 0.04934366047382355, "max_rise_step": 5, "n_rises_gt_0.1": 0, "final_gt_min_plus_0.1": false, "gnorm_mean": 8.823329490919908, "gnorm_max": 234.174560546875, "gnorm_cv": 4.7547196334482695, "any_nan_or_inf": false, "rel_param_change": 0.050295550376176834, "heldout_before": 0.40646309591829777, "heldout_after": 0.19107837975025177, "heldout_paired_diff": -0.215384716168046, "heldout_improved": 4, "sec_per_step": 1.2281610409418742, "losses": [0.234663724899292, 0.15143871307373047, 0.11784729361534119, 0.09170863032341003, 0.14105229079723358, 0.17184224724769592, 0.19859562814235687, 0.19557687640190125, 0.2285073697566986, 0.18026737868785858, 0.22436507046222687, 0.21992380917072296, 0.21076416969299316, 0.2022799551486969, 0.19588643312454224, 0.1915145218372345, 0.1875935047864914, 0.18360063433647156, 0.17976835370063782, 0.17615914344787598, 0.1726791262626648, 0.16931119561195374, 0.1661166250705719, 0.16321149468421936, 0.16069549322128296, 0.15848460793495178, 0.15639567375183105, 0.15432512760162354, 0.15225300192832947, 0.15025757253170013], "gnorms": [16.983501434326172, 234.174560546875, 1.3892574310302734, 1.4186100959777832, 0.7213939428329468, 0.5980833172798157, 0.44090962409973145, 1.103664517402649, 0.4590296745300293, 0.4923834204673767, 0.6859960556030273, 0.723474383354187, 0.6464000344276428, 0.511173665523529, 0.40055108070373535, 0.40373826026916504, 0.39878949522972107, 0.3473345935344696, 0.3049711287021637, 0.284900426864624, 0.2708737254142761, 0.2548772394657135, 0.23341619968414307, 0.21073377132415771, 0.20530162751674652, 0.2155030369758606, 0.22164875268936157, 0.21790629625320435, 0.20477361977100372, 0.1761273294687271]}
