@@ -158,3 +158,14 @@ once something becomes durable project knowledge instead of active state.
   holds AFTER training (untested).
 - What to do with the dead 100k job's orphaned, schema-incompatible
   checkpoint (`checkpoints/embedding2_step10000.pt`).
+
+## Flat-KD-loss diagnostics (2026-09-29, done)
+
+- User asked to test Hypothesis A (broken/vanishing grads) vs B (good init +
+  too little capacity). 7 diagnostics in `diagnostics/`, raw logs in
+  `diagnostics/results/`, write-up in `report.md`. A ruled out; B partially.
+- Key facts: the flat 17k run was EMBEDDING2-ONLY (pre-2026-09-22 code);
+  its step-10000 ckpt is 9% better than init on paired batches (hidden by
+  ~0.2 per-batch noise). 3 trainable layers: held-out 0.708->0.438 in 57
+  steps vs 1 layer 0.708->0.615. BPTT supplies 97% of embedding2 grad and
+  amplifies early-token grads; LR 1e-3 is unstable.
