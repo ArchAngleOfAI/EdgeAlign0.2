@@ -1,4 +1,9 @@
 __pycache__/
 *.pyc
 checkpoints/
-logs/
+logs/*
+!logs/train_3layer.jsonl
+!logs/eval_3layer.jsonl
+# train_3layer.py checkpoints live outside the repo (/data/a84460786/testfolder_checkpoints/); ignore any local copies
+*.pt
+*.pt.tmp
