@@ -1,0 +1,33 @@
+tokenizer bos_token=None pad_token='<|endoftext|>' eos_token='<|im_end|>'
+(a) uses the pad token: id=151643 '<|endoftext|>'
+checkpoint keys: ['embedding2_state_dict', 'optimizer_state_dict', 'step']  step=10000
+step-10000 embedding2 vs init: ||dE||/||E||=1.0227e-01, max|dE|=1.7100e-02, rows changed=151936/151936
+
+per-batch KD loss (20 batches x 4 prompts x 128 tokens):
+batch             (a) pad x100           (b) zeros x100   (c) generated, untrain   (d) generated, emb2@st
+    1                 0.954378                 1.710190                 0.446160                 0.470253
+    2                 0.813403                 1.550472                 0.431495                 0.402233
+    3                 1.017711                 2.441314                 0.756029                 0.375226
+    4                 0.918703                 2.260925                 0.554282                 0.430889
+    5                 0.854237                 2.143350                 0.394809                 0.306721
+    6                 0.789312                 2.616036                 0.553421                 0.430766
+    7                 0.959172                 2.462666                 0.310208                 0.389552
+    8                 0.897769                 1.939176                 0.600743                 0.436782
+    9                 0.788535                 3.130783                 0.433854                 0.392112
+   10                 0.799037                 1.834472                 0.383835                 0.380990
+   11                 1.122366                 2.258363                 0.523735                 0.575905
+   12                 0.831366                 2.254698                 0.473091                 0.374382
+   13                 0.955904                 1.572701                 0.483476                 0.502087
+   14                 1.032488                 4.127042                 1.115478                 1.062226
+   15                 1.011888                 5.007623                 0.500858                 0.408581
+   16                 0.861408                 0.608256                 0.376812                 0.390318
+   17                 0.950006                 3.313972                 0.424298                 0.432861
+   18                 0.921135                 1.465808                 0.450778                 0.567439
+   19                 0.951926                 2.695760                 0.314618                 0.306778
+   20                 0.996213                 1.359958                 0.409992                 0.442763
+
+SUMMARY (mean +- std over batches; paired diff vs (c) untrained generated)
+  (a) pad x100                     mean=0.9213 +- 0.0917   mean diff vs (c)=+0.4244   lower than (c) on 1/20 batches
+  (b) zeros x100                   mean=2.3377 +- 0.9979   mean diff vs (c)=+1.8408   lower than (c) on 0/20 batches
+  (c) generated, untrained         mean=0.4969 +- 0.1777   mean diff vs (c)=+0.0000   lower than (c) on 0/20 batches
+  (d) generated, emb2@step10000    mean=0.4539 +- 0.1590   mean diff vs (c)=-0.0430   lower than (c) on 12/20 batches

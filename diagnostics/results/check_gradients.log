@@ -1,0 +1,25 @@
+loaded in 9.3s; batch shape (4, 128)
+kd_loss=0.446160  (logs/distill_100k.log step 1 = 0.446160)  fwd+bwd 24.3s
+
+Gradient norms:
+  embedding2.weight                                       |grad|=1.4211e+01  |grad|/|w|=3.902e-02  nonzero=1.0000  |g|>1e-8=0.5578
+  student_encoder.lm_head.weight                          |grad|=9.9952e+01  |grad|/|w|=2.744e-01  nonzero=1.0000  |g|>1e-8=0.6547
+  student_encoder.model.layers[-1].self_attn.q_proj.weight |grad|=7.6594e+00  |grad|/|w|=1.723e-01  nonzero=1.0000  |g|>1e-8=1.0000
+  student_encoder.model.layers[-1].self_attn.k_proj.weight |grad|=6.2344e+00  |grad|/|w|=2.134e-01  nonzero=1.0000  |g|>1e-8=1.0000
+  student_encoder.model.layers[-1].self_attn.v_proj.weight |grad|=1.8938e+01  |grad|/|w|=5.724e-01  nonzero=1.0000  |g|>1e-8=1.0000
+  student_encoder.model.layers[-1].self_attn.o_proj.weight |grad|=1.1543e+01  |grad|/|w|=2.740e-01  nonzero=1.0000  |g|>1e-8=1.0000
+  student_encoder.model.layers[-1].self_attn.q_norm.weight |grad|=3.0206e-01  |grad|/|w|=1.416e-02  nonzero=1.0000  |g|>1e-8=1.0000
+  student_encoder.model.layers[-1].self_attn.k_norm.weight |grad|=7.8925e-01  |grad|/|w|=3.053e-02  nonzero=1.0000  |g|>1e-8=1.0000
+  student_encoder.model.layers[-1].mlp.gate_proj.weight   |grad|=2.8602e+01  |grad|/|w|=5.264e-01  nonzero=1.0000  |g|>1e-8=0.9967
+  student_encoder.model.layers[-1].mlp.up_proj.weight     |grad|=3.9225e+01  |grad|/|w|=6.763e-01  nonzero=1.0000  |g|>1e-8=0.9962
+  student_encoder.model.layers[-1].mlp.down_proj.weight   |grad|=5.2255e+01  |grad|/|w|=1.092e+00  nonzero=1.0000  |g|>1e-8=0.9966
+  student_encoder.model.layers[-1].input_layernorm.weight |grad|=3.8329e-02  |grad|/|w|=7.915e-05  nonzero=1.0000  |g|>1e-8=1.0000
+  student_encoder.model.layers[-1].post_attention_layernorm.weight |grad|=2.0051e-01  |grad|/|w|=8.850e-04  nonzero=1.0000  |g|>1e-8=1.0000
+
+encoder params OUTSIDE the trainable set that got a .grad: none
+embed_tokens (Embedding1) grad: None
+
+embedding2 rows with nonzero grad: 151936 / 151936
+top-10 rows hold 65.8% of embedding2's squared grad norm; top tokens: [' not', ' is', ' know', ' do', ' think', ',', ' but', ' a', ' and', ' the']
+
+VERDICT: all trainable params receive nonzero gradient

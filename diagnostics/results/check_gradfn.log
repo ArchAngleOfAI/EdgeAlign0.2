@@ -1,0 +1,8 @@
+step    first (1): grad_fn=<UnsafeViewBackward0 object at 0x7d2ef0476530>  requires_grad=True
+                graph nodes=104  longest chain=55  trainable leaves reached: ['embedding2', 'lm_head'] + 11 last-layer params
+step  middle (50): grad_fn=<UnsafeViewBackward0 object at 0x7d2ef035f730>  requires_grad=True
+                graph nodes=102,661  longest chain=62,432  trainable leaves reached: ['embedding2', 'lm_head'] + 11 last-layer params
+step   last (100): grad_fn=<UnsafeViewBackward0 object at 0x7d2ef00f9a50>  requires_grad=True
+                graph nodes=207,311  longest chain=126,082  trainable leaves reached: ['embedding2', 'lm_head'] + 11 last-layer params
+
+softprompt grad_fn=<CatBackward0 object at 0x7d2f01b9ac20>, shape=(4, 100, 1024)

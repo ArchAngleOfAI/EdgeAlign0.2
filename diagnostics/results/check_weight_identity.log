@@ -1,0 +1,38 @@
+config.tie_word_embeddings = True
+[after build] data_ptrs: lm_head=0x79930a000000, embed_tokens (Embedding1)=0x7995b8000000, embedding2=0x799330000000
+[after build] lm_head IS embed_tokens (same Parameter object): False; same data_ptr: False; all three distinct: True
+w1 (captured before untying) is embed_tokens: True
+values equal at init: lm_head==Emb1 True, embedding2==Emb1 True
+[after 1 optimizer step] data_ptrs: lm_head=0x79930a000000, embed_tokens (Embedding1)=0x7995b8000000, embedding2=0x799330000000
+[after 1 optimizer step] lm_head IS embed_tokens (same Parameter object): False; same data_ptr: False; all three distinct: True
+lm_head changed: 4.4898e-01  Embedding1 changed: 0.0000e+00
+encoder.train()/eval()/.to() re-tie?  False
+
+Repo call sites (tie_weights/resize/save_pretrained/generate/from_pretrained): 14 call sites
+  smoke_train.py:91: config = AutoConfig.from_pretrained(MODEL_PATH)
+  smoke_train.py:93: model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, dtype=torch.float32)
+  smoke_train.py:102: tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+  sweep_softprompt_length.py:104: teacher = AutoModelForCausalLM.from_pretrained(MODEL_PATH, dtype=torch.float32).to(device)
+  sweep_softprompt_length.py:105: receiver = AutoModelForCausalLM.from_pretrained(MODEL_PATH, dtype=torch.float32).to(device)
+  sweep_softprompt_length.py:111: tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+  qwen_dual_embedding.py:40: model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, dtype=dtype)
+  qwen_dual_embedding.py:76: model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, dtype=dtype)
+  wemb_lmhead_gram.py:23: model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, dtype=torch.float32)
+  distill_softprompt.py:147: teacher = AutoModelForCausalLM.from_pretrained(MODEL_PATH, dtype=torch.float32).to(device)
+  distill_softprompt.py:148: receiver = AutoModelForCausalLM.from_pretrained(MODEL_PATH, dtype=torch.float32).to(device)
+  distill_softprompt.py:177: tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+  embedding_roundtrip_forward.py:12: own reference to W1 from the checkpoint's tie_weights() call.
+  embedding_roundtrip_forward.py:44: tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+
+transformers 5.17.0: functions in modeling_utils.py that call tie_weights():
+  modeling_utils.py:1467 inside _from_config(): model.tie_weights()
+  modeling_utils.py:2531 inside tie_weights(): that need to be tied. This is the default when `model.tie_weights()` is called on its own, outside of
+  modeling_utils.py:2638 inside resize_token_embeddings(): Takes care of tying weights embeddings afterwards if the model class has a `tie_weights()` method.
+  modeling_utils.py:2684 inside resize_token_embeddings(): self.tie_weights()
+  modeling_utils.py:3104 inside init_weights(): self.tie_weights(recompute_mapping=False)
+  modeling_utils.py:3733 inside get_init_context(): init_contexts = [local_torch_dtype(dtype, cls.__name__), init.no_tie_weights(), apply_patches()]
+  modeling_utils.py:4493 inside _finalize_model_loading(): model.tie_weights(missing_keys=loading_info.missing_keys, recompute_mapping=False)
+generation/utils.py tie_weights() calls: 0
+modeling_qwen3.py tie_weights() calls: 0; _tied_weights_keys: {'lm_head.weight': 'model.embed_tokens.weight'}
+
+AFTER an explicit encoder.tie_weights(): lm_head IS embed_tokens -> True  (demonstration only; nothing in the training path calls this)

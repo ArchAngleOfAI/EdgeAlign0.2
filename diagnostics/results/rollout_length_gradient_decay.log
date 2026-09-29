@@ -1,0 +1,29 @@
+PART 1: truncated rollout length vs gradient norm
+   L    kd_loss     |g emb2|  |g lm_head|  |g last layer|   |g emb2|/L
+  10   0.269345   2.8183e+00   1.6637e+01      1.6356e+01   2.8183e-01
+  30   0.427059   3.1715e+01   2.4937e+02      1.9692e+02   1.0572e+00
+  60   0.476828   1.9260e+01   1.9364e+02      1.3834e+02   3.2100e-01
+ 100   0.446160   1.4212e+01   9.9953e+01      7.5349e+01   1.4212e-01
+
+PART 2: L=100, full BPTT vs feedback detached (direct paths only)
+  full      kd_loss=0.446160  |g emb2|=1.4212e+01  |g lm_head|=9.9953e+01  |g last layer|=7.5349e+01
+  detached  kd_loss=0.446160  |g emb2|=3.0568e+00  |g lm_head|=1.3929e+01  |g last layer|=1.2559e+01
+  embedding2 grad: |recurrent part| = |full - direct| = 1.3807e+01  (= 97.2% of |full|), cos(full, direct)=0.2380
+
+  per-position ||dL/d soft_token_k||  (k=1 is generated first, so has the MOST downstream steps)
+     k         full  direct only  full/direct
+     1   7.1323e+00   5.6558e+00        1.261
+     2   5.8997e+00   1.7181e+00        3.434
+     5   1.2787e+01   1.0270e+00       12.450
+    10   3.0877e+00   6.9550e-01        4.440
+    20   9.8165e+00   1.6907e+00        5.806
+    30   4.3682e-01   2.6586e-01        1.643
+    40   9.5236e-02   7.1855e-02        1.325
+    50   5.5773e-02   4.7279e-02        1.180
+    60   3.5461e-02   3.2962e-02        1.076
+    70   3.3154e-02   3.2308e-02        1.026
+    80   5.2427e-02   5.1049e-02        1.027
+    90   3.8886e-02   3.8873e-02        1.000
+    95   7.3349e-02   6.7213e-02        1.091
+    99   5.1046e-02   5.0861e-02        1.004
+   100   7.8284e-02   7.8284e-02        1.000
