@@ -184,3 +184,28 @@ once something becomes durable project knowledge instead of active state.
   a narrow ~0.16-0.32 band).
 - GPU 0 threw a CUDA hardware error ("invalid access of peer GPU memory ...
   hardware error") on 2026-09-29 -- avoid it; GPU 5 was used.
+
+## 3-layer long run (2026-09-29 -> stopped 2026-09-30, done)
+
+- `train_3layer.py`: Embedding2 + LM_head + last 3 layers, L=16, AdamW peak
+  LR 1e-4 (100-step warmup, then constant), global batch 16 (2 x accum 8),
+  clip 1.0. Details in `RUN_NOTES_3layer.md`; plot with `replot_3layer.py`.
+- STOPPED by the user at step 3029/10000 (SIGTERM, not a crash). Best
+  held-out 0.0105 @ step 2600 (from 0.3930 @ 0); last eval 0.2066 @ 3000.
+- Loss curve shows INSTABILITY after step ~2000: held-out spike at 2000
+  (0.084), then a regression from ~2650 to ~0.21 with no recovery; clipping
+  active on 52% of steps after 2600; median pre-clip grad norm rose to ~1.0.
+  Earlier regression at step 157 recovered. Cause not isolated (LR constant).
+- Checkpoints (~4.3 GB each) in /data/a84460786/testfolder_checkpoints/
+  train_3layer/: best.pt (step 2600), step_01000/02000/03000.pt, latest.pt
+  (= step 3000). `--resume` continues from step 3000.
+- Environment: EdgeAlign (and its .venv) was deleted on 2026-09-29. New venv:
+  /data/a84460786/venvs/testfolder (torch 2.14.0+cu130, transformers 5.17.0).
+  The diagnostics/*.sh runners still default to the old venv; pass
+  PY=/data/a84460786/venvs/testfolder/bin/python.
+- GPUs: 0 is faulty (CUDA hardware error); GPU 2 worked (~20 s/step, shared
+  with another user's vLLM worker); GPU 5 is often taken by other users.
+- Held-out set for this run comes from FineWeb-Edu shard 001_00000
+  (training reads only 000_00000). The user decided to keep FineWeb-Edu
+  rather than /data/r50058044/.../wiki-18.jsonl (which is a tar-wrapped
+  FlashRAG wiki dump, not plain JSONL).
