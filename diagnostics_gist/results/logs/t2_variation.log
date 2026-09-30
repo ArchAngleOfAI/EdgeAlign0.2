@@ -1,0 +1,4 @@
+step0: cross-prompt cos (mean over pos) 0.1733, std/mean 2.5425, within-gist cos 0.2144
+step1000: cross-prompt cos (mean over pos) 0.9879, std/mean 0.0552, within-gist cos 0.7841
+best: cross-prompt cos (mean over pos) 0.9964, std/mean 0.0271, within-gist cos 0.7842
+saved /home/a84460786/testfolder/diagnostics_gist/results/t2_variation.json

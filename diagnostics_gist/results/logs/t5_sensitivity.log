@@ -1,0 +1,17 @@
+gist_step0     f=0.01  KL mean=4.707e-04 std=1.2e-04
+gist_step0     f=0.05  KL mean=1.149e-02 std=1.5e-03
+gist_step0     f=0.1   KL mean=3.495e-02 std=3.2e-03
+gist_step0     f=0.5   KL mean=1.397e-01 std=2.4e-02
+gist_step1000  f=0.01  KL mean=7.377e-05 std=2.7e-06
+gist_step1000  f=0.05  KL mean=1.751e-03 std=6.0e-06
+gist_step1000  f=0.1   KL mean=5.617e-03 std=3.1e-04
+gist_step1000  f=0.5   KL mean=2.854e-02 std=2.1e-03
+gist_best      f=0.01  KL mean=7.625e-04 std=8.0e-05
+gist_best      f=0.05  KL mean=1.217e-02 std=1.2e-03
+gist_best      f=0.1   KL mean=1.885e-02 std=8.0e-04
+gist_best      f=0.5   KL mean=4.540e-02 std=3.2e-03
+text16         f=0.01  KL mean=9.897e-06 std=9.8e-07
+text16         f=0.05  KL mean=2.368e-04 std=2.3e-05
+text16         f=0.1   KL mean=9.105e-04 std=8.8e-05
+text16         f=0.5   KL mean=1.813e-02 std=2.6e-03
+saved /home/a84460786/testfolder/diagnostics_gist/results/t5_sensitivity.json

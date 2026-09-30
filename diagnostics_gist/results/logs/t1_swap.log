@@ -1,0 +1,10 @@
+step0 seed0: own=0.39300 swapped=0.41228 diff=+0.01929 frac>=0.500
+step0 seed1: own=0.39300 swapped=0.42386 diff=+0.03087 frac>=0.438
+step0 seed2: own=0.39300 swapped=0.38303 diff=-0.00997 frac>=0.500
+step1000 seed0: own=0.03077 swapped=0.03199 diff=+0.00121 frac>=0.562
+step1000 seed1: own=0.03077 swapped=0.03144 diff=+0.00066 frac>=0.562
+step1000 seed2: own=0.03077 swapped=0.03156 diff=+0.00079 frac>=0.375
+best seed0: own=0.01049 swapped=0.01049 diff=-0.00000 frac>=0.531
+best seed1: own=0.01049 swapped=0.01049 diff=-0.00000 frac>=0.469
+best seed2: own=0.01049 swapped=0.01049 diff=-0.00000 frac>=0.438
+saved /home/a84460786/testfolder/diagnostics_gist/results/t1_swap.json

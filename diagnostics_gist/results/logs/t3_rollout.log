@@ -1,0 +1,10 @@
+step0: entropy by step [2.46, 2.71, 3.03, 3.03, 2.98, 3.09, 2.86, 3.11, 2.61, 3.2, 2.83, 3.37, 3.23, 3.17, 2.84, 3.06]
+   top1 prob by step [0.482, 0.42, 0.425, 0.427, 0.423, 0.417, 0.467, 0.409, 0.503, 0.39, 0.475, 0.366, 0.378, 0.367, 0.433, 0.428]
+   distinct top-1 per prompt: mean 12.12 min 6 max 16
+step1000: entropy by step [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+   top1 prob by step [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+   distinct top-1 per prompt: mean 2.00 min 2 max 2
+best: entropy by step [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+   top1 prob by step [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+   distinct top-1 per prompt: mean 2.00 min 2 max 2
+saved /home/a84460786/testfolder/diagnostics_gist/results/t3_rollout.json

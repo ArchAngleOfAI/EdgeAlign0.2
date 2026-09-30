@@ -1,0 +1,24 @@
+(a) gist_step0     lr=0.001: s0=-17.619 s10=-6.934 s25=-0.050 s50=-0.001  gain=+17.618  KD 0.3930->1.7979
+(a) gist_step0     lr=0.01: s0=-17.619 s10=-1.760 s25=-0.085 s50=-0.001  gain=+17.618  KD 0.3930->1.9732
+(a) gist_step1000  lr=0.001: s0=-17.275 s10=-6.644 s25=-0.082 s50=-0.001  gain=+17.274  KD 0.0308->1.1260
+(a) gist_step1000  lr=0.01: s0=-17.275 s10=-4.275 s25=-0.049 s50=-0.001  gain=+17.274  KD 0.0308->1.8976
+(a) gist_best      lr=0.001: s0=-17.355 s10=-10.956 s25=-1.238 s50=-0.009  gain=+17.346  KD 0.0105->1.0432
+(a) gist_best      lr=0.01: s0=-17.355 s10=-6.719 s25=-0.967 s50=-0.021  gain=+17.335  KD 0.0105->1.7087
+(a) text16         lr=0.001: s0=-17.060 s10=-8.654 s25=-0.597 s50=-0.004  gain=+17.056  KD 0.1647->2.8821
+(a) text16         lr=0.01: s0=-17.060 s10=-4.770 s25=-0.451 s50=-0.001  gain=+17.059  KD 0.1647->3.4211
+(a) zeros          lr=0.001: s0=-20.492 s10=nan s25=nan s50=nan  gain=+nan  KD 3.2850->nan
+(a) zeros          lr=0.01: s0=-20.492 s10=nan s25=nan s50=nan  gain=+nan  KD 3.2850->nan
+saved /home/a84460786/testfolder/diagnostics_gist/results/t8_steer.json
+(b) generator from step0
+   step 0: target logprob -17.6188
+   step 10: target logprob -17.0074
+   step 25: target logprob -16.6494
+   step 50: target logprob -16.6899
+(b) step0: gain=+0.929  KD 0.3930->0.1633
+(b) generator from best
+   step 0: target logprob -17.3553
+   step 10: target logprob -16.3546
+   step 25: target logprob -14.1309
+   step 50: target logprob -7.7746
+(b) best: gain=+9.581  KD 0.0105->0.1631
+saved /home/a84460786/testfolder/diagnostics_gist/results/t8_steer.json

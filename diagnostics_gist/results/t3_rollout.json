@@ -1,0 +1,6748 @@
+{
+ "info": {
+  "checkpoints": {
+   "step0": {
+    "step": 0,
+    "source": "fresh init via load_all, seed 0"
+   },
+   "step1000": {
+    "step": 1000,
+    "file": "/data/a84460786/testfolder_checkpoints/train_3layer/step_01000.pt",
+    "best_recorded_in_ckpt": {
+     "heldout_mean": 0.030496870866045356,
+     "step": 900
+    }
+   },
+   "best": {
+    "step": 2600,
+    "file": "/data/a84460786/testfolder_checkpoints/train_3layer/best.pt",
+    "best_recorded_in_ckpt": {
+     "heldout_mean": 0.010493790381588042,
+     "step": 2600
+    }
+   }
+  },
+  "missing_checkpoints": [],
+  "heldout_shard": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu/resolve/main/sample/10BT/001_00000.parquet",
+  "train_shard": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu/resolve/main/sample/10BT/000_00000.parquet",
+  "L": 16,
+  "prompt_len": 128,
+  "dtype": "float32",
+  "model": "/data/models/huggingface/qwen3-0.6b",
+  "gpu": "5",
+  "base_seed": 0
+ },
+ "results": {
+  "step0": {
+   "per_step": [
+    {
+     "step": 1,
+     "entropy_mean": 2.4617190595244836,
+     "entropy_min": 0.04269418736844812,
+     "entropy_max": 6.428666111018639,
+     "top1_prob_mean": 0.48190679447177703,
+     "top1_prob_min": 0.12376222837821577,
+     "top1_prob_max": 0.9944668531694703,
+     "top1_most_common": [
+      {
+       "token": ",",
+       "id": 11,
+       "n_prompts": 4
+      },
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 4
+      },
+      {
+       "token": ".",
+       "id": 13,
+       "n_prompts": 3
+      }
+     ]
+    },
+    {
+     "step": 2,
+     "entropy_mean": 2.71415226137981,
+     "entropy_min": 0.20446262231612103,
+     "entropy_max": 5.287436244727395,
+     "top1_prob_mean": 0.41967785160184223,
+     "top1_prob_min": 0.07311801609439883,
+     "top1_prob_max": 0.9772791482145778,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 5
+      },
+      {
+       "token": ",",
+       "id": 11,
+       "n_prompts": 5
+      },
+      {
+       "token": " a",
+       "id": 264,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "entropy_mean": 3.025788845948523,
+     "entropy_min": 0.0738374297215961,
+     "entropy_max": 5.996078742710112,
+     "top1_prob_mean": 0.42526675692004645,
+     "top1_prob_min": 0.0790955338031217,
+     "top1_prob_max": 0.9941845720118525,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 4
+      },
+      {
+       "token": ".",
+       "id": 13,
+       "n_prompts": 2
+      },
+      {
+       "token": " were",
+       "id": 1033,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "entropy_mean": 3.028690586276052,
+     "entropy_min": 0.3031130720968152,
+     "entropy_max": 6.852026977596701,
+     "top1_prob_mean": 0.426504969912171,
+     "top1_prob_min": 0.023113555941490584,
+     "top1_prob_max": 0.9526276088767762,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 5
+      },
+      {
+       "token": ",",
+       "id": 11,
+       "n_prompts": 3
+      },
+      {
+       "token": " to",
+       "id": 311,
+       "n_prompts": 3
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "entropy_mean": 2.9813531925877026,
+     "entropy_min": 0.10792320160505278,
+     "entropy_max": 6.0902610772151995,
+     "top1_prob_mean": 0.4234017104713166,
+     "top1_prob_min": 0.07079580669464808,
+     "top1_prob_max": 0.9908990481272572,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 5
+      },
+      {
+       "token": ",",
+       "id": 11,
+       "n_prompts": 3
+      },
+      {
+       "token": " ",
+       "id": 220,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 6,
+     "entropy_mean": 3.086480937005863,
+     "entropy_min": 0.03269268524476669,
+     "entropy_max": 7.118073971247654,
+     "top1_prob_mean": 0.41690228993848216,
+     "top1_prob_min": 0.09222253610606906,
+     "top1_prob_max": 0.9956302876444592,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 5
+      },
+      {
+       "token": " and",
+       "id": 323,
+       "n_prompts": 4
+      },
+      {
+       "token": "1",
+       "id": 16,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 7,
+     "entropy_mean": 2.860651081302273,
+     "entropy_min": 0.0501411942046567,
+     "entropy_max": 7.527188235665726,
+     "top1_prob_mean": 0.46684312126796457,
+     "top1_prob_min": 0.05246968093254777,
+     "top1_prob_max": 0.9940892399100397,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 7
+      },
+      {
+       "token": " and",
+       "id": 323,
+       "n_prompts": 2
+      },
+      {
+       "token": " store",
+       "id": 3553,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 8,
+     "entropy_mean": 3.1107846448586853,
+     "entropy_min": 0.5042603951028829,
+     "entropy_max": 5.511168036873324,
+     "top1_prob_mean": 0.4088789247634805,
+     "top1_prob_min": 0.09741302160503675,
+     "top1_prob_max": 0.9000219798971456,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 4
+      },
+      {
+       "token": ".",
+       "id": 13,
+       "n_prompts": 2
+      },
+      {
+       "token": "\n",
+       "id": 198,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 9,
+     "entropy_mean": 2.612498050104281,
+     "entropy_min": 0.01371411333143729,
+     "entropy_max": 5.77380053096852,
+     "top1_prob_mean": 0.5032721766223512,
+     "top1_prob_min": 0.054454910621730045,
+     "top1_prob_max": 0.9990465333901527,
+     "top1_most_common": [
+      {
+       "token": " was",
+       "id": 572,
+       "n_prompts": 3
+      },
+      {
+       "token": ",",
+       "id": 11,
+       "n_prompts": 3
+      },
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 3
+      }
+     ]
+    },
+    {
+     "step": 10,
+     "entropy_mean": 3.197249662705313,
+     "entropy_min": 0.0017469437921597288,
+     "entropy_max": 5.949165823171146,
+     "top1_prob_mean": 0.39013439916950665,
+     "top1_prob_min": 0.06927179806273398,
+     "top1_prob_max": 0.9998591482985445,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 4
+      },
+      {
+       "token": ",",
+       "id": 11,
+       "n_prompts": 3
+      },
+      {
+       "token": " and",
+       "id": 323,
+       "n_prompts": 3
+      }
+     ]
+    },
+    {
+     "step": 11,
+     "entropy_mean": 2.8308651892342995,
+     "entropy_min": 0.010497020570143801,
+     "entropy_max": 6.426743849512304,
+     "top1_prob_mean": 0.4753012574982479,
+     "top1_prob_min": 0.09259887449561988,
+     "top1_prob_max": 0.9987436715494862,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 6
+      },
+      {
+       "token": " and",
+       "id": 323,
+       "n_prompts": 3
+      },
+      {
+       "token": ".",
+       "id": 13,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 12,
+     "entropy_mean": 3.365855606165989,
+     "entropy_min": 0.07984566841507718,
+     "entropy_max": 7.284908483989792,
+     "top1_prob_mean": 0.36576579604403014,
+     "top1_prob_min": 0.03636191023427688,
+     "top1_prob_max": 0.9900232337772217,
+     "top1_most_common": [
+      {
+       "token": " and",
+       "id": 323,
+       "n_prompts": 4
+      },
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 2
+      },
+      {
+       "token": " was",
+       "id": 572,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 13,
+     "entropy_mean": 3.2308362324582816,
+     "entropy_min": 0.00332755749934115,
+     "entropy_max": 7.408580321844408,
+     "top1_prob_mean": 0.3780184288886918,
+     "top1_prob_min": 0.030778159075561046,
+     "top1_prob_max": 0.9996903341714506,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 3
+      },
+      {
+       "token": " was",
+       "id": 572,
+       "n_prompts": 2
+      },
+      {
+       "token": ".",
+       "id": 13,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 14,
+     "entropy_mean": 3.170222649449361,
+     "entropy_min": 0.00012561330327605873,
+     "entropy_max": 6.9160696064279295,
+     "top1_prob_mean": 0.36721349739831466,
+     "top1_prob_min": 0.04093194442633865,
+     "top1_prob_max": 0.9999912294961696,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 4
+      },
+      {
+       "token": " in",
+       "id": 304,
+       "n_prompts": 4
+      },
+      {
+       "token": " a",
+       "id": 264,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 15,
+     "entropy_mean": 2.844018295655331,
+     "entropy_min": 0.07153243654830838,
+     "entropy_max": 5.174208106815875,
+     "top1_prob_mean": 0.4330725121088761,
+     "top1_prob_min": 0.09309535629786851,
+     "top1_prob_max": 0.9917481336708442,
+     "top1_most_common": [
+      {
+       "token": " ",
+       "id": 220,
+       "n_prompts": 4
+      },
+      {
+       "token": ",",
+       "id": 11,
+       "n_prompts": 3
+      },
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 16,
+     "entropy_mean": 3.0611570874292875,
+     "entropy_min": 0.0022777126290998775,
+     "entropy_max": 6.535355350488533,
+     "top1_prob_mean": 0.4279730549112781,
+     "top1_prob_min": 0.047018699315938446,
+     "top1_prob_max": 0.9997825714159884,
+     "top1_most_common": [
+      {
+       "token": " the",
+       "id": 279,
+       "n_prompts": 5
+      },
+      {
+       "token": "1",
+       "id": 16,
+       "n_prompts": 4
+      },
+      {
+       "token": " not",
+       "id": 537,
+       "n_prompts": 2
+      }
+     ]
+    }
+   ],
+   "distinct_top1_per_prompt": [
+    13,
+    12,
+    10,
+    11,
+    13,
+    11,
+    13,
+    9,
+    11,
+    14,
+    12,
+    15,
+    16,
+    11,
+    12,
+    13,
+    13,
+    8,
+    10,
+    13,
+    14,
+    14,
+    14,
+    15,
+    11,
+    6,
+    12,
+    10,
+    13,
+    12,
+    14,
+    13
+   ],
+   "distinct_top1_mean": 12.125,
+   "examples": [
+    {
+     "prompt_index": 0,
+     "prompt_start": "The Heilwood Company store was a product of necessity. Being a rural, isolated area, the newly created town needed",
+     "top1_tokens_per_step": [
+      " not",
+      " a",
+      " as",
+      " a",
+      " partnership",
+      ".",
+      " The",
+      " store",
+      " was",
+      " a",
+      " by",
+      " the",
+      " town",
+      " who",
+      " the",
+      " family"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " not",
+        "cos": 0.8067
+       },
+       {
+        "token": "not",
+        "cos": 0.6008
+       },
+       {
+        "token": " Not",
+        "cos": 0.5802
+       },
+       {
+        "token": "Not",
+        "cos": 0.5576
+       },
+       {
+        "token": " also",
+        "cos": 0.5485
+       }
+      ],
+      [
+       {
+        "token": " a",
+        "cos": 0.8486
+       },
+       {
+        "token": " an",
+        "cos": 0.4949
+       },
+       {
+        "token": "\ta",
+        "cos": 0.4498
+       },
+       {
+        "token": "_a",
+        "cos": 0.4381
+       },
+       {
+        "token": " the",
+        "cos": 0.4328
+       }
+      ],
+      [
+       {
+        "token": " as",
+        "cos": 0.9428
+       },
+       {
+        "token": "\u4f5c\u4e3a",
+        "cos": 0.5794
+       },
+       {
+        "token": " As",
+        "cos": 0.5246
+       },
+       {
+        "token": " in",
+        "cos": 0.5138
+       },
+       {
+        "token": "As",
+        "cos": 0.489
+       }
+      ],
+      [
+       {
+        "token": " a",
+        "cos": 0.9979
+       },
+       {
+        "token": " an",
+        "cos": 0.5219
+       },
+       {
+        "token": "_a",
+        "cos": 0.4726
+       },
+       {
+        "token": " the",
+        "cos": 0.4513
+       },
+       {
+        "token": "\ta",
+        "cos": 0.4357
+       }
+      ],
+      [
+       {
+        "token": " partnership",
+        "cos": 0.5923
+       },
+       {
+        "token": " corporation",
+        "cos": 0.5868
+       },
+       {
+        "token": " company",
+        "cos": 0.5331
+       },
+       {
+        "token": "(company",
+        "cos": 0.5164
+       },
+       {
+        "token": "company",
+        "cos": 0.5069
+       }
+      ],
+      [
+       {
+        "token": ".",
+        "cos": 0.9721
+       },
+       {
+        "token": ",",
+        "cos": 0.6531
+       },
+       {
+        "token": ".\n",
+        "cos": 0.5849
+       },
+       {
+        "token": ".\n\n",
+        "cos": 0.4715
+       },
+       {
+        "token": " ",
+        "cos": 0.4575
+       }
+      ],
+      [
+       {
+        "token": " The",
+        "cos": 0.8114
+       },
+       {
+        "token": " This",
+        "cos": 0.6313
+       },
+       {
+        "token": "The",
+        "cos": 0.6291
+       },
+       {
+        "token": " It",
+        "cos": 0.5756
+       },
+       {
+        "token": "\tThe",
+        "cos": 0.5042
+       }
+      ],
+      [
+       {
+        "token": " store",
+        "cos": 0.8873
+       },
+       {
+        "token": " Store",
+        "cos": 0.7703
+       },
+       {
+        "token": "\tstore",
+        "cos": 0.7561
+       },
+       {
+        "token": "store",
+        "cos": 0.7413
+       },
+       {
+        "token": " stores",
+        "cos": 0.7329
+       }
+      ],
+      [
+       {
+        "token": " was",
+        "cos": 0.8938
+       },
+       {
+        "token": " had",
+        "cos": 0.6316
+       },
+       {
+        "token": "was",
+        "cos": 0.6214
+       },
+       {
+        "token": " wasn",
+        "cos": 0.5689
+       },
+       {
+        "token": " were",
+        "cos": 0.5659
+       }
+      ],
+      [
+       {
+        "token": " located",
+        "cos": 0.4503
+       },
+       {
+        "token": " initially",
+        "cos": 0.4252
+       },
+       {
+        "token": " originally",
+        "cos": 0.409
+       },
+       {
+        "token": " not",
+        "cos": 0.4026
+       },
+       {
+        "token": " established",
+        "cos": 0.401
+       }
+      ],
+      [
+       {
+        "token": " by",
+        "cos": 0.9392
+       },
+       {
+        "token": "by",
+        "cos": 0.592
+       },
+       {
+        "token": " By",
+        "cos": 0.5717
+       },
+       {
+        "token": "By",
+        "cos": 0.5716
+       },
+       {
+        "token": " in",
+        "cos": 0.5596
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.8765
+       },
+       {
+        "token": " a",
+        "cos": 0.7789
+       },
+       {
+        "token": "the",
+        "cos": 0.4949
+       },
+       {
+        "token": " an",
+        "cos": 0.4822
+       },
+       {
+        "token": " ",
+        "cos": 0.3788
+       }
+      ],
+      [
+       {
+        "token": " town",
+        "cos": 0.5587
+       },
+       {
+        "token": " owner",
+        "cos": 0.5557
+       },
+       {
+        "token": " owners",
+        "cos": 0.5124
+       },
+       {
+        "token": " Owner",
+        "cos": 0.492
+       },
+       {
+        "token": "\u683c\u6703\u54e1",
+        "cos": 0.4861
+       }
+      ],
+      [
+       {
+        "token": ",",
+        "cos": 0.6373
+       },
+       {
+        "token": " who",
+        "cos": 0.6254
+       },
+       {
+        "token": " of",
+        "cos": 0.5473
+       },
+       {
+        "token": " and",
+        "cos": 0.5028
+       },
+       {
+        "token": ".",
+        "cos": 0.4382
+       }
+      ],
+      [
+       {
+        "token": " a",
+        "cos": 0.7391
+       },
+       {
+        "token": " the",
+        "cos": 0.7357
+       },
+       {
+        "token": " an",
+        "cos": 0.482
+       },
+       {
+        "token": " and",
+        "cos": 0.4387
+       },
+       {
+        "token": " his",
+        "cos": 0.3903
+       }
+      ],
+      [
+       {
+        "token": " owner",
+        "cos": 0.4871
+       },
+       {
+        "token": " father",
+        "cos": 0.4847
+       },
+       {
+        "token": "\ud861\udfe0",
+        "cos": 0.4692
+       },
+       {
+        "token": "\u683c\u6703\u54e1",
+        "cos": 0.469
+       },
+       {
+        "token": "\u6218\u6218\u7ec4\u5408",
+        "cos": 0.4687
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 1,
+     "prompt_start": " still deeply linked to its \u201cparent\u201d coal mining company.\nThe new corporation was to transact its business in Heil",
+     "top1_tokens_per_step": [
+      " of",
+      " the",
+      " State",
+      " of",
+      " Pennsylvania",
+      ",",
+      " and",
+      " was",
+      " was",
+      " incorporated",
+      " on",
+      " April",
+      " ",
+      "1",
+      ",",
+      ","
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " of",
+        "cos": 0.9776
+       },
+       {
+        "token": "of",
+        "cos": 0.5576
+       },
+       {
+        "token": " c\u1ee7a",
+        "cos": 0.5208
+       },
+       {
+        "token": "_of",
+        "cos": 0.5181
+       },
+       {
+        "token": "Of",
+        "cos": 0.5115
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.986
+       },
+       {
+        "token": "the",
+        "cos": 0.648
+       },
+       {
+        "token": " a",
+        "cos": 0.4213
+       },
+       {
+        "token": "_the",
+        "cos": 0.4194
+       },
+       {
+        "token": "The",
+        "cos": 0.4133
+       }
+      ],
+      [
+       {
+        "token": " State",
+        "cos": 0.9108
+       },
+       {
+        "token": "_state",
+        "cos": 0.8182
+       },
+       {
+        "token": "State",
+        "cos": 0.8095
+       },
+       {
+        "token": " state",
+        "cos": 0.7843
+       },
+       {
+        "token": "\tstate",
+        "cos": 0.7502
+       }
+      ],
+      [
+       {
+        "token": " of",
+        "cos": 0.9968
+       },
+       {
+        "token": "of",
+        "cos": 0.5921
+       },
+       {
+        "token": " c\u1ee7a",
+        "cos": 0.5873
+       },
+       {
+        "token": "_of",
+        "cos": 0.585
+       },
+       {
+        "token": "Of",
+        "cos": 0.5629
+       }
+      ],
+      [
+       {
+        "token": " Pennsylvania",
+        "cos": 0.9978
+       },
+       {
+        "token": "Penn",
+        "cos": 0.6138
+       },
+       {
+        "token": " Maryland",
+        "cos": 0.5369
+       },
+       {
+        "token": " Philadelphia",
+        "cos": 0.5263
+       },
+       {
+        "token": " Massachusetts",
+        "cos": 0.5219
+       }
+      ],
+      [
+       {
+        "token": ",",
+        "cos": 0.8647
+       },
+       {
+        "token": ".",
+        "cos": 0.807
+       },
+       {
+        "token": " and",
+        "cos": 0.5851
+       },
+       {
+        "token": " ",
+        "cos": 0.5241
+       },
+       {
+        "token": " (",
+        "cos": 0.5119
+       }
+      ],
+      [
+       {
+        "token": " and",
+        "cos": 0.9862
+       },
+       {
+        "token": "\u548c",
+        "cos": 0.704
+       },
+       {
+        "token": " \u0438",
+        "cos": 0.6843
+       },
+       {
+        "token": " v\u00e0",
+        "cos": 0.6011
+       },
+       {
+        "token": "and",
+        "cos": 0.5328
+       }
+      ],
+      [
+       {
+        "token": " was",
+        "cos": 0.6403
+       },
+       {
+        "token": " its",
+        "cos": 0.6077
+       },
+       {
+        "token": " it",
+        "cos": 0.5492
+       },
+       {
+        "token": " the",
+        "cos": 0.4973
+       },
+       {
+        "token": " had",
+        "cos": 0.4698
+       }
+      ],
+      [
+       {
+        "token": " was",
+        "cos": 0.9572
+       },
+       {
+        "token": "was",
+        "cos": 0.6997
+       },
+       {
+        "token": " had",
+        "cos": 0.6475
+       },
+       {
+        "token": " Was",
+        "cos": 0.6335
+       },
+       {
+        "token": " wasn",
+        "cos": 0.6243
+       }
+      ],
+      [
+       {
+        "token": " registered",
+        "cos": 0.5248
+       },
+       {
+        "token": " incorporated",
+        "cos": 0.5247
+       },
+       {
+        "token": " established",
+        "cos": 0.4919
+       },
+       {
+        "token": " originally",
+        "cos": 0.47
+       },
+       {
+        "token": " previously",
+        "cos": 0.4173
+       }
+      ],
+      [
+       {
+        "token": " on",
+        "cos": 0.8531
+       },
+       {
+        "token": " in",
+        "cos": 0.734
+       },
+       {
+        "token": "On",
+        "cos": 0.4671
+       },
+       {
+        "token": " On",
+        "cos": 0.4656
+       },
+       {
+        "token": "\u5728",
+        "cos": 0.4518
+       }
+      ],
+      [
+       {
+        "token": " April",
+        "cos": 0.8984
+       },
+       {
+        "token": " January",
+        "cos": 0.8581
+       },
+       {
+        "token": " February",
+        "cos": 0.8412
+       },
+       {
+        "token": " July",
+        "cos": 0.8317
+       },
+       {
+        "token": " October",
+        "cos": 0.8286
+       }
+      ],
+      [
+       {
+        "token": " ",
+        "cos": 1.0
+       },
+       {
+        "token": "1",
+        "cos": 0.4562
+       },
+       {
+        "token": " (",
+        "cos": 0.4531
+       },
+       {
+        "token": ",",
+        "cos": 0.4356
+       },
+       {
+        "token": "2",
+        "cos": 0.4326
+       }
+      ],
+      [
+       {
+        "token": "1",
+        "cos": 0.9593
+       },
+       {
+        "token": "2",
+        "cos": 0.8713
+       },
+       {
+        "token": "3",
+        "cos": 0.7891
+       },
+       {
+        "token": "4",
+        "cos": 0.7394
+       },
+       {
+        "token": "5",
+        "cos": 0.7209
+       }
+      ],
+      [
+       {
+        "token": "1",
+        "cos": 0.7659
+       },
+       {
+        "token": "2",
+        "cos": 0.7589
+       },
+       {
+        "token": "3",
+        "cos": 0.7392
+       },
+       {
+        "token": "5",
+        "cos": 0.7379
+       },
+       {
+        "token": ",",
+        "cos": 0.7336
+       }
+      ],
+      [
+       {
+        "token": ",",
+        "cos": 1.0
+       },
+       {
+        "token": ".",
+        "cos": 0.5365
+       },
+       {
+        "token": ":",
+        "cos": 0.4451
+       },
+       {
+        "token": " ",
+        "cos": 0.4357
+       },
+       {
+        "token": " (",
+        "cos": 0.4157
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 2,
+     "prompt_start": " on November 15, 1904.\nBy December 1904 construction for the new He",
+     "top1_tokens_per_step": [
+      ",",
+      " the",
+      " left",
+      " the",
+      " store",
+      " and",
+      " the",
+      " post",
+      " office",
+      ",",
+      " and",
+      " also",
+      " the",
+      " the",
+      " land",
+      " for"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": ",",
+        "cos": 0.9987
+       },
+       {
+        "token": ".",
+        "cos": 0.5422
+       },
+       {
+        "token": ":",
+        "cos": 0.4487
+       },
+       {
+        "token": " ",
+        "cos": 0.4452
+       },
+       {
+        "token": " (",
+        "cos": 0.4279
+       }
+      ],
+      [
+       {
+        "token": " he",
+        "cos": 0.815
+       },
+       {
+        "token": " the",
+        "cos": 0.6454
+       },
+       {
+        "token": "\u4ed6",
+        "cos": 0.5912
+       },
+       {
+        "token": " his",
+        "cos": 0.5811
+       },
+       {
+        "token": "he",
+        "cos": 0.5638
+       }
+      ],
+      [
+       {
+        "token": " had",
+        "cos": 0.5537
+       },
+       {
+        "token": " was",
+        "cos": 0.5418
+       },
+       {
+        "token": " gave",
+        "cos": 0.5042
+       },
+       {
+        "token": " took",
+        "cos": 0.4858
+       },
+       {
+        "token": " did",
+        "cos": 0.4589
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.8576
+       },
+       {
+        "token": " his",
+        "cos": 0.6274
+       },
+       {
+        "token": "the",
+        "cos": 0.5151
+       },
+       {
+        "token": " a",
+        "cos": 0.4741
+       },
+       {
+        "token": "\u4ed6\u7684",
+        "cos": 0.4173
+       }
+      ],
+      [
+       {
+        "token": " store",
+        "cos": 0.8419
+       },
+       {
+        "token": " Store",
+        "cos": 0.7285
+       },
+       {
+        "token": "\tstore",
+        "cos": 0.7085
+       },
+       {
+        "token": ".store",
+        "cos": 0.6977
+       },
+       {
+        "token": " stores",
+        "cos": 0.6918
+       }
+      ],
+      [
+       {
+        "token": " and",
+        "cos": 0.8921
+       },
+       {
+        "token": ",",
+        "cos": 0.7216
+       },
+       {
+        "token": "\u548c",
+        "cos": 0.6041
+       },
+       {
+        "token": " \u0438",
+        "cos": 0.5592
+       },
+       {
+        "token": ".",
+        "cos": 0.4719
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.9773
+       },
+       {
+        "token": "the",
+        "cos": 0.6267
+       },
+       {
+        "token": " a",
+        "cos": 0.4701
+       },
+       {
+        "token": "_the",
+        "cos": 0.3945
+       },
+       {
+        "token": "The",
+        "cos": 0.3889
+       }
+      ],
+      [
+       {
+        "token": " post",
+        "cos": 0.9409
+       },
+       {
+        "token": "post",
+        "cos": 0.8107
+       },
+       {
+        "token": " Post",
+        "cos": 0.7972
+       },
+       {
+        "token": "Post",
+        "cos": 0.7844
+       },
+       {
+        "token": "\tpost",
+        "cos": 0.7399
+       }
+      ],
+      [
+       {
+        "token": " office",
+        "cos": 1.0
+       },
+       {
+        "token": " Office",
+        "cos": 0.7801
+       },
+       {
+        "token": "office",
+        "cos": 0.7646
+       },
+       {
+        "token": "Office",
+        "cos": 0.7336
+       },
+       {
+        "token": " offices",
+        "cos": 0.7332
+       }
+      ],
+      [
+       {
+        "token": ",",
+        "cos": 0.8331
+       },
+       {
+        "token": " and",
+        "cos": 0.7419
+       },
+       {
+        "token": ".",
+        "cos": 0.6061
+       },
+       {
+        "token": " ",
+        "cos": 0.4992
+       },
+       {
+        "token": " in",
+        "cos": 0.4989
+       }
+      ],
+      [
+       {
+        "token": " and",
+        "cos": 0.988
+       },
+       {
+        "token": "\u548c",
+        "cos": 0.711
+       },
+       {
+        "token": " \u0438",
+        "cos": 0.6851
+       },
+       {
+        "token": " v\u00e0",
+        "cos": 0.5993
+       },
+       {
+        "token": "and",
+        "cos": 0.5311
+       }
+      ],
+      [
+       {
+        "token": " also",
+        "cos": 0.7747
+       },
+       {
+        "token": "also",
+        "cos": 0.6127
+       },
+       {
+        "token": "\u4e5f",
+        "cos": 0.5671
+       },
+       {
+        "token": " Also",
+        "cos": 0.53
+       },
+       {
+        "token": " \u0442\u0430\u043a\u0436\u0435",
+        "cos": 0.5093
+       }
+      ],
+      [
+       {
+        "token": " bought",
+        "cos": 0.5452
+       },
+       {
+        "token": " purchased",
+        "cos": 0.5219
+       },
+       {
+        "token": " sold",
+        "cos": 0.4929
+       },
+       {
+        "token": " transferred",
+        "cos": 0.48
+       },
+       {
+        "token": " acquired",
+        "cos": 0.4255
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.9316
+       },
+       {
+        "token": " a",
+        "cos": 0.6939
+       },
+       {
+        "token": "the",
+        "cos": 0.5389
+       },
+       {
+        "token": " an",
+        "cos": 0.4514
+       },
+       {
+        "token": " ",
+        "cos": 0.3958
+       }
+      ],
+      [
+       {
+        "token": " land",
+        "cos": 0.6463
+       },
+       {
+        "token": " house",
+        "cos": 0.5381
+       },
+       {
+        "token": " Land",
+        "cos": 0.5089
+       },
+       {
+        "token": "Land",
+        "cos": 0.4977
+       },
+       {
+        "token": " town",
+        "cos": 0.4878
+       }
+      ],
+      [
+       {
+        "token": " for",
+        "cos": 0.749
+       },
+       {
+        "token": " to",
+        "cos": 0.6958
+       },
+       {
+        "token": " in",
+        "cos": 0.5616
+       },
+       {
+        "token": " and",
+        "cos": 0.5439
+       },
+       {
+        "token": " from",
+        "cos": 0.5336
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 3,
+     "prompt_start": ", it became necessary for the new owners \u2013 the Penn Mary Coal Company \u2013 to sell the company store and store manager\u2019s",
+     "top1_tokens_per_step": [
+      " He",
+      ",",
+      " the",
+      " store",
+      " of",
+      " the",
+      " store",
+      " from",
+      " ",
+      "1",
+      "9",
+      "1",
+      "7",
+      " to",
+      " ",
+      "1"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " He",
+        "cos": 0.6213
+       },
+       {
+        "token": "He",
+        "cos": 0.5353
+       },
+       {
+        "token": ".He",
+        "cos": 0.5084
+       },
+       {
+        "token": "\u0432\u043b\u0435\u043a\u0430\u0442\u0435\u043b\u044c\u043d",
+        "cos": 0.485
+       },
+       {
+        "token": "_he",
+        "cos": 0.4846
+       }
+      ],
+      [
+       {
+        "token": " was",
+        "cos": 0.6897
+       },
+       {
+        "token": ",",
+        "cos": 0.6285
+       },
+       {
+        "token": " is",
+        "cos": 0.4409
+       },
+       {
+        "token": " were",
+        "cos": 0.4399
+       },
+       {
+        "token": " had",
+        "cos": 0.4393
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.8531
+       },
+       {
+        "token": " a",
+        "cos": 0.5163
+       },
+       {
+        "token": "the",
+        "cos": 0.5057
+       },
+       {
+        "token": ",",
+        "cos": 0.3854
+       },
+       {
+        "token": " in",
+        "cos": 0.3815
+       }
+      ],
+      [
+       {
+        "token": " store",
+        "cos": 0.706
+       },
+       {
+        "token": "\tstore",
+        "cos": 0.6055
+       },
+       {
+        "token": " owner",
+        "cos": 0.6054
+       },
+       {
+        "token": " Store",
+        "cos": 0.6043
+       },
+       {
+        "token": "(store",
+        "cos": 0.5742
+       }
+      ],
+      [
+       {
+        "token": " of",
+        "cos": 0.8749
+       },
+       {
+        "token": " in",
+        "cos": 0.5869
+       },
+       {
+        "token": ",",
+        "cos": 0.4694
+       },
+       {
+        "token": " for",
+        "cos": 0.4622
+       },
+       {
+        "token": "of",
+        "cos": 0.4573
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.9992
+       },
+       {
+        "token": "the",
+        "cos": 0.6423
+       },
+       {
+        "token": " a",
+        "cos": 0.463
+       },
+       {
+        "token": "The",
+        "cos": 0.4128
+       },
+       {
+        "token": "_the",
+        "cos": 0.3961
+       }
+      ],
+      [
+       {
+        "token": " store",
+        "cos": 0.9743
+       },
+       {
+        "token": " Store",
+        "cos": 0.8462
+       },
+       {
+        "token": "store",
+        "cos": 0.8098
+       },
+       {
+        "token": "Store",
+        "cos": 0.8077
+       },
+       {
+        "token": " stores",
+        "cos": 0.788
+       }
+      ],
+      [
+       {
+        "token": " from",
+        "cos": 0.7245
+       },
+       {
+        "token": " in",
+        "cos": 0.6507
+       },
+       {
+        "token": " until",
+        "cos": 0.5039
+       },
+       {
+        "token": " for",
+        "cos": 0.4534
+       },
+       {
+        "token": ",",
+        "cos": 0.4477
+       }
+      ],
+      [
+       {
+        "token": " ",
+        "cos": 0.9999
+       },
+       {
+        "token": "1",
+        "cos": 0.4572
+       },
+       {
+        "token": " (",
+        "cos": 0.454
+       },
+       {
+        "token": ",",
+        "cos": 0.4363
+       },
+       {
+        "token": "2",
+        "cos": 0.4336
+       }
+      ],
+      [
+       {
+        "token": "1",
+        "cos": 1.0
+       },
+       {
+        "token": "2",
+        "cos": 0.7252
+       },
+       {
+        "token": "3",
+        "cos": 0.6743
+       },
+       {
+        "token": "4",
+        "cos": 0.632
+       },
+       {
+        "token": "0",
+        "cos": 0.6309
+       }
+      ],
+      [
+       {
+        "token": "9",
+        "cos": 1.0
+       },
+       {
+        "token": "8",
+        "cos": 0.7137
+       },
+       {
+        "token": "7",
+        "cos": 0.6809
+       },
+       {
+        "token": "6",
+        "cos": 0.6286
+       },
+       {
+        "token": "5",
+        "cos": 0.6006
+       }
+      ],
+      [
+       {
+        "token": "1",
+        "cos": 0.9675
+       },
+       {
+        "token": "2",
+        "cos": 0.8713
+       },
+       {
+        "token": "3",
+        "cos": 0.763
+       },
+       {
+        "token": "4",
+        "cos": 0.7092
+       },
+       {
+        "token": "5",
+        "cos": 0.6842
+       }
+      ],
+      [
+       {
+        "token": "7",
+        "cos": 0.9827
+       },
+       {
+        "token": "8",
+        "cos": 0.8375
+       },
+       {
+        "token": "6",
+        "cos": 0.7644
+       },
+       {
+        "token": "9",
+        "cos": 0.7591
+       },
+       {
+        "token": "5",
+        "cos": 0.7151
+       }
+      ],
+      [
+       {
+        "token": " to",
+        "cos": 0.9846
+       },
+       {
+        "token": "\u5230",
+        "cos": 0.5861
+       },
+       {
+        "token": "_to",
+        "cos": 0.5717
+       },
+       {
+        "token": "To",
+        "cos": 0.5698
+       },
+       {
+        "token": " To",
+        "cos": 0.5664
+       }
+      ],
+      [
+       {
+        "token": " ",
+        "cos": 1.0
+       },
+       {
+        "token": "1",
+        "cos": 0.4565
+       },
+       {
+        "token": " (",
+        "cos": 0.4534
+       },
+       {
+        "token": ",",
+        "cos": 0.4357
+       },
+       {
+        "token": "2",
+        "cos": 0.4329
+       }
+      ],
+      [
+       {
+        "token": "1",
+        "cos": 1.0
+       },
+       {
+        "token": "2",
+        "cos": 0.7252
+       },
+       {
+        "token": "3",
+        "cos": 0.6744
+       },
+       {
+        "token": "4",
+        "cos": 0.632
+       },
+       {
+        "token": "0",
+        "cos": 0.6309
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 4,
+     "prompt_start": " Liriner operated it in 1920 and Romeo Rossi operated it from about 1921 to",
+     "top1_tokens_per_step": [
+      " Coal",
+      " was",
+      " the",
+      " land",
+      " in",
+      " the",
+      " Pine",
+      ",",
+      ",",
+      " and",
+      " the",
+      " He",
+      "il",
+      "wood",
+      " Company",
+      " acquired"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " Coal",
+        "cos": 0.8067
+       },
+       {
+        "token": " Company",
+        "cos": 0.6839
+       },
+       {
+        "token": "Coal",
+        "cos": 0.6588
+       },
+       {
+        "token": " coal",
+        "cos": 0.6353
+       },
+       {
+        "token": "Company",
+        "cos": 0.6234
+       }
+      ],
+      [
+       {
+        "token": " was",
+        "cos": 0.6837
+       },
+       {
+        "token": " had",
+        "cos": 0.5745
+       },
+       {
+        "token": " were",
+        "cos": 0.5032
+       },
+       {
+        "token": "was",
+        "cos": 0.4967
+       },
+       {
+        "token": " wasn",
+        "cos": 0.4875
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.9155
+       },
+       {
+        "token": " a",
+        "cos": 0.5605
+       },
+       {
+        "token": "the",
+        "cos": 0.5492
+       },
+       {
+        "token": " all",
+        "cos": 0.4648
+       },
+       {
+        "token": " ",
+        "cos": 0.4276
+       }
+      ],
+      [
+       {
+        "token": " land",
+        "cos": 0.6906
+       },
+       {
+        "token": " He",
+        "cos": 0.579
+       },
+       {
+        "token": " Land",
+        "cos": 0.5645
+       },
+       {
+        "token": "Land",
+        "cos": 0.5369
+       },
+       {
+        "token": "He",
+        "cos": 0.5323
+       }
+      ],
+      [
+       {
+        "token": " in",
+        "cos": 0.7733
+       },
+       {
+        "token": " on",
+        "cos": 0.6725
+       },
+       {
+        "token": " and",
+        "cos": 0.6459
+       },
+       {
+        "token": ",",
+        "cos": 0.5271
+       },
+       {
+        "token": " at",
+        "cos": 0.5242
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.7502
+       },
+       {
+        "token": "the",
+        "cos": 0.5124
+       },
+       {
+        "token": " which",
+        "cos": 0.4413
+       },
+       {
+        "token": " Pine",
+        "cos": 0.3999
+       },
+       {
+        "token": "\tthe",
+        "cos": 0.397
+       }
+      ],
+      [
+       {
+        "token": "\ub6e9",
+        "cos": 0.6765
+       },
+       {
+        "token": "\ufc3c",
+        "cos": 0.676
+       },
+       {
+        "token": "\ud84f\udded",
+        "cos": 0.6757
+       },
+       {
+        "token": "\ufc1c",
+        "cos": 0.6742
+       },
+       {
+        "token": "\ud859\udc8d",
+        "cos": 0.6736
+       }
+      ],
+      [
+       {
+        "token": ",",
+        "cos": 0.7274
+       },
+       {
+        "token": " and",
+        "cos": 0.5951
+       },
+       {
+        "token": ".",
+        "cos": 0.4426
+       },
+       {
+        "token": " in",
+        "cos": 0.398
+       },
+       {
+        "token": "\u548c",
+        "cos": 0.3939
+       }
+      ],
+      [
+       {
+        "token": ",",
+        "cos": 0.9669
+       },
+       {
+        "token": ".",
+        "cos": 0.5828
+       },
+       {
+        "token": " and",
+        "cos": 0.5595
+       },
+       {
+        "token": " (",
+        "cos": 0.4891
+       },
+       {
+        "token": " ",
+        "cos": 0.4853
+       }
+      ],
+      [
+       {
+        "token": " and",
+        "cos": 0.8215
+       },
+       {
+        "token": " \u0438",
+        "cos": 0.5867
+       },
+       {
+        "token": "\u548c",
+        "cos": 0.5724
+       },
+       {
+        "token": " v\u00e0",
+        "cos": 0.5276
+       },
+       {
+        "token": " which",
+        "cos": 0.4774
+       }
+      ],
+      [
+       {
+        "token": " the",
+        "cos": 0.7738
+       },
+       {
+        "token": " He",
+        "cos": 0.5923
+       },
+       {
+        "token": "He",
+        "cos": 0.5564
+       },
+       {
+        "token": "the",
+        "cos": 0.5288
+       },
+       {
+        "token": " he",
+        "cos": 0.5002
+       }
+      ],
+      [
+       {
+        "token": " He",
+        "cos": 0.9999
+       },
+       {
+        "token": "He",
+        "cos": 0.9052
+       },
+       {
+        "token": " he",
+        "cos": 0.6783
+       },
+       {
+        "token": "_he",
+        "cos": 0.6668
+       },
+       {
+        "token": ".He",
+        "cos": 0.6517
+       }
+      ],
+      [
+       {
+        "token": "il",
+        "cos": 1.0
+       },
+       {
+        "token": "IL",
+        "cos": 0.579
+       },
+       {
+        "token": " il",
+        "cos": 0.5203
+       },
+       {
+        "token": "ils",
+        "cos": 0.4644
+       },
+       {
+        "token": " Il",
+        "cos": 0.4496
+       }
+      ],
+      [
+       {
+        "token": "wood",
+        "cos": 1.0
+       },
+       {
+        "token": "WOOD",
+        "cos": 0.7249
+       },
+       {
+        "token": "woods",
+        "cos": 0.6404
+       },
+       {
+        "token": " wood",
+        "cos": 0.6054
+       },
+       {
+        "token": "Wood",
+        "cos": 0.5467
+       }
+      ],
+      [
+       {
+        "token": " Company",
+        "cos": 1.0
+       },
+       {
+        "token": "Company",
+        "cos": 0.8639
+       },
+       {
+        "token": " company",
+        "cos": 0.8007
+       },
+       {
+        "token": "\u516c\u53f8",
+        "cos": 0.7422
+       },
+       {
+        "token": "_company",
+        "cos": 0.7325
+       }
+      ],
+      [
+       {
+        "token": " acquired",
+        "cos": 0.7956
+       },
+       {
+        "token": " took",
+        "cos": 0.6297
+       },
+       {
+        "token": " acquire",
+        "cos": 0.5217
+       },
+       {
+        "token": " acquisition",
+        "cos": 0.484
+       },
+       {
+        "token": " acquiring",
+        "cos": 0.4802
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  "step1000": {
+   "per_step": [
+    {
+     "step": 1,
+     "entropy_mean": 7.058384395224351e-07,
+     "entropy_min": 3.252734757232066e-14,
+     "entropy_max": 1.017176334470066e-05,
+     "top1_prob_mean": 0.9999999576080175,
+     "top1_prob_min": 0.9999993316279074,
+     "top1_prob_max": 0.9999999999999991,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 28
+      },
+      {
+       "token": "gle",
+       "id": 3408,
+       "n_prompts": 4
+      }
+     ]
+    },
+    {
+     "step": 2,
+     "entropy_mean": 0.0003006402104196925,
+     "entropy_min": 1.1534944149896081e-18,
+     "entropy_max": 0.00959588028568944,
+     "top1_prob_mean": 0.9999609295354986,
+     "top1_prob_min": 0.9987513805452847,
+     "top1_prob_max": 1.0,
+     "top1_most_common": [
+      {
+       "token": "gle",
+       "id": 3408,
+       "n_prompts": 30
+      },
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "entropy_mean": 3.6615522433977565e-07,
+     "entropy_min": 5.396823837868892e-20,
+     "entropy_max": 1.0002498507653773e-05,
+     "top1_prob_mean": 0.9999999766770766,
+     "top1_prob_min": 0.9999993533625018,
+     "top1_prob_max": 1.0,
+     "top1_most_common": [
+      {
+       "token": "gle",
+       "id": 3408,
+       "n_prompts": 30
+      },
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 2
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "entropy_mean": 4.001071807443318e-06,
+     "entropy_min": 5.343004639603085e-12,
+     "entropy_max": 9.47004350178507e-06,
+     "top1_prob_mean": 0.9999997533454847,
+     "top1_prob_min": 0.999999382656276,
+     "top1_prob_max": 0.9999999999998241,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 31
+      },
+      {
+       "token": "gle",
+       "id": 3408,
+       "n_prompts": 1
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "entropy_mean": 5.547557624010461e-06,
+     "entropy_min": 2.8825899571476874e-06,
+     "entropy_max": 1.2860635067047743e-05,
+     "top1_prob_mean": 0.9999996556751805,
+     "top1_prob_min": 0.9999991528273608,
+     "top1_prob_max": 0.9999998282121121,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 6,
+     "entropy_mean": 4.563459564152141e-06,
+     "entropy_min": 2.2576435798250647e-06,
+     "entropy_max": 8.424006630045106e-06,
+     "top1_prob_mean": 0.9999997220611211,
+     "top1_prob_min": 0.999999455661465,
+     "top1_prob_max": 0.9999998692101097,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 7,
+     "entropy_mean": 4.1492164116177305e-06,
+     "entropy_min": 2.1333770645137407e-06,
+     "entropy_max": 7.95858382646496e-06,
+     "top1_prob_mean": 0.9999997493432686,
+     "top1_prob_min": 0.9999994889492232,
+     "top1_prob_max": 0.9999998779861365,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 8,
+     "entropy_mean": 3.867434496450869e-06,
+     "entropy_min": 1.9753352581379022e-06,
+     "entropy_max": 6.6291632474529206e-06,
+     "top1_prob_mean": 0.9999997666511307,
+     "top1_prob_min": 0.9999995849569978,
+     "top1_prob_max": 0.9999998870335302,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 9,
+     "entropy_mean": 3.7124033055480988e-06,
+     "entropy_min": 1.7163223317986792e-06,
+     "entropy_max": 6.358602380445051e-06,
+     "top1_prob_mean": 0.9999997750189491,
+     "top1_prob_min": 0.9999995991217213,
+     "top1_prob_max": 0.9999999028341767,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 10,
+     "entropy_mean": 3.737622925509238e-06,
+     "entropy_min": 1.506985800485542e-06,
+     "entropy_max": 6.70698785000481e-06,
+     "top1_prob_mean": 0.9999997726548709,
+     "top1_prob_min": 0.9999995759236728,
+     "top1_prob_max": 0.999999915075975,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 11,
+     "entropy_mean": 3.6687780539302385e-06,
+     "entropy_min": 1.3432712217391921e-06,
+     "entropy_max": 7.3545612748879105e-06,
+     "top1_prob_mean": 0.9999997768839901,
+     "top1_prob_min": 0.9999995318078094,
+     "top1_prob_max": 0.9999999247438228,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 12,
+     "entropy_mean": 3.547723537384181e-06,
+     "entropy_min": 1.31477064929192e-06,
+     "entropy_max": 6.599465844399604e-06,
+     "top1_prob_mean": 0.9999997847441757,
+     "top1_prob_min": 0.99999958323277,
+     "top1_prob_max": 0.9999999265835623,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 13,
+     "entropy_mean": 3.4732626969573976e-06,
+     "entropy_min": 1.3704841181621416e-06,
+     "entropy_max": 5.960385979435313e-06,
+     "top1_prob_mean": 0.9999997893893142,
+     "top1_prob_min": 0.9999996256440007,
+     "top1_prob_max": 0.999999923211608,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 14,
+     "entropy_mean": 3.583636273285073e-06,
+     "entropy_min": 1.342284328257112e-06,
+     "entropy_max": 6.528451417137193e-06,
+     "top1_prob_mean": 0.9999997817178907,
+     "top1_prob_min": 0.9999995864950251,
+     "top1_prob_max": 0.9999999245144097,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 15,
+     "entropy_mean": 4.093916059921907e-06,
+     "entropy_min": 1.490747087974429e-06,
+     "entropy_max": 8.427094546489994e-06,
+     "top1_prob_mean": 0.999999747959816,
+     "top1_prob_min": 0.9999994563387102,
+     "top1_prob_max": 0.9999999155053394,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 16,
+     "entropy_mean": 4.227914377050479e-06,
+     "entropy_min": 1.6416818365811646e-06,
+     "entropy_max": 7.448747162775531e-06,
+     "top1_prob_mean": 0.9999997395076167,
+     "top1_prob_min": 0.9999995241082611,
+     "top1_prob_max": 0.9999999065635995,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    }
+   ],
+   "distinct_top1_per_prompt": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "distinct_top1_mean": 2.0,
+   "examples": [
+    {
+     "prompt_index": 0,
+     "prompt_start": "The Heilwood Company store was a product of necessity. Being a rural, isolated area, the newly created town needed",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 1,
+     "prompt_start": " still deeply linked to its \u201cparent\u201d coal mining company.\nThe new corporation was to transact its business in Heil",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 2,
+     "prompt_start": " on November 15, 1904.\nBy December 1904 construction for the new He",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 3,
+     "prompt_start": ", it became necessary for the new owners \u2013 the Penn Mary Coal Company \u2013 to sell the company store and store manager\u2019s",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 4,
+     "prompt_start": " Liriner operated it in 1920 and Romeo Rossi operated it from about 1921 to",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9471
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4739
+       },
+       {
+        "token": " gle",
+        "cos": 0.4048
+       },
+       {
+        "token": "gles",
+        "cos": 0.4022
+       },
+       {
+        "token": " Gle",
+        "cos": 0.387
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.8722
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6737
+       },
+       {
+        "token": " It",
+        "cos": 0.6132
+       },
+       {
+        "token": "It",
+        "cos": 0.5992
+       },
+       {
+        "token": "\tit",
+        "cos": 0.552
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  "best": {
+   "per_step": [
+    {
+     "step": 1,
+     "entropy_mean": 1.2740980910733985e-07,
+     "entropy_min": 4.09147069635646e-09,
+     "entropy_max": 5.128406935584129e-07,
+     "top1_prob_mean": 0.99999999345761,
+     "top1_prob_min": 0.9999999721259828,
+     "top1_prob_max": 0.9999999998257072,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 2,
+     "entropy_mean": 1.3354930600595351e-17,
+     "entropy_min": 1.7897306245358675e-18,
+     "entropy_max": 5.310410534273132e-17,
+     "top1_prob_mean": 1.0,
+     "top1_prob_min": 1.0,
+     "top1_prob_max": 1.0,
+     "top1_most_common": [
+      {
+       "token": "gle",
+       "id": 3408,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "entropy_mean": 6.264336466431622e-19,
+     "entropy_min": 4.3950072820120885e-21,
+     "entropy_max": 3.865287153364033e-18,
+     "top1_prob_mean": 1.0,
+     "top1_prob_min": 1.0,
+     "top1_prob_max": 1.0,
+     "top1_most_common": [
+      {
+       "token": "gle",
+       "id": 3408,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "entropy_mean": 3.159335771679167e-06,
+     "entropy_min": 2.1214255995687841e-07,
+     "entropy_max": 6.177111347021401e-05,
+     "top1_prob_mean": 0.9999997993583529,
+     "top1_prob_min": 0.9999958347465978,
+     "top1_prob_max": 0.9999999891547168,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "entropy_mean": 1.0911624628354352e-06,
+     "entropy_min": 2.3993061328920696e-07,
+     "entropy_max": 4.889765446548379e-06,
+     "top1_prob_mean": 0.9999999383919622,
+     "top1_prob_min": 0.9999997090565775,
+     "top1_prob_max": 0.9999999877492577,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 6,
+     "entropy_mean": 9.984612220979585e-07,
+     "entropy_min": 2.170767937571903e-07,
+     "entropy_max": 2.998453829196332e-06,
+     "top1_prob_mean": 0.9999999440176315,
+     "top1_prob_min": 0.9999998230953091,
+     "top1_prob_max": 0.9999999889483423,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 7,
+     "entropy_mean": 7.374605609173483e-07,
+     "entropy_min": 1.9969528833721904e-07,
+     "entropy_max": 1.5095087851038307e-06,
+     "top1_prob_mean": 0.9999999594585393,
+     "top1_prob_min": 0.99999991392185,
+     "top1_prob_max": 0.999999989894447,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 8,
+     "entropy_mean": 6.621343905224971e-07,
+     "entropy_min": 1.8128684917184126e-07,
+     "entropy_max": 1.5049599220673547e-06,
+     "top1_prob_mean": 0.9999999638125796,
+     "top1_prob_min": 0.9999999144756337,
+     "top1_prob_max": 0.9999999908424247,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 9,
+     "entropy_mean": 6.844780868328908e-07,
+     "entropy_min": 2.358982826262981e-07,
+     "entropy_max": 1.501225847674072e-06,
+     "top1_prob_mean": 0.9999999624589393,
+     "top1_prob_min": 0.999999914643851,
+     "top1_prob_max": 0.9999999879467839,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 10,
+     "entropy_mean": 7.192314123842616e-07,
+     "entropy_min": 2.2494672207623514e-07,
+     "entropy_max": 1.376421170774677e-06,
+     "top1_prob_mean": 0.999999960400928,
+     "top1_prob_min": 0.999999922047396,
+     "top1_prob_max": 0.9999999885938592,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 11,
+     "entropy_mean": 6.890565641725062e-07,
+     "entropy_min": 2.0247027113988163e-07,
+     "entropy_max": 1.3840791406757273e-06,
+     "top1_prob_mean": 0.99999996216435,
+     "top1_prob_min": 0.9999999213477444,
+     "top1_prob_max": 0.9999999897180499,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 12,
+     "entropy_mean": 6.326950081783914e-07,
+     "entropy_min": 2.2720614743721348e-07,
+     "entropy_max": 1.1614198132717548e-06,
+     "top1_prob_mean": 0.9999999654351359,
+     "top1_prob_min": 0.9999999341073423,
+     "top1_prob_max": 0.9999999883993679,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 13,
+     "entropy_mean": 5.713365607163112e-07,
+     "entropy_min": 2.4709622241101193e-07,
+     "entropy_max": 1.0101005619882936e-06,
+     "top1_prob_mean": 0.9999999689872358,
+     "top1_prob_min": 0.9999999431491081,
+     "top1_prob_max": 0.9999999872921826,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 14,
+     "entropy_mean": 5.672243628674548e-07,
+     "entropy_min": 2.506117936953042e-07,
+     "entropy_max": 1.0015915457837998e-06,
+     "top1_prob_mean": 0.9999999692189524,
+     "top1_prob_min": 0.9999999436408135,
+     "top1_prob_max": 0.9999999871492841,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 15,
+     "entropy_mean": 6.176717365069403e-07,
+     "entropy_min": 3.080806557215789e-07,
+     "entropy_max": 1.1289400641316945e-06,
+     "top1_prob_mean": 0.9999999662981345,
+     "top1_prob_min": 0.9999999359811981,
+     "top1_prob_max": 0.9999999840019931,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    },
+    {
+     "step": 16,
+     "entropy_mean": 6.587354788261835e-07,
+     "entropy_min": 3.245345667109252e-07,
+     "entropy_max": 1.1918524992741944e-06,
+     "top1_prob_mean": 0.9999999639110746,
+     "top1_prob_min": 0.9999999322671794,
+     "top1_prob_max": 0.9999999830737137,
+     "top1_most_common": [
+      {
+       "token": " it",
+       "id": 432,
+       "n_prompts": 32
+      }
+     ]
+    }
+   ],
+   "distinct_top1_per_prompt": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "distinct_top1_mean": 2.0,
+   "examples": [
+    {
+     "prompt_index": 0,
+     "prompt_start": "The Heilwood Company store was a product of necessity. Being a rural, isolated area, the newly created town needed",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 1,
+     "prompt_start": " still deeply linked to its \u201cparent\u201d coal mining company.\nThe new corporation was to transact its business in Heil",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 2,
+     "prompt_start": " on November 15, 1904.\nBy December 1904 construction for the new He",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 3,
+     "prompt_start": ", it became necessary for the new owners \u2013 the Penn Mary Coal Company \u2013 to sell the company store and store manager\u2019s",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ]
+     ]
+    },
+    {
+     "prompt_index": 4,
+     "prompt_start": " Liriner operated it in 1920 and Romeo Rossi operated it from about 1921 to",
+     "top1_tokens_per_step": [
+      " it",
+      "gle",
+      "gle",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it",
+      " it"
+     ],
+     "nearest_receiver_tokens": [
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": "gle",
+        "cos": 0.9127
+       },
+       {
+        "token": "GLE",
+        "cos": 0.4586
+       },
+       {
+        "token": " gle",
+        "cos": 0.3903
+       },
+       {
+        "token": "gles",
+        "cos": 0.3898
+       },
+       {
+        "token": " Gle",
+        "cos": 0.373
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ],
+      [
+       {
+        "token": " it",
+        "cos": 0.7988
+       },
+       {
+        "token": "\u5b83",
+        "cos": 0.6127
+       },
+       {
+        "token": " It",
+        "cos": 0.5491
+       },
+       {
+        "token": "It",
+        "cos": 0.5378
+       },
+       {
+        "token": "\tit",
+        "cos": 0.5039
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ }
+}
