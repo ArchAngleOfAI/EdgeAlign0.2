@@ -1,7 +1,16 @@
 # Run notes — `train_3layer.py` (launched 2026-09-29)
 
-Status at this commit: **running**, past step 300 (end of the dense-eval phase).
-This file will be updated with final results when the run finishes.
+Status: **stopped at the user's request on 2026-09-30 ~13:55 UTC, at step 3029
+of 10,000**. The run was stopped with SIGTERM, not a crash or NaN stop. The last
+eval and checkpoint are at step 3000. The training log also contains steps
+3001–3029, which no checkpoint covers. `--resume` would continue from step
+3000 and re-run those 29 steps on the same data.
+
+**Headline: the loss curve shows training instability after step ~2000.**
+Held-out loss reached its best, **0.0105 at step 2600** (−97% vs 0.3930 at
+step 0). From step ~2650 it regressed sharply and had not recovered by the
+stop (0.2066 at step 3000), which is back to about its step-290 level. See
+"Final results" below.
 
 ## Exact settings
 
@@ -57,7 +66,7 @@ This file will be updated with final results when the run finishes.
   gaps from step 1 to 30).
 - **Estimated total:** 19.94 s × 10,000 ≈ **55.4 h** of training plus 128
   evals/checkpoint writes. Measured mean over the first 300 steps: 20.32 s/step
-  → **≈ 56.5 h** of training. Expected finish around 2026-10-02 ~05:30 UTC.
+  → **≈ 56.5 h** of training. (The run was stopped at step 3029, so it never reached 10,000.)
 - **Checkpoints** (outside git, on `/data`):
   `/data/a84460786/testfolder_checkpoints/train_3layer/`. `latest.pt` is
   rewritten at every eval, `best.pt` is a hard link to the best-eval
@@ -65,7 +74,58 @@ This file will be updated with final results when the run finishes.
   Each file is ~4.3 GB. Resume with
   `python train_3layer.py --resume`.
 
-## Held-out loss so far (mean of 32 prompts)
+## Final results (run stopped at step 3029)
+
+| | step | mean held-out loss | per-batch (8 batches × 4 prompts) |
+|---|---|---|---|
+| start | 0 | 0.3930 | 0.1920, 0.8578, 0.5906, 0.2354, 0.2255, 0.6223, 0.2461, 0.1744 |
+| **best** | **2600** | **0.0105** | 0.0080, 0.0155, 0.0103, 0.0081, 0.0088, 0.0105, 0.0119, 0.0108 |
+| final (last eval) | 3000 | 0.2066 | 0.1755, 0.2212, 0.2048, 0.1894, 0.2356, 0.2136, 0.2085, 0.2040 |
+
+At the best step every batch is between 0.008 and 0.016. At the final eval
+every batch is between 0.18 and 0.24, so the regression hits all 8 batches and
+does not come from a single outlier.
+
+### Instability after step 2000
+
+The loss curve (`kd_loss_curve_3layer_lr1e-4_bs16_accum8_gradclip_trained_range.png`)
+shows training becoming unstable after step ~2000. The evidence:
+
+- **Held-out spikes grow.** Earlier spikes were small and short (held-out
+  0.052 at step 1500). At step 2000 held-out rose to **0.0836** from 0.020 at
+  step 1900, then recovered to 0.0107–0.0128 over steps 2100–2600. From step
+  ~2650 it regressed again, to **0.1505** at step 2700, 0.0723 at 2800,
+  **0.2117** at 2900 and **0.2066** at 3000, with no recovery before the stop.
+- **Training loss shows the same thing.** Per-step training loss ranged
+  0.0083–0.0691 over steps 2001–2600 and **0.0096–0.3157** over steps
+  2601–3029. The 50-step moving average went from ~0.013 at step 2600 to
+  ~0.23 at step 2900.
+- **Gradients grow and clipping fires more often:**
+
+  | steps | clipping active | median pre-clip grad norm | max pre-clip grad norm |
+  |---|---|---|---|
+  | 1001–2000 | 204 / 1000 (20%) | 0.65 | 1,783.9 |
+  | 2001–2600 | 151 / 600 (25%) | 0.79 | 87.0 |
+  | 2601–3029 | 221 / 429 (52%) | 1.03 | 409.0 |
+
+  The median pre-clip norm rose steadily through training, and after step 2600
+  it sits right at the clip threshold (1.0).
+- **Context:** this is the third distinct regression in this run. The first was
+  at step 157 (held-out 0.105 → 0.278), which recovered by step ~400. It
+  follows the same fast-drop → sudden-jump pattern `stability_report.md` found
+  at LR 1e-3. Here it happens at a constant peak LR of 1e-4, with warmup,
+  gradient clipping at 1.0 and 3 trainable layers. This run does not show what
+  causes it: the LR is constant after warmup, so it cannot tell LR from other
+  factors.
+
+**Checkpoints kept** (`/data/a84460786/testfolder_checkpoints/train_3layer/`,
+~4.3 GB each): `best.pt` (step 2600, held-out 0.0105), `step_01000.pt`,
+`step_02000.pt`, `step_03000.pt` (the same file as `latest.pt`, step 3000).
+
+**Timing, measured:** 20.27 s per optimizer step on average over 3,029 steps
+(GPU 2), plus eval/checkpoint overhead.
+
+## Held-out loss at the step-300 commit (mean of 32 prompts)
 
 | step | mean | per-batch |
 |---|---|---|
@@ -85,10 +145,10 @@ loss then fell slowly: 0.283 at step 170, 0.240 at step 260, 0.223 at step 290,
 ## Files
 
 - `train_3layer.py` — the training script
-- `logs/train_3layer.jsonl`, `logs/eval_3layer.jsonl` — per-step and per-eval
-  logs (snapshot at commit time; the run keeps appending)
+- `logs/train_3layer.jsonl`, `logs/eval_3layer.jsonl` — per-step (steps
+  1–3029) and per-eval (steps 0–3000) logs, final
 - `kd_loss_curve_3layer_lr1e-4_bs16_accum8_gradclip.png` — the run's own
-  plot, x-axis 0–10,000, rewritten at every eval
+  plot, x-axis 0–10,000, as last written at the step-3000 eval
 - `replot_3layer.py` + `kd_loss_curve_3layer_lr1e-4_bs16_accum8_gradclip_trained_range.png` —
   the same plot, x-axis limited to the steps trained so far. The script only
   reads the logs, runs on CPU, and is safe to run during training.
