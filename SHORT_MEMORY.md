@@ -209,3 +209,25 @@ once something becomes durable project knowledge instead of active state.
   (training reads only 000_00000). The user decided to keep FineWeb-Edu
   rather than /data/r50058044/.../wiki-18.jsonl (which is a tar-wrapped
   FlashRAG wiki dump, not plain JSONL).
+
+## Gist health check (2026-09-30, done)
+
+- `diagnostics_gist/` (t1_swap ... t8_steer, `_gist_common.py`, `run_all.sh`);
+  results in `diagnostics_gist/results/`; write-up in `gist_health_report.md`.
+  Checkpoints tested: step0 (fresh init, seed 0), step1000 (`step_01000.pt`),
+  best (`best.pt` = step 2600, held-out 0.0105). Ran on GPU 5.
+- Verdict: COLLAPSED BUT ALIVE. From step 1000 the generator is one-hot at
+  every rollout step and emits the same sequence for every prompt
+  (' it', 'gle', 'gle', ' it' x13): cross-prompt cos 0.996, swap effect
+  ~4e-8. Not dead: naive prefixes are 14-16x worse (text16 0.165,
+  rand_tok 0.148-0.196, pad16 0.394, zeros 3.29); the best gist is 2.5-77x
+  more noise-sensitive than real text; directly steerable to log p("{") ~0;
+  generator steering from best +9.6 nats vs +0.9 from step0.
+- Only sign of invisibility: attention to gist positions 2-16 falls
+  0.125 -> 0.022 -> 0.0035 (text16 0.026); the receiver uses the gist mostly
+  via position 0 (attention sink).
+- Gradient at an exactly-zero prefix is NaN (steering from zeros undefined).
+- Next steps suggested: monitor swap / cross-prompt cos / rollout entropy
+  during training (KD loss alone missed the collapse); test whether one
+  learned constant prefix matches 0.0105; test whether gist positions 2-16
+  matter at all.
