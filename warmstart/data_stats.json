@@ -1,0 +1,541 @@
+{
+ "sni": {
+  "repo": "github.com/allenai/natural-instructions",
+  "files": "tasks/*.json, splits/default/{train,test}_tasks.txt",
+  "fields_used": "Definition[0], Input_language, Output_language, Instances[].{id,input}",
+  "train_tasks_listed": 756,
+  "test_tasks_listed": 119,
+  "non_english_dropped": {
+   "train": 0,
+   "test": 0
+  },
+  "tasks_with_multiple_definitions_used_first": [
+   "task288_gigaword_summarization"
+  ],
+  "train_tasks_english": 756,
+  "test_tasks_english": 119,
+  "definition_tokens_train_pool": {
+   "n_tasks": 756,
+   "p50": 64.5,
+   "p75": 95.0,
+   "p90": 156.5,
+   "p95": 203.25,
+   "p99": 490.5500000000018,
+   "min": 10,
+   "max": 837,
+   "mean": 85.08730158730158
+  },
+  "CAP": 208,
+  "CAP_rule": "p95=203.2 rounded up to a multiple of 16, capped at 256",
+  "train_tasks_dropped_over_cap": 37,
+  "train_tasks_dropped_under_8": 0,
+  "test_tasks_dropped_over_cap": 6,
+  "test_tasks_dropped_under_8": 0,
+  "train_pool_after_length_filters": 101265
+ },
+ "rlvr": {
+  "n_total": 14973,
+  "types": {
+   "All Lowercase": 622,
+   "Number Paragraphs": 614,
+   "No Commas": 628,
+   "Keyword Frequency": 648,
+   "Quotation": 647,
+   "Minimum Number Highlighted Section": 646,
+   "Repeat Prompt": 604,
+   "Number Paragraphs + First Word in i-th Paragraph": 614,
+   "JSON Format": 624,
+   "Letter Frequency": 619,
+   "Frequency of All-capital Words": 618,
+   "Number Sentences": 605,
+   "End Checker": 618,
+   "All Uppercase": 631,
+   "Multiple Sections": 655,
+   "Forbidden Words": 617,
+   "Choose": 615,
+   "Title": 610,
+   "Number Words": 618,
+   "Postscript": 643,
+   "Number Placeholder": 629,
+   "Number Bullets": 621,
+   "Two Responses": 617,
+   "Include Keywords": 610
+  },
+  "excluded_language_types": [
+   "All Lowercase",
+   "All Uppercase"
+  ],
+  "excluded_language_reason": "no constraint_type is about response language as such; these two are the only types whose constraint text sets the response language ('Your entire response should be in English, ...')",
+  "excluded_language_n": 1253,
+  "not_located": {},
+  "decontam_ifeval": 0,
+  "decontam_ifbench": 0,
+  "decontam_both": 0,
+  "duplicate_user_full": 4,
+  "decontam_sources": {
+   "google/IFEval": 541,
+   "allenai/IFBench_test": 300
+  },
+  "decontam_rule": "13-gram (lowercased \\w+ words) overlap between the task text (message with the constraint removed) and any IFEval / IFBench_test prompt",
+  "whole_message_would_hit": 2764,
+  "not_located_total": 0,
+  "decontam_dropped_total": 0,
+  "usable_after_location_decontam_dedup": 13716
+ },
+ "squad": {
+  "train_split_rows": 87599,
+  "validation_split_rows": 10570,
+  "train_candidates": 11000,
+  "heldout_candidates": 140
+ },
+ "length_filter_drops_at_build": {
+  "sni": {
+   "train": {
+    "_cap": 208,
+    "drop_total_len_prompt": 1538,
+    "drop_kept_len": 2280
+   },
+   "heldout_a": {
+    "_cap": 208,
+    "drop_total_len_prompt": 34,
+    "drop_kept_len": 42
+   },
+   "heldout_b": {
+    "_cap": 208,
+    "drop_total_len_prompt": 3,
+    "drop_kept_len": 1
+   }
+  },
+  "rlvr": {
+   "train": {
+    "_cap": 208,
+    "drop_total_len_prompt": 861,
+    "drop_removed_len": 337,
+    "drop_kept_len": 132
+   },
+   "heldout_a": {
+    "_cap": 208,
+    "drop_total_len_prompt": 12,
+    "drop_kept_len": 1,
+    "drop_removed_len": 2
+   },
+   "heldout_b": {
+    "_cap": 208
+   }
+  },
+  "squad": {
+   "train": {
+    "_cap": 208,
+    "drop_removed_len": 922
+   },
+   "heldout_a": {
+    "_cap": 208,
+    "drop_removed_len": 6
+   },
+   "heldout_b": {
+    "_cap": 208
+   }
+  }
+ },
+ "candidates": {
+  "sni/train": 26000,
+  "sni/heldout_a": 320,
+  "sni/heldout_b": 335,
+  "rlvr/train": 12186,
+  "rlvr/heldout_a": 185,
+  "squad/train": 11000,
+  "squad/heldout_a": 140
+ },
+ "response_generation": {
+  "backend": "HF transformers generate (vLLM not installed), bf16, left padding",
+  "sampling": "temperature 0.7, top_p 0.8, top_k 20, max_new_tokens 256, eos = <|im_end|> or <|endoftext|>",
+  "input": "teacher token ids (prefix + removed + suffix), i.e. the FULL user message, non-thinking template",
+  "degenerate_rule": "drop if (a) no <|im_end|> within 256 new tokens (incl. stopping on <|endoftext|>), (b) empty/whitespace-only content, (c) '<think>' or '</think>' in content, (d) >= 16 content tokens and distinct-4-gram ratio < 0.5 (heavy repetition)",
+  "counts": {
+   "rlvr/heldout_a/candidates": 185,
+   "rlvr/heldout_a/drop_no_end_of_turn": 49,
+   "rlvr/heldout_a/drop_repetition": 17,
+   "rlvr/heldout_a/drop_total_len_gt_1024": 1,
+   "rlvr/train/candidates": 12186,
+   "rlvr/train/drop_no_end_of_turn": 3064,
+   "rlvr/train/drop_repetition": 562,
+   "rlvr/train/drop_total_len_gt_1024": 65,
+   "sni/heldout_a/candidates": 320,
+   "sni/heldout_a/drop_no_end_of_turn": 25,
+   "sni/heldout_a/drop_total_len_gt_1024": 1,
+   "sni/heldout_b/candidates": 335,
+   "sni/heldout_b/drop_no_end_of_turn": 1,
+   "sni/train/candidates": 26000,
+   "sni/train/drop_no_end_of_turn": 1634,
+   "sni/train/drop_repetition": 28,
+   "sni/train/drop_total_len_gt_1024": 26,
+   "squad/heldout_a/candidates": 140,
+   "squad/train/candidates": 11000,
+   "squad/train/drop_no_end_of_turn": 18,
+   "squad/train/drop_repetition": 1,
+   "squad/train/drop_total_len_gt_1024": 1
+  }
+ },
+ "kl_nogist_filter": {
+  "rule": "per source, gap examples with KL_nogist <= the 30th percentile of that source's gap pool are dropped; no-gap examples are not filtered; held-out sets use the same per-source thresholds (held-out B uses SNI's)",
+  "per_source": {
+   "sni": {
+    "gap_before_filter": {
+     "n": 21639,
+     "mean": 4.112866972743794,
+     "std": 4.758812935670766,
+     "min": 0.003081974573433399,
+     "p10": 0.22225558757781982,
+     "p25": 0.5580858886241913,
+     "p30": 0.7197336196899414,
+     "p50": 1.7511993646621704,
+     "p75": 6.184831142425537,
+     "p90": 12.163251876831055,
+     "max": 24.55097198486328
+    },
+    "gap_after_filter": {
+     "n": 15147,
+     "mean": 5.732891887770696,
+     "std": 4.856744691400997,
+     "min": 0.7197874784469604,
+     "p10": 0.991727876663208,
+     "p25": 1.5567196607589722,
+     "p30": 1.8374303817749025,
+     "p50": 4.37421989440918,
+     "p75": 8.521863460540771,
+     "p90": 13.940106391906738,
+     "max": 24.55097198486328
+    },
+    "threshold_p30": 0.7197336196899414,
+    "gap_dropped": 6492,
+    "nogap_kl_nogist_unfiltered": {
+     "n": 2673,
+     "mean": 4.021195921241705,
+     "std": 4.726325344406784,
+     "min": 0.012102278880774975,
+     "p10": 0.22464665174484252,
+     "p25": 0.5465829372406006,
+     "p30": 0.7235164284706116,
+     "p50": 1.666129231452942,
+     "p75": 5.873969078063965,
+     "p90": 11.878258323669439,
+     "max": 23.682376861572266
+    }
+   },
+   "rlvr": {
+    "gap_before_filter": {
+     "n": 7561,
+     "mean": 1.8350059979535673,
+     "std": 2.6943190376210793,
+     "min": 0.0007805912755429745,
+     "p10": 0.1520003229379654,
+     "p25": 0.33750465512275696,
+     "p30": 0.39810842275619507,
+     "p50": 0.7413133382797241,
+     "p75": 1.9406110048294067,
+     "p90": 5.056182384490967,
+     "max": 18.60574722290039
+    },
+    "gap_after_filter": {
+     "n": 5292,
+     "mean": 2.531356789425117,
+     "std": 2.9581420342288745,
+     "min": 0.3982579708099365,
+     "p10": 0.5014614343643189,
+     "p25": 0.6862663924694061,
+     "p30": 0.7631275713443756,
+     "p50": 1.241478145122528,
+     "p75": 3.1870040893554688,
+     "p90": 6.4613765716552765,
+     "max": 18.60574722290039
+    },
+    "threshold_p30": 0.39810842275619507,
+    "gap_dropped": 2269,
+    "nogap_kl_nogist_unfiltered": {
+     "n": 934,
+     "mean": 1.7937180142150693,
+     "std": 2.6233430429135307,
+     "min": 0.0020325807854533195,
+     "p10": 0.18068156540393832,
+     "p25": 0.3510403335094452,
+     "p30": 0.41834998726844785,
+     "p50": 0.7510560154914856,
+     "p75": 1.9358801245689392,
+     "p90": 4.723865842819214,
+     "max": 16.834625244140625
+    }
+   },
+   "squad": {
+    "gap_before_filter": {
+     "n": 9773,
+     "mean": 1.567228696015806,
+     "std": 0.9570972465482137,
+     "min": 0.023265289142727852,
+     "p10": 0.5066728830337525,
+     "p25": 0.8466236591339111,
+     "p30": 0.9624823093414306,
+     "p50": 1.4091589450836182,
+     "p75": 2.1079208850860596,
+     "p90": 2.8017577648162844,
+     "max": 16.591184616088867
+    },
+    "gap_after_filter": {
+     "n": 6841,
+     "mean": 1.979148911961058,
+     "std": 0.8498602680939255,
+     "min": 0.9625074863433838,
+     "p10": 1.1089527606964111,
+     "p25": 1.3544007539749146,
+     "p30": 1.427677869796753,
+     "p50": 1.7913470268249512,
+     "p75": 2.387485980987549,
+     "p90": 3.076216220855713,
+     "max": 16.591184616088867
+    },
+    "threshold_p30": 0.9624823093414306,
+    "gap_dropped": 2932,
+    "nogap_kl_nogist_unfiltered": {
+     "n": 1207,
+     "mean": 1.5633022240436363,
+     "std": 0.9305146920642908,
+     "min": 0.07912231236696243,
+     "p10": 0.5598830223083497,
+     "p25": 0.8764211535453796,
+     "p30": 0.9528667211532593,
+     "p50": 1.407210111618042,
+     "p75": 2.1016082763671875,
+     "p90": 2.765759181976319,
+     "max": 8.108999252319336
+    }
+   }
+  }
+ },
+ "final": {
+  "train": {
+   "total": 20754,
+   "per_source": {
+    "sni": {
+     "total": 10377,
+     "gap": 8820,
+     "nogap": 1557
+    },
+    "rlvr": {
+     "total": 6226,
+     "gap": 5292,
+     "nogap": 934
+    },
+    "squad": {
+     "total": 4151,
+     "gap": 3528,
+     "nogap": 623
+    }
+   },
+   "fractions": {
+    "sni": 0.5,
+    "rlvr": 0.3,
+    "squad": 0.2
+   },
+   "nogap_fraction": 0.15,
+   "removed_tokens": {
+    "n": 20754,
+    "mean": 44.806591500433655,
+    "std": 40.65222307252462,
+    "min": 8.0,
+    "p10": 10.0,
+    "p25": 15.0,
+    "p30": 17.0,
+    "p50": 25.0,
+    "p75": 66.0,
+    "p90": 101.0,
+    "max": 204.0
+   },
+   "response_tokens": {
+    "n": 20754,
+    "mean": 29.06952876553917,
+    "std": 39.598958462599754,
+    "min": 2.0,
+    "p10": 2.0,
+    "p25": 4.0,
+    "p30": 5.0,
+    "p50": 16.0,
+    "p75": 34.0,
+    "p90": 75.0,
+    "max": 256.0
+   },
+   "teacher_tokens": {
+    "n": 20754,
+    "mean": 205.45384022357135,
+    "std": 137.2471518182682,
+    "min": 32.0,
+    "p10": 82.0,
+    "p25": 115.0,
+    "p30": 127.0,
+    "p50": 172.0,
+    "p75": 245.0,
+    "p90": 365.0,
+    "max": 1024.0
+   }
+  },
+  "heldout_a": {
+   "total": 256,
+   "per_source": {
+    "sni": {
+     "total": 128,
+     "gap": 109,
+     "nogap": 19
+    },
+    "rlvr": {
+     "total": 77,
+     "gap": 65,
+     "nogap": 12
+    },
+    "squad": {
+     "total": 51,
+     "gap": 43,
+     "nogap": 8
+    }
+   },
+   "fractions": {
+    "sni": 0.5,
+    "rlvr": 0.3008,
+    "squad": 0.1992
+   },
+   "nogap_fraction": 0.1523,
+   "removed_tokens": {
+    "n": 256,
+    "mean": 46.62109375,
+    "std": 42.41048689656499,
+    "min": 8.0,
+    "p10": 11.0,
+    "p25": 15.75,
+    "p30": 18.0,
+    "p50": 25.0,
+    "p75": 67.0,
+    "p90": 110.0,
+    "max": 203.0
+   },
+   "response_tokens": {
+    "n": 256,
+    "mean": 28.7578125,
+    "std": 36.705488795476406,
+    "min": 2.0,
+    "p10": 2.0,
+    "p25": 4.0,
+    "p30": 5.0,
+    "p50": 17.0,
+    "p75": 35.25,
+    "p90": 74.5,
+    "max": 255.0
+   },
+   "teacher_tokens": {
+    "n": 256,
+    "mean": 201.8359375,
+    "std": 127.76778113435364,
+    "min": 44.0,
+    "p10": 80.0,
+    "p25": 109.25,
+    "p30": 121.5,
+    "p50": 177.0,
+    "p75": 248.25,
+    "p90": 342.5,
+    "max": 893.0
+   },
+   "kl_nogist_gap": {
+    "n": 217,
+    "mean": 3.7066301198049625,
+    "std": 3.6444584368561985,
+    "min": 0.41862455010414124,
+    "p10": 0.7469934463500977,
+    "p25": 1.1953439712524414,
+    "p30": 1.2679686784744262,
+    "p50": 2.123666763305664,
+    "p75": 5.05747127532959,
+    "p90": 9.08325538635254,
+    "max": 21.7596492767334
+   }
+  },
+  "heldout_b": {
+   "total": 128,
+   "per_source": {
+    "sni": {
+     "total": 128,
+     "gap": 128,
+     "nogap": 0
+    },
+    "rlvr": {
+     "total": 0,
+     "gap": 0,
+     "nogap": 0
+    },
+    "squad": {
+     "total": 0,
+     "gap": 0,
+     "nogap": 0
+    }
+   },
+   "fractions": {
+    "sni": 1.0,
+    "rlvr": 0.0,
+    "squad": 0.0
+   },
+   "nogap_fraction": 0.0,
+   "removed_tokens": {
+    "n": 128,
+    "mean": 65.203125,
+    "std": 28.743031594359962,
+    "min": 20.0,
+    "p10": 31.400000000000002,
+    "p25": 46.25,
+    "p30": 53.1,
+    "p50": 64.0,
+    "p75": 75.0,
+    "p90": 103.0,
+    "max": 201.0
+   },
+   "response_tokens": {
+    "n": 128,
+    "mean": 20.1328125,
+    "std": 22.27294150622777,
+    "min": 2.0,
+    "p10": 2.0,
+    "p25": 3.75,
+    "p30": 5.0,
+    "p50": 11.0,
+    "p75": 27.25,
+    "p90": 55.19999999999999,
+    "max": 107.0
+   },
+   "teacher_tokens": {
+    "n": 128,
+    "mean": 192.8984375,
+    "std": 137.54095071126488,
+    "min": 64.0,
+    "p10": 90.0,
+    "p25": 112.0,
+    "p30": 116.0,
+    "p50": 146.5,
+    "p75": 222.0,
+    "p90": 372.19999999999993,
+    "max": 895.0
+   },
+   "kl_nogist_gap": {
+    "n": 128,
+    "mean": 3.926543173380196,
+    "std": 3.5463108679857465,
+    "min": 0.7222349643707275,
+    "p10": 0.9131811976432801,
+    "p25": 1.2228190898895264,
+    "p30": 1.4072942733764648,
+    "p50": 2.097061038017273,
+    "p75": 5.869894027709961,
+    "p90": 8.36826581954956,
+    "max": 16.35424041748047
+   }
+  },
+  "heldout_b_tasks": 98,
+  "train_sni_tasks": 674,
+  "train_sni_max_instances_per_task": 35,
+  "mix_rule": "user's choice (2026-09-30): keep 50/30/20; RLVR limits the size, all of its filtered examples are used and SNI/SQuAD are subsampled to 5/3 and 2/3 of it",
+  "nogap_rule": "no-gap = 15% of the final set per source (marked before the KL filter at the share that leaves 15% after it)"
+ }
+}

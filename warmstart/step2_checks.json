@@ -1,0 +1,28 @@
+{
+ "a_response_ids_identical": {
+  "examples": 21138,
+  "mismatches": 0
+ },
+ "b_alignment_kl": {
+  "n_examples": 64,
+  "mean": -5.808998105672272e-10,
+  "max": 1.4889337762724608e-08
+ },
+ "c_nogist_kl": {
+  "n_examples": 64,
+  "mean": 5.540820499882102,
+  "min": 0.7338566184043884
+ },
+ "d_backward": {
+  "loss": 1.511069893836975,
+  "grad_norms": {
+   "embedding2": 6003.03271484375,
+   "lm_head": 26151.876953125,
+   "layer_25": 9433.903651621034,
+   "layer_26": 11563.779521040788,
+   "layer_27": 25763.494239576557
+  },
+  "last_soft_token_grad_fn": "<SelectBackward0 object at 0x792579990250>",
+  "frozen_params_with_grad": []
+ }
+}
