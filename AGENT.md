@@ -43,5 +43,8 @@ one-off correction.
 
 ## Status
 
-Project scaffolding initialized on 2026-09-18. Awaiting the user's
-description of the actual project goal to populate `MEMORY.md`.
+Project scaffolding initialized on 2026-09-18. As of 2026-09-30 the project
+is soft-prompt ("gist") distillation research on Qwen3-0.6B; see `MEMORY.md`
+for the durable picture and the CURRENT STATUS block at the top of
+`SHORT_MEMORY.md` for where work stands. On restart, read those two files
+before doing anything else.

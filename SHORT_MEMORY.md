@@ -4,22 +4,53 @@ Running log of current tasks and conversation state. Read this first on
 restart to pick up where things left off. Prune/archive into `MEMORY.md`
 once something becomes durable project knowledge instead of active state.
 
-## Current Status (2026-09-18)
+## >>> CURRENT STATUS (updated 2026-09-30) -- read this first <<<
 
-- Just initialized this project: `git init`, branch renamed to `main`,
-  created `AGENT.md`, `MEMORY.md`, `SHORT_MEMORY.md`.
-- **Blocked / waiting on user:** what is this project actually for? Need
-  the goal, scope, and any existing code/design to populate `MEMORY.md`
-  and start real work.
-- Nothing committed yet. First commit is pending until the user confirms
-  what to include (and asks for a commit — per policy I don't commit
-  unless asked).
+Nothing is running. No background jobs, no GPU in use. The working tree is
+clean and everything is pushed to `origin/main`
+(https://github.com/ArchAngleOfAI/EdgeAlign0.2). Pushing works without a
+prompt: a GitHub token is stored in `~/.git-credentials`.
 
-## Open Questions
+**Latest state of the research (newest first):**
+1. **Gist health check, done:** `gist_health_report.md`, `diagnostics_gist/`.
+   The best 3-layer generator (step 2600) is COLLAPSED BUT ALIVE. It emits the
+   same 16-vector gist for every prompt (' it', 'gle', 'gle', ' it' x13), yet
+   still beats naive prefixes 14-16x and is steerable.
+2. **3-layer long run, stopped by the user at step 3029/10000:**
+   `train_3layer.py`, `RUN_NOTES_3layer.md`. Best held-out 0.0105 @ step 2600;
+   unstable after step ~2000 (regressed to ~0.21 by step 3000).
+3. **Stability vs soft-prompt length, done:** `stability_report.md`.
+4. **Flat-KD-loss diagnosis, done:** `report.md`.
 
-1. What is the project's goal/purpose?
-2. What language/stack (if any is already decided)?
-3. Any existing code elsewhere to import, or starting from scratch?
+**No task is in progress. Next steps are the user's call.** Candidates the
+reports raise, none started:
+- monitor gist collapse during training (swap test, cross-prompt cos, rollout
+  entropy)
+- test a single learned constant prefix against 0.0105
+- test whether gist positions 2-16 matter
+- a lower LR / LR decay to address the late instability
+
+**Where things are:**
+- Python venv: `/data/a84460786/venvs/testfolder/bin/python`. The EdgeAlign
+  venv was deleted on 2026-09-29. `diagnostics/*.sh` still default to the old
+  path; pass `PY=...`.
+- 3-layer checkpoints (~4.3 GB each, outside git):
+  `/data/a84460786/testfolder_checkpoints/train_3layer/`. `best.pt` = step
+  2600; also `step_01000.pt`, `step_02000.pt`, `step_03000.pt`, and
+  `latest.pt` (= step 3000).
+- Old checkpoint `checkpoints/embedding2_step10000.pt` (1.8 GB, from the
+  flat 17k run, Embedding2 only). report.md test 5 uses it. Kept; the user was
+  told about it and has not asked to delete it.
+- GPUs: 0 is faulty (CUDA hardware error). 5 and 2 have worked. Others are
+  usually busy with other users' jobs, so check `nvidia-smi` first.
+
+**Resolved older items** (the sections below are historical log):
+- The dead 17k-step job is superseded. Its checkpoint was used in
+  report.md; no decision is pending.
+- The bs64/ga16 test was interrupted at step 26/63. Its plot is committed as
+  `kd_loss_bs64_ga16_test.png`.
+- The project-goal questions from 2026-09-18 are answered by the work
+  itself: soft-prompt ("gist") distillation research on Qwen3-0.6B.
 
 ## Recent Actions Log
 
@@ -50,7 +81,7 @@ once something becomes durable project knowledge instead of active state.
   over 10 steps. Not yet committed. Haven't run `--pretrained` on real
   data yet — didn't assume the user wants that repeated, will ask/wait.
 
-## DEAD job (started 2026-09-18 21:05, found dead 2026-09-22)
+## [HISTORICAL] DEAD job (started 2026-09-18 21:05, found dead 2026-09-22) -- superseded
 
 - `distill_softprompt.py --steps 100000 --batch-size 4 --checkpoint-every 10000`
   was running on GPU 6 (PID 2669321), log at `logs/distill_100k.log`
@@ -131,7 +162,7 @@ once something becomes durable project knowledge instead of active state.
   re-raising, so an OOM is unambiguous in the log instead of a bare
   traceback.
 
-## Active job: bs64/ga16 test (started 2026-09-22, in progress)
+## [HISTORICAL] bs64/ga16 test (started 2026-09-22) -- ended: interrupted at step 26/63, plot committed
 
 - `distill_softprompt.py --steps 63 --batch-size 4 --grad-accum-steps 16`
   on GPU 7 (only sufficiently idle GPU at launch time; GPU 4 got grabbed
@@ -149,7 +180,7 @@ once something becomes durable project knowledge instead of active state.
   fresh; still need to plot the kd_loss curve to PNG once it finishes
   and report final OOM status.
 
-## Open Questions (updated)
+## [HISTORICAL] Open Questions (2026-09-22; see CURRENT STATUS at top)
 
 - Whether to also run `--pretrained --data fineweb-edu` for a
   pretrained-vs-random-init comparison on real text (more meaningful

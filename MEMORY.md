@@ -7,8 +7,13 @@ life of the project," not for in-flight task state (that belongs in
 
 ## Project Goal
 
-_Pending — not yet defined. Waiting on the user to describe what this
-project is for._
+The user has not written a formal goal statement. What the project does
+(from the work since 2026-09-18): **soft-prompt ("gist") distillation on
+Qwen3-0.6B.** A student encoder rolls out a short continuous prefix (the
+"gist") from a prompt. A frozen receiver sees [gist ++ prompt] and is trained
+(via the encoder) to match a frozen teacher that sees the plain prompt,
+using the loss KL(teacher || receiver) on the prompt positions. The user's
+ideas are often non-standard; see AGENT.md.
 
 ## Environment
 
@@ -16,27 +21,60 @@ project is for._
   0.6B (hidden_size 1024, 28 layers, 16 attn heads / 8 KV heads, vocab
   151936, bf16, tied embeddings). Saved with `transformers==4.51.0`
   per its `config.json`.
-- **Python env:** `/home/a84460786/EdgeAlign/.venv` (Python 3.12.3,
-  reused from the separate EdgeAlign project — not local to
-  testfolder). Key packages: `torch==2.14.0`, `transformers==5.17.0`,
-  `accelerate`, `datasets`, `liger_kernel`, CUDA 13 wheels.
-  Note: this is EdgeAlign's *current* venv, whose `transformers` version
-  (5.17.0) EdgeAlign's own SHORT_MEMORY.md flags as a suspect in an
-  active bf16 bug investigation against the 32B checkpoint — worth
-  keeping in mind if similar symptoms show up here with the 0.6B model.
-- **Cluster:** 3x NVIDIA A100-PCIE-40GB (per `nvidia-smi`); shared with
-  other users' running jobs — check `nvidia-smi` and scope
-  `CUDA_VISIBLE_DEVICES` before use, don't assume exclusive access.
+- **Python env (since 2026-09-29):** `/data/a84460786/venvs/testfolder`
+  (Python 3.12.3, `torch==2.14.0+cu130`, `transformers==5.17.0`,
+  `accelerate`, `fsspec`, `aiohttp`, `pyarrow`, `matplotlib`). It was built with
+  `venv --without-pip` + get-pip.py, because the system Python lacks ensurepip.
+  The old env, `/home/a84460786/EdgeAlign/.venv`, is gone: the whole
+  EdgeAlign directory was deleted on 2026-09-29 (not by the agent).
+  `diagnostics/run_all.sh` and `diagnostics/run_stability.sh` still default to
+  the old path; override with `PY=/data/a84460786/venvs/testfolder/bin/python`.
+- **Cluster:** 8x NVIDIA A100-PCIE-40GB, shared with other users. Check
+  `nvidia-smi` and set `CUDA_VISIBLE_DEVICES` before every run.
+  **GPU 0 is faulty** ("invalid access of peer GPU memory ... hardware error"
+  on 2026-09-29); GPU 2 shows a permanently-100% vLLM worker from another
+  user but works. GPUs 5 and 2 have been used successfully.
+- **Disk:** `/` (home, repo) has only ~30 GB free. Put large files
+  (checkpoints, venvs, pip cache) under `/data/a84460786/`.
 
 ## Repository Structure
 
-- Git repo initialized 2026-09-18, default branch `main`.
-- No commits yet.
-- No source files yet.
+- Git repo, branch `main`, remote `origin` =
+  https://github.com/ArchAngleOfAI/EdgeAlign0.2 (same GitHub account as the
+  old EdgeAlign repo). Auth uses a token stored via `credential.helper
+  store` in `~/.git-credentials`; pushes work non-interactively.
+- `.gitignore`: `__pycache__/`, `*.pyc`, `checkpoints/`, `*.pt`, and `logs/*`
+  except `logs/train_3layer.jsonl` and `logs/eval_3layer.jsonl` (tracked).
+- Core code: `smoke_train.py` (FineWeb-Edu loader `fineweb_edu_batches`),
+  `qwen_dual_embedding.py` (`build_softprompt_generator`),
+  `distill_softprompt.py` (`generate_softprompt`, `receiver_forward`, original
+  training loop), `train_3layer.py` (the 3-layer long-run trainer),
+  `replot_3layer.py` (redraws its loss curve over the steps actually trained).
+- Diagnostics: `diagnostics/` (shared `_common.py` with `load_all`,
+  `forward_loss`, verbatim `kd_loss`; tests 1-7; `stability_vs_length.py`)
+  and `diagnostics_gist/` (`_gist_common.py`, t1-t8).
+- Reports: `report.md` (flat-loss diagnosis), `stability_report.md`,
+  `RUN_NOTES_3layer.md`, `gist_health_report.md`.
 
 ## Conventions & Decisions
 
-_None recorded yet._
+- The user asks explicitly for each commit and push, and usually asks for
+  a SHORT_MEMORY log entry plus a push after each finished piece of work.
+  Commit messages end with the Co-Authored-By line.
+- Diagnostic and experiment requests usually say: don't modify existing
+  files, put new scripts in a new folder, reuse existing functions rather
+  than reimplementing them, and commit JSON/logs/plots plus a report at the
+  repo root.
+- Held-out data for anything trained on FineWeb-Edu shard `000_00000` comes
+  from shard `001_00000`, which training never reads (see RUN_NOTES_3layer.md).
+- The user chose to keep FineWeb-Edu rather than
+  `/data/r50058044/reskill_search/retriever/wiki-18.jsonl`. That file is
+  another user's, and is a tar archive wrapping a FlashRAG wiki dump, not
+  plain JSONL.
+- The docstrings in `distill_softprompt.py` / `qwen_dual_embedding.py` still
+  say "only Embedding2 trainable" in places. Since 2026-09-22 the untied
+  LM_head and the last decoder layer are also trainable (train_3layer.py
+  unfreezes the last 3 layers).
 
 ## Key Terminology / Domain Notes
 
@@ -102,7 +140,11 @@ Embedding1/LM_head weight (`W1`), distinguished by where the trainable
    (the original standalone forward-pass smoke test).
 2. `build_softprompt_generator` — Embedding1(frozen, **input**) →
    Transformer(frozen) → LM_head(frozen) → Embedding2(trainable,
-   **output** projection). Used by the distillation encoder
+   **output** projection). **Updated 2026-09-22:** LM_head is now UNTIED
+   from Embedding1 (own cloned Parameter) and trainable, and the last decoder
+   layer is trainable too. train_3layer.py unfreezes the last 3 and also sets
+   `config.tie_word_embeddings=False`, because a `tie_weights()` call would
+   otherwise re-tie them (report.md test 3). Used by the distillation encoder
    (`distill_softprompt.py`). Corrected 2026-09-18 from an earlier,
    wrong version that had Embedding2 at the input — user caught this:
    real tokens should go through the well-calibrated frozen embedding,
@@ -169,6 +211,24 @@ project should default to `softmax(logits) @ W`, not raw logits.**
 - Post-fix 10-step run: KD loss in a sane 0.22-0.74 range (vs. ~10-12
   pre-fix, when the receiver was getting a garbage-scale softprompt).
 
+## Key results so far (details in the reports)
+
+- **Flat loss (report.md):** the flat 17k-step run trained Embedding2 only.
+  It did improve (9% on paired batches), but per-batch noise (~0.2) hid it.
+  The gradient path is intact. BPTT through the rollout amplifies gradients.
+  More trainable layers help.
+- **Stability (stability_report.md):** at LR 1e-3, shorter soft prompts jump
+  less (L=100 +0.56, L=16 +0.18, L=8 +0.06). clip_grad_norm_ 1.0 does not
+  remove the jump.
+- **3-layer run (RUN_NOTES_3layer.md):** L=16, peak LR 1e-4 with warmup,
+  global batch 16, clip 1.0. Best held-out 0.0105 @ step 2600 (from
+  0.393). Unstable after step ~2000; stopped by the user at step 3029.
+- **Gist health (gist_health_report.md):** from step 1000 on, the generator
+  is collapsed to one prompt-independent one-hot token sequence, but the gist
+  is "alive": it beats naive prefixes 14-16x, is more noise-sensitive than
+  real text, and is steerable. Attention to gist positions 2-16 falls across
+  training (0.125 -> 0.0035). KD loss alone did not reveal the collapse.
+
 ## Changelog (durable, high-level only)
 
 - 2026-09-18: Repo initialized (`git init`, branch renamed to `main`).
@@ -183,3 +243,10 @@ project should default to `softmax(logits) @ W`, not raw logits.**
   projection) per user feedback, found and fixed the soft-token
   collapse bug (raw logits → softmax(logits) in the projection). See
   sections above.
+- 2026-09-22: Trainable set expanded (untied LM_head + last layer), grad
+  accumulation, soft-prompt-length sweep.
+- 2026-09-29: Remote set to ArchAngleOfAI/EdgeAlign0.2. Flat-loss
+  diagnostics (report.md) and stability grid (stability_report.md).
+  EdgeAlign venv lost, new venv on /data. 3-layer long run launched.
+- 2026-09-30: 3-layer run stopped at step 3029 (best 0.0105 @ 2600). Gist
+  health check (gist_health_report.md).
