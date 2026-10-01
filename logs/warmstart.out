@@ -209,3 +209,24 @@ step   130  kd=1.49538  ent=0.000  grad_norm=3.437e+00  clip=on  lr=1.00e-04  5.
 WARNING: held-out mean rollout entropy 0.0000 < 0.05 nats at step 130 (possible collapse to hard tokens)
 EVAL step 130: A KL_gist gap 3.1983 (nogist 3.7066) nogap 0.0442 | recovery 0.1278 (ratio-of-means 0.1372) | per-source sni=0.106 rlvr=0.136 squad=0.172 | swap-own +0.0000 | cos 1.000 | ent 0.000 | top1 1.0  [51s]
 step   131  kd=1.00686  ent=0.000  grad_norm=2.322e+00  clip=on  lr=1.00e-04  6.5s
+step   132  kd=0.58742  ent=0.000  grad_norm=1.004e+00  clip=on  lr=1.00e-04  6.4s
+step   133  kd=2.44937  ent=0.000  grad_norm=2.707e+00  clip=on  lr=1.00e-04  6.6s
+step   134  kd=0.78192  ent=0.000  grad_norm=1.075e+00  clip=on  lr=1.00e-04  6.5s
+step   135  kd=1.25814  ent=0.000  grad_norm=2.035e+00  clip=on  lr=1.00e-04  6.5s
+step   136  kd=1.13968  ent=0.000  grad_norm=1.150e+00  clip=on  lr=1.00e-04  7.0s
+step   137  kd=1.08264  ent=0.000  grad_norm=1.784e+00  clip=on  lr=1.00e-04  7.2s
+step   138  kd=0.61822  ent=0.000  grad_norm=5.854e-01  clip=off  lr=1.00e-04  7.6s
+step   139  kd=1.21914  ent=0.000  grad_norm=2.376e+00  clip=on  lr=1.00e-04  7.5s
+step   140  kd=0.97132  ent=0.000  grad_norm=1.685e+00  clip=on  lr=1.00e-04  7.1s
+WARNING: held-out mean rollout entropy 0.0000 < 0.05 nats at step 140 (possible collapse to hard tokens)
+EVAL step 140: A KL_gist gap 3.1368 (nogist 3.7066) nogap 0.0432 | recovery 0.1446 (ratio-of-means 0.1537) | per-source sni=0.119 rlvr=0.143 squad=0.211 | swap-own +0.0000 | cos 1.000 | ent 0.000 | top1 1.0  [54s]  (new best)
+step   141  kd=1.26914  ent=0.000  grad_norm=2.289e+00  clip=on  lr=1.00e-04  5.9s
+step   142  kd=0.93670  ent=0.000  grad_norm=2.433e+00  clip=on  lr=1.00e-04  5.9s
+step   143  kd=0.75216  ent=0.000  grad_norm=2.097e+00  clip=on  lr=1.00e-04  6.1s
+step   144  kd=0.96367  ent=0.000  grad_norm=1.924e+00  clip=on  lr=1.00e-04  6.6s
+step   145  kd=0.60151  ent=0.000  grad_norm=1.243e+00  clip=on  lr=1.00e-04  6.2s
+step   146  kd=0.93703  ent=0.000  grad_norm=9.699e-01  clip=off  lr=1.00e-04  6.1s
+step   147  kd=0.75290  ent=0.000  grad_norm=7.823e-01  clip=off  lr=1.00e-04  6.0s
+step   148  kd=1.07028  ent=0.000  grad_norm=1.429e+00  clip=on  lr=1.00e-04  6.0s
+step   149  kd=0.96706  ent=0.000  grad_norm=1.531e+00  clip=on  lr=1.00e-04  6.5s
+step   150  kd=0.96076  ent=0.000  grad_norm=1.433e+00  clip=on  lr=1.00e-04  5.8s
