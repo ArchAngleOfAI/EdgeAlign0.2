@@ -407,10 +407,56 @@ def main():
                     help="Examples per micro-batch; accum = 16 / this, so the global batch stays 16.")
     ap.add_argument("--skip-evals", action="store_true", help="Smoke timing: only the step-0 eval.")
     args = ap.parse_args()
-    if GLOBAL_BATCH % args.micro_batch:
-        sys.exit(f"--micro-batch must divide {GLOBAL_BATCH}")
-    MICRO_BATCH, ACCUM = args.micro_batch, GLOBAL_BATCH // args.micro_batch
-    CONFIG.update(micro_batch=MICRO_BATCH, accum=ACCUM)
+    # Data parallel when launched with torchrun (one process per GPU): each rank takes an equal share of the
+    # step's 16 examples, gradients are summed across ranks before clipping, so the update is the same as on
+    # one GPU. Rank 0 alone runs the checks, evals, logging, plots and checkpoints.
+    dist_on = int(os.environ.get("WORLD_SIZE", "1")) > 1
+    if dist_on:
+        import datetime
+        import torch.distributed as dist
+        # GPU-to-GPU P2P hangs on this machine (NCCL broadcast never completes, 2026-10-01); route through host
+        # memory instead (~3.5 GB/s between GPUs 4 and 6, ~0.4 s for the full gradient all-reduce)
+        os.environ.setdefault("NCCL_P2P_DISABLE", "1")
+        local_rank = int(os.environ["LOCAL_RANK"])
+        torch.cuda.set_device(local_rank)
+        device = torch.device(f"cuda:{local_rank}")
+        dist.init_process_group("nccl", device_id=device, timeout=datetime.timedelta(minutes=30))
+        rank, world = dist.get_rank(), dist.get_world_size()
+    else:
+        device, rank, world = get_device(), 0, 1
+    is_main = rank == 0
+    if not is_main:
+        sys.stdout = open(os.devnull, "w")
+    if GLOBAL_BATCH % (args.micro_batch * world):
+        sys.exit(f"--micro-batch x {world} GPU(s) must divide {GLOBAL_BATCH}")
+    MICRO_BATCH, ACCUM = args.micro_batch, GLOBAL_BATCH // (args.micro_batch * world)  # ACCUM is per rank
+    CONFIG.update(micro_batch=MICRO_BATCH, accum=ACCUM, world_size=world)
+
+    def on_main(fn, *a):
+        """Run fn on rank 0 only while the other ranks wait; a STOP (SystemExit) on rank 0 stops every rank."""
+        msg = None
+        if is_main:
+            try:
+                fn(*a)
+            except SystemExit as ex:
+                msg = str(ex.code)
+        if dist_on:
+            flag = torch.tensor([0 if msg is None else 1], device=device)
+            dist.broadcast(flag, 0)
+            if flag.item():
+                sys.exit(msg if is_main else "STOP (raised on rank 0)")
+        elif msg is not None:
+            sys.exit(msg)
+
+    def check_sync(step):
+        """Every rank must hold the same trainable weights (identical summed grads -> identical AdamW steps)."""
+        if not dist_on:
+            return
+        mine = torch.stack([p.detach().double().sum() for p in params])
+        allv = [torch.empty_like(mine) for _ in range(world)]
+        dist.all_gather(allv, mine)
+        if not all(torch.equal(allv[0], v) for v in allv[1:]):
+            sys.exit(f"STOP: trainable weights differ across GPUs at step {step}")
     sched = args.schedule_steps or args.steps
 
     if args.smoke:
@@ -427,7 +473,6 @@ def main():
     latest = os.path.join(ckpt_dir, "latest.pt")
 
     torch.manual_seed(SEED)
-    device = get_device()
     encoder, embedding2, _, teacher, receiver = load_all(device, num_trainable_layers=NUM_LAYERS)
     encoder.config.tie_word_embeddings = False
     ptrs = {encoder.lm_head.weight.data_ptr(), encoder.model.embed_tokens.weight.data_ptr(),
@@ -451,23 +496,33 @@ def main():
     cap = stats["sni"]["CAP"]
     print(f"data: train {len(train)}, held-out A {len(hold_a)}, held-out B {len(hold_b)}, CAP {cap}")
 
-    checks = run_checks(models, train, hold_a, hold_b, capture, device, params)
+    def checks_main():
+        checks = run_checks(models, train, hold_a, hold_b, capture, device, params)
+        if args.checks_only:
+            json.dump(checks, open(os.path.join(WS, "step2_checks.json"), "w"), indent=1)
+
+    on_main(checks_main)
     if args.checks_only:
-        json.dump(checks, open(os.path.join(WS, "step2_checks.json"), "w"), indent=1)
+        if dist_on:
+            dist.destroy_process_group()
         return
 
-    # KL_nogist once at start for every gap example of both held-out sets (compared to the data file)
-    t0 = time.time()
-    for name, hs in (("A", hold_a), ("B", hold_b)):
-        gap = [e for e in hs if e["gap"]]
-        vals = kl_nogist(teacher, receiver, gap, device)
-        diffs = [abs(v - e["kl_nogist"]) for v, e in zip(vals, gap)]
-        for v, e in zip(vals, gap):
-            e["kl_nogist"] = v
-        print(f"KL_nogist held-out {name}: {len(gap)} gap examples, mean {mean(vals):.4f}; "
-              f"max |diff| vs data-prep value {max(diffs):.2e}")
+    # KL_nogist once at start for every gap example of both held-out sets (compared to the data file); evals
+    # run on rank 0 only, so only rank 0 needs it
+    def kl_nogist_main():
+        t0 = time.time()
+        for name, hs in (("A", hold_a), ("B", hold_b)):
+            gap = [e for e in hs if e["gap"]]
+            vals = kl_nogist(teacher, receiver, gap, device)
+            diffs = [abs(v - e["kl_nogist"]) for v, e in zip(vals, gap)]
+            for v, e in zip(vals, gap):
+                e["kl_nogist"] = v
+            print(f"KL_nogist held-out {name}: {len(gap)} gap examples, mean {mean(vals):.4f}; "
+                  f"max |diff| vs data-prep value {max(diffs):.2e}")
+        print(f"KL_nogist computed in {time.time() - t0:.0f}s")
+
+    on_main(kl_nogist_main)
     nogist_mean_a = mean(e["kl_nogist"] for e in hold_a if e["gap"])
-    print(f"KL_nogist computed in {time.time() - t0:.0f}s")
     der_a, der_b = derangement(len(hold_a), 0), derangement(len(hold_b), 0)
     attn_idx = [i for i, e in enumerate(hold_a) if e["gap"]][:ATTN_N]
 
@@ -481,10 +536,11 @@ def main():
         load_trainable_state(encoder, embedding2, ckpt["trainable"])
         optimizer.load_state_dict(ckpt["optimizer"])
         start_step, micro_consumed, best = ckpt["step"], ckpt["micro_consumed"], ckpt["best"]
-        train_rows = truncate_jsonl(train_log, start_step)
-        eval_rows = truncate_jsonl(eval_log, start_step)
+        if is_main:
+            train_rows = truncate_jsonl(train_log, start_step)
+            eval_rows = truncate_jsonl(eval_log, start_step)
         print(f"resumed from {latest}: step {start_step}, best recovery {best['recovery']:.4f} @ {best['step']}")
-    else:
+    elif is_main:
         for p in (train_log, eval_log):
             if os.path.exists(p):
                 os.remove(p)
@@ -581,9 +637,10 @@ def main():
         print(msg + f"  [{res['eval_seconds']:.0f}s]{'  (new best)' if improved else ''}")
 
     if start_step == 0:
-        evaluate(0)
+        check_sync(0)
+        on_main(evaluate, 0)
 
-    print(f"L={L} micro={MICRO_BATCH} accum={ACCUM} peak_lr={PEAK_LR} min_lr={MIN_LR} warmup={WARMUP_STEPS} "
+    print(f"GPUs={world} L={L} micro={MICRO_BATCH} accum={ACCUM} (per GPU) peak_lr={PEAK_LR} min_lr={MIN_LR} warmup={WARMUP_STEPS} "
           f"schedule={sched} steps={args.steps} betas={BETAS} eps={EPS} wd={WEIGHT_DECAY} clip={MAX_NORM} "
           f"entropy_coef={args.entropy_coef} ckpt_dir={ckpt_dir}")
     step_times = []
@@ -593,23 +650,33 @@ def main():
         for g in optimizer.param_groups:
             g["lr"] = lr
         optimizer.zero_grad(set_to_none=True)
-        kds, ents, srcs, epochs = [], [], [], set()
-        step_exs = []
+        epochs, step_exs = set(), []
         for _k in range(GLOBAL_BATCH):
             idx, ep = order(micro_consumed * MICRO_BATCH + _k)
             step_exs.append(train[idx])
             epochs.add(ep)
+        micro_consumed += GLOBAL_BATCH // MICRO_BATCH  # counts micro-batches over all GPUs
+        srcs = [e["source"] for e in step_exs]
         n_tok = sum(len(e["response_ids"]) for e in step_exs)  # loss = token-weighted mean over the whole step
+        n_micro = GLOBAL_BATCH // MICRO_BATCH
+        mine = step_exs[rank * MICRO_BATCH * ACCUM:(rank + 1) * MICRO_BATCH * ACCUM]
+        stats = torch.zeros(3, dtype=torch.float64, device=device)  # [sum of kd shares, sum of entropies, non-finite]
         for m in range(ACCUM):
-            exs = step_exs[m * MICRO_BATCH:(m + 1) * MICRO_BATCH]
-            micro_consumed += 1
-            loss, kd, ent, _ = micro_loss(models, exs, capture, device, args.entropy_coef, n_tok, ACCUM)
+            exs = mine[m * MICRO_BATCH:(m + 1) * MICRO_BATCH]
+            loss, kd, ent, _ = micro_loss(models, exs, capture, device, args.entropy_coef, n_tok, n_micro)
             if not (math.isfinite(loss.item()) and math.isfinite(kd.item())):
-                sys.exit(f"STOP: non-finite training loss at step {step} (micro-batch {len(kds) + 1}): {loss.item()}")
+                stats[2] += 1
+                break
             loss.backward()
-            kds.append(kd.item())
-            ents.append(ent.item())
-            srcs += [e["source"] for e in exs]
+            stats[0] += kd.item()
+            stats[1] += ent.item()
+        if dist_on:
+            dist.all_reduce(stats)
+        if stats[2] > 0:
+            sys.exit(f"STOP: non-finite training loss at step {step}")
+        if dist_on:
+            for p in params:
+                dist.all_reduce(p.grad)  # sum: each rank's loss is already its share of the step mean
         gn = torch.nn.utils.clip_grad_norm_(params, max_norm=MAX_NORM).item()
         if not math.isfinite(gn):
             sys.exit(f"STOP: non-finite gradient norm at step {step}: {gn}")
@@ -618,17 +685,19 @@ def main():
             torch.cuda.synchronize()
         dt = time.time() - t0
         step_times.append(dt)
-        row = {"step": step, "train_kd": sum(kds), "train_entropy": sum(ents) / ACCUM,
+        row = {"step": step, "train_kd": stats[0].item(), "train_entropy": stats[1].item() / n_micro,
                "grad_norm_preclip": gn, "clip_active": gn > MAX_NORM, "lr": lr, "epoch": sorted(epochs),
                "n_sni": srcs.count("sni"), "n_rlvr": srcs.count("rlvr"), "n_squad": srcs.count("squad"),
                "time": time.time(), "step_seconds": dt}
         train_rows.append(row)
-        with open(train_log, "a") as f:
-            f.write(json.dumps(row) + "\n")
+        if is_main:
+            with open(train_log, "a") as f:
+                f.write(json.dumps(row) + "\n")
         print(f"step {step:5d}  kd={row['train_kd']:.5f}  ent={row['train_entropy']:.3f}  grad_norm={gn:.3e}  "
               f"clip={'on' if row['clip_active'] else 'off'}  lr={lr:.2e}  {dt:.1f}s")
         if is_eval_step(step) and not args.skip_evals:
-            evaluate(step)
+            check_sync(step)
+            on_main(evaluate, step)
 
     if step_times:
         sps = sum(step_times) / len(step_times)
@@ -637,12 +706,16 @@ def main():
         print(f"TIMING: {sps:.2f} s per optimizer step (mean over {len(step_times)} steps); "
               f"{TOTAL_STEPS} steps = {sps * TOTAL_STEPS / 3600:.1f} h of training + {n_evals} evals "
               f"(step-0 eval took {ev[0]:.0f}s)" if ev else "")
+    if dist_on:
+        check_sync(args.steps)
+        print("GPU weight sync OK at the end")
+        dist.destroy_process_group()
     print(f"done. best held-out A recovery {best['recovery']:.4f} @ step {best['step']}")
 
 
 CONFIG = {"num_trainable_layers": NUM_LAYERS, "L": L, "peak_lr": PEAK_LR, "min_lr": MIN_LR,
           "warmup_steps": WARMUP_STEPS, "betas": BETAS, "eps": EPS, "weight_decay": WEIGHT_DECAY,
-          "micro_batch": MICRO_BATCH, "accum": ACCUM, "max_norm": MAX_NORM, "total_steps": TOTAL_STEPS, "seed": SEED}
+          "micro_batch": MICRO_BATCH, "accum": ACCUM, "world_size": 1, "max_norm": MAX_NORM, "total_steps": TOTAL_STEPS, "seed": SEED}
 
 if __name__ == "__main__":
     main()

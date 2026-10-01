@@ -34,6 +34,16 @@ ideas are often non-standard; see AGENT.md.
   **GPU 0 is faulty** ("invalid access of peer GPU memory ... hardware error"
   on 2026-09-29); GPU 2 shows a permanently-100% vLLM worker from another
   user but works. GPUs 5 and 2 have been used successfully.
+- **GPU topology:** no NVLink. Two PCIe groups, one per CPU socket: GPUs 0-3
+  (NUMA 0) and GPUs 4-7 (NUMA 1). Pairs inside a group share a PCIe switch;
+  pairs across groups go over the socket link.
+- **Multi-GPU (NCCL): direct GPU-to-GPU P2P hangs on this machine** (found
+  2026-10-01 on GPUs 4+6: the first NCCL broadcast never completes, both GPUs
+  sit at 99% spinning). `NCCL_P2P_DISABLE=1` fixes it (~3.5 GB/s via host
+  memory). `warmstart/train_warmstart.py` sets it itself under torchrun.
+- Debugging running processes: `ptrace_scope=1`, so `py-spy dump` on an
+  already-running process is refused; launch under `py-spy record
+  --subprocesses -- ...` instead (py-spy is installed in the venv).
 - **Disk:** `/` (home, repo) has only ~30 GB free. Put large files
   (checkpoints, venvs, pip cache) under `/data/a84460786/`.
 
@@ -60,7 +70,9 @@ ideas are often non-standard; see AGENT.md.
   `rollout_gists` + per-example `rollout_gists_serial`), `prepare_data.py`
   (build / gen / klscore / finalize; data in /data/a84460786/warmstart_data/),
   `train_warmstart.py` (trainer; `--checks-only` runs checks (a)-(e) and writes
-  `step2_checks.json`; `--smoke`; `--micro-batch`; `--resume`).
+  `step2_checks.json`; `--smoke`; `--micro-batch`; `--resume`; data parallel
+  when launched with `torchrun --nproc_per_node=N`), `TASK_PROMPT.md` (the
+  user's original spec, verbatim, with a header listing agreed changes).
 
 ## Conventions & Decisions
 
@@ -104,6 +116,18 @@ ideas are often non-standard; see AGENT.md.
   `torch.use_deterministic_algorithms(True)` with
   `CUBLAS_WORKSPACE_CONFIG=:4096:8` (set before CUDA init) for exactness tests.
 - Eager attention gives NaN on fully-masked (left-pad) query rows; sdpa is fine.
+- **Future improvement (user asked to keep this, 2026-10-01): one example can
+  dominate a step.** Training clips once per optimizer step
+  (`clip_grad_norm_(params, 1.0)` on the gradient summed over all 16 examples).
+  That caps the step size (a 1e5 spike reaches AdamW at norm 1.0) but keeps each
+  example's share of the direction: on one measured step a single example had
+  grad norm 3.6e3 of the step's 3.7e3, so the update was almost all that example
+  and the other 15 had almost no say. Options, none implemented:
+  (1) cheap diagnostic first: log the largest per-example grad share per step to
+  see how often one example dominates; (2) per-example gradient clipping
+  (cap each example's grad before summing). This needs a per-example backward,
+  which costs part of the batched-rollout speed-up. Possibly linked to the
+  3-layer run's late instability.
 
 ## Key Terminology / Domain Notes
 
@@ -281,4 +305,5 @@ project should default to `softmax(logits) @ W`, not raw logits.**
   health check (gist_health_report.md). Warm-start pretraining data + trainer
   (warmstart/).
 - 2026-10-01: Warm-start smoke test passed; batched gist rollout (3.2x faster
-  steps), check (e), step-wide token-weighted KD loss. Full run not yet started.
+  steps), check (e), step-wide token-weighted KD loss. 2-GPU data parallel
+  (7.05 s/step on GPUs 6+4, NCCL P2P disabled). Full run launched on GPUs 6+4.
