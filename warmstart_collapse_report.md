@@ -1,6 +1,6 @@
 # Warm-start gist pretraining: pipeline and gist collapse
 
-Snapshot at **step 140 of 5,000** (2026-10-01, ~18:00 UTC). The full run is still running on
+Snapshot at **step 140 of 5,000** (2026-10-01, ~18:00 UTC); the appendix tables run to **step 210**. The full run is still running on
 GPUs 6 + 4 (started 17:25 UTC, code at commit `8b57a57`); logs and plots up to step 131 are in
 commit `aa08e71`. The spec is `warmstart/TASK_PROMPT.md`.
 
@@ -19,6 +19,11 @@ commit `aa08e71`. The spec is `warmstart/TASK_PROMPT.md`.
   constant `" prompt"` x16 prefix "recovers" more of the gap than the informative step-0 gist did
   (0.145 vs 0.136). Under this objective a content-free placeholder is a strong solution. That is
   the main reason I think the collapse happened (section 5).
+- **Update at step 210:** the gap has widened. With the same constant prefix (swap minus own
+  still exactly 0), held-out A recovery is 0.241 (ratio of means 0.275) and held-out B, the
+  unseen tasks, is at 0.200. That is far above the input-specific step-0 gist (0.136 and 0.102).
+  Every metric except swap minus own, cosine and entropy now looks like progress. Full tables are
+  in the appendix.
 
 ## 2. The training pipeline as built
 
@@ -278,7 +283,7 @@ above. Point 5.4 is a plausible but untested hypothesis.
    *placeholder* baseline instead of deletion: replace the removed part with 16 generic tokens
    (e.g. `' prompt'` x16 or pad tokens). Better still, train against it, so the gist is only
    rewarded for information beyond "something was here". The learned constant prefix gives a
-   ready-made baseline: KL_gap 3.137 at step 140.
+   ready-made baseline: KL_gap 3.137 at step 140 and 2.687 at step 210.
 3. **Make collapse costly or impossible:**
    - `--entropy-coef > 0` (already supported);
    - keep LM_head frozen, or bound the rollout logits (temperature or logit cap), so the softmax
@@ -303,3 +308,100 @@ above. Point 5.4 is a plausible but untested hypothesis.
     `/data/a84460786/testfolder_checkpoints/warmstart/`.
 - **Analysis for section 4:** a CPU comparison of `best.pt` and `latest.pt` (step 130) on 12
   held-out A gap examples, plus the per-row LM_head and Embedding2 weight changes.
+
+## Appendix: full metric and loss tables (steps 0-210, from the logs)
+
+### A1. Held-out A, overall, every evaluation
+
+KL values are nats on response tokens. KL no-gist (gap) is 3.707 throughout. Recovery is the mean of per-example (KL_nogist − KL_gist) / KL_nogist; ratio of means is (mean KL_nogist − mean KL_gist) / mean KL_nogist.
+
+| step | LR | KL gist, gap | KL swap, gap | KL gist, no-gap | recovery | ratio of means | swap − own | cross-gist cosine | rollout entropy | distinct top-1 | eval s |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | 0e+00 | 3.189 | 3.883 | 0.360 | 0.136 | 0.140 | +0.694 | 0.195 | 2.977 | 12.1 | 78 |
+| 10 | 1e-05 | 3.199 | 3.883 | 0.351 | 0.092 | 0.137 | +0.683 | 0.185 | 2.949 | 12.1 | 51 |
+| 20 | 2e-05 | 3.664 | 3.878 | 0.238 | -0.030 | 0.011 | +0.214 | 0.237 | 3.239 | 12.3 | 57 |
+| 30 | 3e-05 | 3.705 | 3.828 | 0.260 | -0.041 | 0.000 | +0.123 | 0.314 | 3.133 | 12.2 | 51 |
+| 40 | 4e-05 | 3.713 | 3.910 | 0.303 | -0.054 | -0.002 | +0.197 | 0.319 | 2.721 | 11.1 | 51 |
+| 50 | 5e-05 | 3.595 | 3.805 | 0.254 | -0.033 | 0.030 | +0.210 | 0.321 | 2.773 | 10.9 | 52 |
+| 60 | 6e-05 | 3.607 | 3.853 | 0.288 | -0.024 | 0.027 | +0.246 | 0.296 | 2.466 | 11.0 | 52 |
+| 70 | 7e-05 | 3.572 | 3.723 | 0.171 | 0.027 | 0.036 | +0.151 | 0.434 | 1.259 | 8.1 | 51 |
+| 80 | 8e-05 | 3.488 | 3.590 | 0.135 | 0.023 | 0.059 | +0.103 | 0.449 | 0.476 | 5.4 | 51 |
+| 90 | 9e-05 | 3.425 | 3.423 | 0.045 | 0.065 | 0.076 | -0.002 | 0.999 | 0.005 | 1.0 | 51 |
+| 100 | 1e-04 | 3.373 | 3.373 | 0.044 | 0.079 | 0.090 | +0.000 | 1.000 | 0.000 | 1.0 | 86 |
+| 110 | 1e-04 | 3.316 | 3.316 | 0.045 | 0.095 | 0.105 | +0.000 | 1.000 | 0.000 | 1.0 | 56 |
+| 120 | 1e-04 | 3.256 | 3.256 | 0.045 | 0.112 | 0.122 | +0.000 | 1.000 | 0.000 | 1.0 | 52 |
+| 130 | 1e-04 | 3.198 | 3.198 | 0.044 | 0.128 | 0.137 | +0.000 | 1.000 | 0.000 | 1.0 | 51 |
+| 140 | 1e-04 | 3.137 | 3.137 | 0.043 | 0.145 | 0.154 | +0.000 | 1.000 | 0.000 | 1.0 | 54 |
+| 150 | 1e-04 | 3.075 | 3.075 | 0.043 | 0.161 | 0.170 | +0.000 | 1.000 | 0.000 | 1.0 | 51 |
+| 160 | 1e-04 | 3.011 | 3.011 | 0.043 | 0.176 | 0.188 | +0.000 | 1.000 | 0.000 | 1.0 | 54 |
+| 170 | 1e-04 | 2.948 | 2.948 | 0.044 | 0.190 | 0.205 | +0.000 | 1.000 | 0.000 | 1.0 | 52 |
+| 180 | 1e-04 | 2.883 | 2.883 | 0.045 | 0.205 | 0.222 | +0.000 | 1.000 | 0.000 | 1.0 | 52 |
+| 190 | 1e-04 | 2.812 | 2.812 | 0.047 | 0.218 | 0.241 | +0.000 | 1.000 | 0.000 | 1.0 | 53 |
+| 200 | 1e-04 | 2.742 | 2.742 | 0.048 | 0.231 | 0.260 | +0.000 | 1.000 | 0.000 | 1.0 | 77 |
+| 210 | 1e-04 | 2.687 | 2.687 | 0.049 | 0.241 | 0.275 | +0.000 | 1.000 | 0.000 | 1.0 | 51 |
+
+### A2. Held-out A recovery by source and by removed-length bucket
+
+| step | SNI | RLVR | SQuAD | KL gist gap SNI / RLVR / SQuAD | len le64 | len 65_128 | len 129_208 |
+|---|---|---|---|---|---|---|---|
+| 0 | 0.110 | 0.258 | 0.019 | 4.58 / 1.72 / 1.88 | 0.146 | 0.060 | 0.256 |
+| 10 | 0.121 | 0.152 | -0.075 | 4.43 / 1.90 / 2.04 | 0.083 | 0.125 | 0.082 |
+| 20 | -0.032 | 0.141 | -0.285 | 5.23 / 1.86 / 2.41 | -0.037 | -0.029 | 0.026 |
+| 30 | -0.047 | 0.094 | -0.229 | 5.30 / 1.91 / 2.38 | -0.042 | -0.064 | 0.031 |
+| 40 | -0.042 | 0.116 | -0.341 | 5.31 / 1.82 / 2.54 | -0.060 | -0.057 | 0.017 |
+| 50 | 0.017 | 0.080 | -0.330 | 5.00 / 1.95 / 2.52 | -0.048 | 0.007 | 0.010 |
+| 60 | 0.023 | 0.093 | -0.322 | 5.04 / 1.94 / 2.50 | -0.040 | -0.004 | 0.075 |
+| 70 | -0.011 | 0.098 | 0.015 | 5.19 / 1.99 / 1.85 | 0.041 | -0.029 | 0.046 |
+| 80 | 0.026 | 0.098 | -0.097 | 4.93 / 2.01 / 2.08 | 0.031 | -0.009 | 0.033 |
+| 90 | 0.056 | 0.110 | 0.017 | 4.86 / 2.03 / 1.90 | 0.074 | 0.032 | 0.059 |
+| 100 | 0.069 | 0.114 | 0.052 | 4.79 / 2.02 / 1.83 | 0.090 | 0.041 | 0.072 |
+| 110 | 0.081 | 0.122 | 0.090 | 4.72 / 2.00 / 1.75 | 0.109 | 0.051 | 0.082 |
+| 120 | 0.094 | 0.129 | 0.130 | 4.64 / 1.98 / 1.67 | 0.127 | 0.063 | 0.093 |
+| 130 | 0.106 | 0.136 | 0.172 | 4.58 / 1.96 / 1.58 | 0.145 | 0.075 | 0.102 |
+| 140 | 0.119 | 0.143 | 0.211 | 4.49 / 1.95 / 1.50 | 0.163 | 0.089 | 0.114 |
+| 150 | 0.132 | 0.152 | 0.247 | 4.41 / 1.93 / 1.42 | 0.181 | 0.103 | 0.126 |
+| 160 | 0.147 | 0.160 | 0.273 | 4.31 / 1.92 / 1.37 | 0.195 | 0.118 | 0.143 |
+| 170 | 0.163 | 0.171 | 0.291 | 4.21 / 1.90 / 1.33 | 0.209 | 0.133 | 0.164 |
+| 180 | 0.178 | 0.181 | 0.307 | 4.11 / 1.88 / 1.30 | 0.223 | 0.148 | 0.182 |
+| 190 | 0.195 | 0.190 | 0.319 | 3.99 / 1.86 / 1.27 | 0.235 | 0.165 | 0.201 |
+| 200 | 0.213 | 0.197 | 0.328 | 3.86 / 1.85 / 1.25 | 0.245 | 0.183 | 0.220 |
+| 210 | 0.227 | 0.202 | 0.333 | 3.76 / 1.83 / 1.24 | 0.253 | 0.198 | 0.236 |
+
+Bucket sizes (gap examples): le64: 157, 65_128: 44, 129_208: 16. KL no-gist by source: sni 5.21, rlvr 2.31, squad 2.01.
+
+### A3. Held-out B (unseen SNI tasks, every 100 steps) and attention (every 500 steps)
+
+| step | KL gist | KL no-gist | recovery | ratio of means | swap − own | cross-gist cosine | attention on gist 1-16 / 2-16 |
+|---|---|---|---|---|---|---|---|
+| 0 | 3.533 | 3.927 | 0.102 | 0.100 | +0.579 | 0.203 | 0.074 / 0.070 |
+| 100 | 3.695 | 3.927 | 0.050 | 0.059 | -0.000 | 1.000 | — |
+| 200 | 3.046 | 3.927 | 0.200 | 0.224 | +0.000 | 1.000 | — |
+
+### A4. Training, per 10 steps
+
+Train KD is the step-wide token-weighted mean (section 2.4); every step uses new examples, so it is noisy.
+
+| steps | LR at end | train KD mean | min | max | rollout entropy | median pre-clip grad norm | max grad norm | steps clipped | s/step |
+|---|---|---|---|---|---|---|---|---|---|
+| 1-10 | 1e-05 | 1.208 | 0.749 | 1.861 | 2.952 | 1973.6 | 1.73e+04 | 10/10 | 6.5 |
+| 11-20 | 2e-05 | 1.097 | 0.426 | 1.707 | 3.145 | 854.2 | 4.01e+05 | 10/10 | 6.6 |
+| 21-30 | 3e-05 | 1.377 | 0.757 | 2.579 | 3.228 | 725.9 | 2.26e+04 | 10/10 | 6.7 |
+| 31-40 | 4e-05 | 1.127 | 0.811 | 1.837 | 2.898 | 362.8 | 5.22e+03 | 10/10 | 6.6 |
+| 41-50 | 5e-05 | 1.353 | 0.685 | 3.112 | 2.776 | 257.4 | 1.8e+03 | 10/10 | 6.8 |
+| 51-60 | 6e-05 | 1.430 | 1.090 | 2.106 | 2.551 | 372.5 | 1.59e+04 | 10/10 | 6.2 |
+| 61-70 | 7e-05 | 1.399 | 0.526 | 1.986 | 2.054 | 338.9 | 2.95e+03 | 10/10 | 6.1 |
+| 71-80 | 8e-05 | 1.100 | 0.598 | 1.884 | 0.822 | 27.9 | 7.98e+03 | 10/10 | 6.1 |
+| 81-90 | 9e-05 | 1.291 | 0.750 | 2.020 | 0.244 | 13.8 | 204 | 10/10 | 6.6 |
+| 91-100 | 1e-04 | 1.123 | 0.571 | 2.079 | 0.001 | 1.5 | 1.82 | 7/10 | 7.0 |
+| 101-110 | 1e-04 | 1.180 | 0.729 | 2.070 | 0.000 | 2.0 | 2.64 | 7/10 | 6.8 |
+| 111-120 | 1e-04 | 1.154 | 0.523 | 1.976 | 0.000 | 1.9 | 3.57 | 8/10 | 6.2 |
+| 121-130 | 1e-04 | 1.216 | 0.807 | 2.279 | 0.000 | 1.7 | 3.64 | 9/10 | 6.0 |
+| 131-140 | 1e-04 | 1.111 | 0.587 | 2.449 | 0.000 | 1.8 | 2.71 | 9/10 | 6.9 |
+| 141-150 | 1e-04 | 0.921 | 0.602 | 1.269 | 0.000 | 1.5 | 2.43 | 8/10 | 6.1 |
+| 151-160 | 1e-04 | 0.846 | 0.569 | 1.134 | 0.000 | 1.5 | 2.72 | 8/10 | 6.1 |
+| 161-170 | 1e-04 | 1.195 | 0.568 | 1.676 | 0.000 | 2.1 | 5.76 | 9/10 | 6.0 |
+| 171-180 | 1e-04 | 0.910 | 0.622 | 1.307 | 0.000 | 1.5 | 3 | 8/10 | 6.2 |
+| 181-190 | 1e-04 | 1.021 | 0.769 | 1.369 | 0.000 | 2.5 | 3.47 | 9/10 | 6.1 |
+| 191-200 | 1e-04 | 1.010 | 0.426 | 2.108 | 0.000 | 2.4 | 5.88 | 9/10 | 6.3 |
+| 201-210 | 1e-04 | 1.033 | 0.357 | 1.746 | 0.000 | 1.8 | 2.67 | 9/10 | 6.2 |
+| 211-218 | 1e-04 | 0.860 | 0.614 | 1.116 | 0.000 | 2.3 | 3.03 | 8/8 | 6.1 |
