@@ -4,6 +4,9 @@ checkpoints/
 logs/*
 !logs/train_3layer.jsonl
 !logs/eval_3layer.jsonl
+!logs/warmstart_train.jsonl
+!logs/warmstart_eval.jsonl
+!logs/warmstart.out
 # train_3layer.py checkpoints live outside the repo (/data/a84460786/testfolder_checkpoints/); ignore any local copies
 *.pt
 *.pt.tmp
