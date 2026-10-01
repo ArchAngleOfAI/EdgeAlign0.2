@@ -314,3 +314,4 @@ step   217  kd=0.73190  ent=0.000  grad_norm=1.700e+00  clip=on  lr=9.99e-05  6.
 step   218  kd=0.82967  ent=0.000  grad_norm=1.274e+00  clip=on  lr=9.99e-05  6.0s
 step   219  kd=0.94408  ent=0.000  grad_norm=9.144e-01  clip=off  lr=9.99e-05  6.5s
 step   220  kd=0.50822  ent=0.000  grad_norm=1.630e+00  clip=on  lr=9.99e-05  6.1s
+WARNING: held-out mean rollout entropy 0.0000 < 0.05 nats at step 220 (possible collapse to hard tokens)
