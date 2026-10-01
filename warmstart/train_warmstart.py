@@ -4,13 +4,15 @@ Per example: the frozen teacher sees the full user message + response; the gener
 the removed part and rolls out L=16 gist vectors; the frozen receiver sees the user message with the
 removed part replaced by the gist (no-gap examples: removed part kept, gist after it) + the same
 response. Loss = KL(teacher || receiver), T=1, on the response tokens only (assistant content + its
-closing <|im_end|>), token-weighted mean over the micro-batch.
+closing <|im_end|>), token-weighted mean over all response tokens of the optimizer step's 16 examples
+(changed 2026-10-01 from a token mean per micro-batch averaged over micro-batches, so that the
+objective does not depend on the micro-batch size).
 
 Settings: generator = build_softprompt_generator with the last 3 layers + LM_head + Embedding2
 trainable (via diagnostics/_common.load_all, as in train_3layer.py), full backprop through the
 rollout; fp32; seed 0; AdamW betas (0.9, 0.95), eps 1e-6, weight decay 0.01 (AdamW's default, which
 train_3layer.py used); LR linear warmup 0 -> 1e-4 over 100 steps then cosine to 1e-5 at the final
-step; global batch 16 = micro 2 x accum 8 (each micro loss / 8); clip_grad_norm_ 1.0 once per step;
+step; global batch 16 = micro x accum (default 2 x 8; --micro-batch 4 -> 4 x 4 with the batched rollout); clip_grad_norm_ 1.0 once per step;
 5,000 steps. Data order: a fresh permutation per epoch (seed 0 + epoch), no example repeated within
 an epoch (the user chose multi-epoch because the 50/30/20 set is smaller than 80,000 draws).
 
@@ -25,14 +27,15 @@ import random
 import sys
 import time
 
+os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")  # lets check (e1) switch on deterministic algorithms
 import torch
 import torch.nn.functional as F
 
 WS = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, WS)
 from common import (  # noqa: E402
-    DATA_DIR, L, REPO_ROOT, LogitCapture, build_batch, kd_per_token, per_example_kl, receiver_inputs,
-    receiver_response_logits, rollout_gists, split_per_example, teacher_response_logits,
+    DATA_DIR, L, PAD_ID, REPO_ROOT, LogitCapture, build_batch, kd_per_token, per_example_kl, receiver_inputs,
+    receiver_response_logits, rollout_gists, rollout_gists_serial, split_per_example, teacher_response_logits,
 )
 from _common import get_device, load_all, setup_stdout, trainable_params  # noqa: E402
 from train_3layer import (  # noqa: E402
@@ -44,6 +47,7 @@ PEAK_LR, MIN_LR = 1e-4, 1e-5
 WARMUP_STEPS = 100
 BETAS, EPS, WEIGHT_DECAY = (0.9, 0.95), 1e-6, 0.01
 MICRO_BATCH, ACCUM = 2, 8
+GLOBAL_BATCH = MICRO_BATCH * ACCUM
 MAX_NORM = 1.0
 TOTAL_STEPS = 5000
 PERMANENT_EVERY = 1000
@@ -105,15 +109,19 @@ def derangement(n, seed=0):
 
 # ---------------------------------------------------------------- forward helpers
 
-def micro_loss(models, exs, capture, device, entropy_coef):
+def micro_loss(models, exs, capture, device, entropy_coef, n_tok=None, n_micro=1):
+    """KD = this micro-batch's share of the token-weighted mean over the whole optimizer step: summed per-token KL
+    divided by n_tok, the step's total response tokens (default: this micro-batch's own, i.e. its token mean).
+    Summing the shares over a step's micro-batches gives one token-weighted mean over all 16 examples, whatever
+    the micro-batch size. The entropy term stays a per-gist-position mean, split evenly over n_micro micro-batches."""
     encoder, embedding2, teacher, receiver = models
     gists, ent, _ = rollout_gists(encoder, embedding2, [e["removed_ids"] for e in exs], capture, device)
     b = build_batch(exs, device)
     t_log = teacher_response_logits(teacher, b)
     r_log = receiver_response_logits(receiver, b, list(gists))
-    kd = kd_per_token(r_log, t_log).mean()  # token-weighted mean over the micro-batch
+    kd = kd_per_token(r_log, t_log).sum() / (n_tok or sum(b["resp_len"]))
     mean_ent = ent.mean()
-    return kd - entropy_coef * mean_ent, kd, mean_ent, gists
+    return kd - entropy_coef * mean_ent / n_micro, kd, mean_ent, gists
 
 
 @torch.no_grad()
@@ -288,7 +296,7 @@ def save_plots(train_rows, eval_rows, nogist_mean, out_dir, total):
 # ---------------------------------------------------------------- Step 2 checks
 
 def run_checks(models, train, hold_a, hold_b, capture, device, params):
-    """(a)-(d); returns a dict and raises SystemExit on failure."""
+    """(a)-(e); returns a dict and raises SystemExit on failure."""
     encoder, embedding2, teacher, receiver = models
     res = {}
     # (a) response ids identical in teacher and receiver sequences, for every example
@@ -339,6 +347,43 @@ def run_checks(models, train, hold_a, hold_b, capture, device, params):
         p.grad = None
     if last_fn is None or any(not (v > 0 and math.isfinite(v)) for v in norms.values()) or frozen_grad:
         sys.exit(f"CHECK (d) FAILED: {res['d_backward']}")
+
+    # (e) batched (left-padded) rollout. It cannot match the per-example rollout exactly: batch shape alone changes
+    # fp32 reductions (~1e-6; Qwen3RMSNorm runs in fp32 even for an fp64 model), and this rollout amplifies that to
+    # percent level in gists and more in grads (the per-example rollout is no closer to an fp64 reference). So test
+    # what padding can break: (e1) a padding leak -> swap the pad token at identical shapes: gists, entropy and grads
+    # must be bit-identical (under deterministic algorithms); (e2) position ids -> first soft token vs an unpadded batch of copies, at fp32 noise level.
+    by_len = sorted(train[:256], key=lambda e: len(e["removed_ids"]))
+    removed = [by_len[round(k * (len(by_len) - 1) / 3)]["removed_ids"] for k in range(4)]  # spans the length range
+    proj = torch.randn((len(removed), L, encoder.config.hidden_size), generator=torch.Generator().manual_seed(0)).to(device)
+
+    def run(batch, pad_id):
+        for p in params:
+            p.grad = None
+        g, en, tp = rollout_gists(encoder, embedding2, batch, capture, device, pad_id=pad_id)
+        ((g * proj[:len(batch)]).sum() + en.sum()).backward()
+        out = g.detach(), en.detach(), tp, [p.grad.clone() for p in params]
+        for p in params:
+            p.grad = None
+        return out
+
+    torch.use_deterministic_algorithms(True)  # backward is otherwise not bit-reproducible (~4e-6 run to run)
+    try:
+        (g1, e1, t1, gr1), (g2, e2, t2, gr2) = run(removed, PAD_ID), run(removed, 0)
+    finally:
+        torch.use_deterministic_algorithms(False)
+    leak = {"gists_bit_identical": bool(torch.equal(g1, g2)), "entropy_bit_identical": bool(torch.equal(e1, e2)),
+            "top1_identical": bool(torch.equal(t1, t2)),
+            "grads_bit_identical": all(torch.equal(a, b) for a, b in zip(gr1, gr2))}
+    with torch.no_grad():
+        first = []
+        for i, r in enumerate(removed):
+            gu, _, _ = rollout_gists(encoder, embedding2, [r] * len(removed), capture, device)
+            first.append(((g1[i, 0] - gu[0, 0]).norm() / gu[0, 0].norm()).item())
+    res["e_batched_rollout"] = {"removed_lens": [len(r) for r in removed], "e1_pad_token_swap": leak,
+                                "e2_first_soft_token_rel_diff_vs_unpadded": first}
+    if not all(leak.values()) or max(first) > 1e-4:
+        sys.exit(f"CHECK (e) FAILED: {res['e_batched_rollout']}")
     print("STEP 2 CHECKS PASSED:", json.dumps(res, indent=1))
     return res
 
@@ -346,6 +391,7 @@ def run_checks(models, train, hold_a, hold_b, capture, device, params):
 # ---------------------------------------------------------------- main
 
 def main():
+    global MICRO_BATCH, ACCUM
     setup_stdout()
     ap = argparse.ArgumentParser()
     ap.add_argument("--steps", type=int, default=TOTAL_STEPS)
@@ -357,8 +403,14 @@ def main():
     ap.add_argument("--entropy-coef", type=float, default=0.0)
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--checks-only", action="store_true", help="Run the Step 2 checks, write them, exit.")
+    ap.add_argument("--micro-batch", type=int, default=MICRO_BATCH,
+                    help="Examples per micro-batch; accum = 16 / this, so the global batch stays 16.")
     ap.add_argument("--skip-evals", action="store_true", help="Smoke timing: only the step-0 eval.")
     args = ap.parse_args()
+    if GLOBAL_BATCH % args.micro_batch:
+        sys.exit(f"--micro-batch must divide {GLOBAL_BATCH}")
+    MICRO_BATCH, ACCUM = args.micro_batch, GLOBAL_BATCH // args.micro_batch
+    CONFIG.update(micro_batch=MICRO_BATCH, accum=ACCUM)
     sched = args.schedule_steps or args.steps
 
     if args.smoke:
@@ -424,6 +476,8 @@ def main():
     train_rows, eval_rows = [], []
     if args.resume:
         ckpt = torch.load(latest, map_location=device)
+        if ckpt["config"].get("micro_batch", 2) != MICRO_BATCH:  # micro_consumed counts micro-batches
+            sys.exit(f"--resume needs --micro-batch {ckpt['config'].get('micro_batch', 2)} (the checkpoint's)")
         load_trainable_state(encoder, embedding2, ckpt["trainable"])
         optimizer.load_state_dict(ckpt["optimizer"])
         start_step, micro_consumed, best = ckpt["step"], ckpt["micro_consumed"], ckpt["best"]
@@ -540,17 +594,19 @@ def main():
             g["lr"] = lr
         optimizer.zero_grad(set_to_none=True)
         kds, ents, srcs, epochs = [], [], [], set()
-        for _ in range(ACCUM):
-            exs = []
-            for _k in range(MICRO_BATCH):
-                idx, ep = order(micro_consumed * MICRO_BATCH + _k)
-                exs.append(train[idx])
-                epochs.add(ep)
+        step_exs = []
+        for _k in range(GLOBAL_BATCH):
+            idx, ep = order(micro_consumed * MICRO_BATCH + _k)
+            step_exs.append(train[idx])
+            epochs.add(ep)
+        n_tok = sum(len(e["response_ids"]) for e in step_exs)  # loss = token-weighted mean over the whole step
+        for m in range(ACCUM):
+            exs = step_exs[m * MICRO_BATCH:(m + 1) * MICRO_BATCH]
             micro_consumed += 1
-            loss, kd, ent, _ = micro_loss(models, exs, capture, device, args.entropy_coef)
+            loss, kd, ent, _ = micro_loss(models, exs, capture, device, args.entropy_coef, n_tok, ACCUM)
             if not (math.isfinite(loss.item()) and math.isfinite(kd.item())):
                 sys.exit(f"STOP: non-finite training loss at step {step} (micro-batch {len(kds) + 1}): {loss.item()}")
-            (loss / ACCUM).backward()
+            loss.backward()
             kds.append(kd.item())
             ents.append(ent.item())
             srcs += [e["source"] for e in exs]
@@ -562,7 +618,7 @@ def main():
             torch.cuda.synchronize()
         dt = time.time() - t0
         step_times.append(dt)
-        row = {"step": step, "train_kd": sum(kds) / ACCUM, "train_entropy": sum(ents) / ACCUM,
+        row = {"step": step, "train_kd": sum(kds), "train_entropy": sum(ents) / ACCUM,
                "grad_norm_preclip": gn, "clip_active": gn > MAX_NORM, "lr": lr, "epoch": sorted(epochs),
                "n_sni": srcs.count("sni"), "n_rlvr": srcs.count("rlvr"), "n_squad": srcs.count("squad"),
                "time": time.time(), "step_seconds": dt}

@@ -14,15 +14,35 @@
   "min": 0.7338566184043884
  },
  "d_backward": {
-  "loss": 1.511069893836975,
+  "loss": 1.51067316532135,
   "grad_norms": {
-   "embedding2": 6003.03271484375,
-   "lm_head": 26151.876953125,
-   "layer_25": 9433.903651621034,
-   "layer_26": 11563.779521040788,
-   "layer_27": 25763.494239576557
+   "embedding2": 5899.87646484375,
+   "lm_head": 25701.4921875,
+   "layer_25": 9272.071542519749,
+   "layer_26": 11365.631845000053,
+   "layer_27": 25322.182913701177
   },
-  "last_soft_token_grad_fn": "<SelectBackward0 object at 0x792579990250>",
+  "last_soft_token_grad_fn": "<SelectBackward0 object at 0x7d64566d6f50>",
   "frozen_params_with_grad": []
+ },
+ "e_batched_rollout": {
+  "removed_lens": [
+   8,
+   18,
+   66,
+   189
+  ],
+  "e1_pad_token_swap": {
+   "gists_bit_identical": true,
+   "entropy_bit_identical": true,
+   "top1_identical": true,
+   "grads_bit_identical": true
+  },
+  "e2_first_soft_token_rel_diff_vs_unpadded": [
+   1.4224540336726932e-06,
+   3.936359007639112e-06,
+   3.436142378632212e-06,
+   0.0
+  ]
  }
 }

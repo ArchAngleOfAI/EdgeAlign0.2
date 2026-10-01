@@ -3,8 +3,9 @@
 Reuse, not reimplementation:
 - generator build: diagnostics/_common.load_all -> qwen_dual_embedding.build_softprompt_generator
   (last 3 layers unfrozen there), trainable list: diagnostics/_common.trainable_params
-- rollout: distill_softprompt.generate_softprompt (called per example, because it takes no
-  attention mask, so padded batches would be wrong)
+- rollout: distill_softprompt.generate_softprompt math. rollout_gists_serial calls it per example
+  (it takes no attention mask); rollout_gists is the batched, left-padded, masked version of the
+  same math, checked against the serial one by check (e)
 - KD math: the expression from distill_softprompt.main() (kl_div(log_softmax(s/T), softmax(t/T))
   summed over vocab), kept per token here so it can be masked to response tokens only.
 
@@ -190,7 +191,49 @@ class LogitCapture:
             self.logits.append(out)
 
 
-def rollout_gists(encoder, embedding2, removed_list, capture, device):
+def rollout_gists(encoder, embedding2, removed_list, capture, device, pad_id=PAD_ID):
+    """Batched rollout: the generate_softprompt math, on a LEFT-padded batch with an attention
+    mask and explicit position ids (generate_softprompt itself takes no mask, so it stays
+    per-example in rollout_gists_serial). Left padding keeps every example's last real token
+    at index -1, so all rows start the soft-token loop together. Same return values as
+    rollout_gists_serial; check (e) compares the two."""
+    inner = encoder.model
+    B, T = len(removed_list), max(len(r) for r in removed_list)
+    ids = torch.full((B, T), pad_id, dtype=torch.long)
+    mask = torch.zeros((B, T), dtype=torch.long)
+    for i, r in enumerate(removed_list):
+        ids[i, T - len(r):] = torch.tensor(r)
+        mask[i, T - len(r):] = 1
+    ids, mask = ids.to(device), mask.to(device)
+    pos = (mask.cumsum(-1) - 1).clamp(min=0)
+    capture.logits, capture.active = [], True
+    try:
+        out = inner(inputs_embeds=inner.embed_tokens(ids), attention_mask=mask, position_ids=pos, use_cache=True)
+        past_key_values = out.past_key_values
+        hidden = out.last_hidden_state[:, -1:, :]
+        next_pos = pos[:, -1:] + 1
+        soft_tokens = []
+        for step in range(L):
+            logits = encoder.lm_head(hidden)
+            probs = torch.softmax(logits, dim=-1)
+            soft_token = probs @ embedding2.weight
+            soft_tokens.append(soft_token)
+            if step == L - 1:
+                break
+            mask = torch.cat([mask, torch.ones((B, 1), dtype=mask.dtype, device=device)], dim=1)
+            out = inner(inputs_embeds=soft_token, attention_mask=mask, position_ids=next_pos,
+                        past_key_values=past_key_values, use_cache=True)
+            past_key_values = out.past_key_values
+            hidden = out.last_hidden_state
+            next_pos = next_pos + 1
+    finally:
+        capture.active = False
+    logits = torch.cat(capture.logits, dim=1)  # (B, L, V)
+    logp = F.log_softmax(logits, dim=-1)
+    return torch.cat(soft_tokens, dim=1), -(logp.exp() * logp).sum(-1), logits.argmax(-1)
+
+
+def rollout_gists_serial(encoder, embedding2, removed_list, capture, device):
     """One generate_softprompt call per example (no padding). Returns
     (gists (B, L, H), entropy (B, L) differentiable, top1 (B, L) token ids)."""
     gists, ents, tops = [], [], []

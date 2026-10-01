@@ -4,14 +4,22 @@ Running log of current tasks and conversation state. Read this first on
 restart to pick up where things left off. Prune/archive into `MEMORY.md`
 once something becomes durable project knowledge instead of active state.
 
-## >>> CURRENT STATUS (updated 2026-09-30) -- read this first <<<
+## >>> CURRENT STATUS (updated 2026-10-01 ~15:30 UTC) -- read this first <<<
 
-Nothing is running. No background jobs, no GPU in use. The working tree is
-clean and everything is pushed to `origin/main`
-(https://github.com/ArchAngleOfAI/EdgeAlign0.2). Pushing works without a
-prompt: a GitHub token is stored in `~/.git-credentials`.
+Nothing is running. No background jobs, no GPU in use. Everything is committed
+and pushed to `origin/main` (https://github.com/ArchAngleOfAI/EdgeAlign0.2).
+Pushing works without a prompt: a GitHub token is stored in `~/.git-credentials`.
+
+**Active task: WARM-START gist pretraining (`warmstart/`) -- ready to launch, NOT started.**
+The full 5,000-step run has not been started; the user has not yet said go.
+Planned launch (GPU 6 or 7, whichever is free; check `nvidia-smi`):
+`cd warmstart && CUDA_VISIBLE_DEVICES=<gpu> nohup /data/a84460786/venvs/testfolder/bin/python
+train_warmstart.py --micro-batch 4 > ../logs/warmstart.out 2>&1 &` -- ~12.2 s/step ->
+~17 h training + 78 evals x ~1.4 min ~= 19 h total. Checkpoints go to
+/data/a84460786/testfolder_checkpoints/warmstart/. Details: "Warm-start" section below.
 
 **Latest state of the research (newest first):**
+0. **Warm-start pretraining, implemented + smoke-tested, full run not started** (see below).
 1. **Gist health check, done:** `gist_health_report.md`, `diagnostics_gist/`.
    The best 3-layer generator (step 2600) is COLLAPSED BUT ALIVE. It emits the
    same 16-vector gist for every prompt (' it', 'gle', 'gle', ' it' x13), yet
@@ -22,8 +30,9 @@ prompt: a GitHub token is stored in `~/.git-credentials`.
 3. **Stability vs soft-prompt length, done:** `stability_report.md`.
 4. **Flat-KD-loss diagnosis, done:** `report.md`.
 
-**No task is in progress. Next steps are the user's call.** Candidates the
-reports raise, none started:
+**Next step: the user's go for the warm-start full run.** Older candidates the
+reports raise, none started (warm-start evals already log swap test,
+cross-prompt cos, rollout entropy and gist attention):
 - monitor gist collapse during training (swap test, cross-prompt cos, rollout
   entropy)
 - test a single learned constant prefix against 0.0105
@@ -41,8 +50,11 @@ reports raise, none started:
 - Old checkpoint `checkpoints/embedding2_step10000.pt` (1.8 GB, from the
   flat 17k run, Embedding2 only). report.md test 5 uses it. Kept; the user was
   told about it and has not asked to delete it.
-- GPUs: 0 is faulty (CUDA hardware error). 5 and 2 have worked. Others are
+- GPUs: 0 is faulty (CUDA hardware error). 5, 2, 6 and 7 have worked. Others are
   usually busy with other users' jobs, so check `nvidia-smi` first.
+- Warm-start data (outside git): /data/a84460786/warmstart_data/ (train.jsonl,
+  heldout_a.jsonl, heldout_b.jsonl, data_stats.json; raw/ = SNI clone @55a3656 + HF
+  parquets). A 30-example sample + stats are committed in warmstart/.
 
 **Resolved older items** (the sections below are historical log):
 - The dead 17k-step job is superseded. Its checkpoint was used in
@@ -262,3 +274,45 @@ reports raise, none started:
   during training (KD loss alone missed the collapse); test whether one
   learned constant prefix matches 0.0105; test whether gist positions 2-16
   matter at all.
+
+## Warm-start gist pretraining (2026-09-30 -> 2026-10-01, ready to launch)
+
+- Spec (user-pasted): "fill in the removed part" -- the generator reads only the
+  removed span of a user message and rolls out L=16 gist vectors; the receiver sees
+  the message with the span replaced by the gist (no-gap examples: span kept, gist
+  after it) + the response; loss KL(teacher || receiver), T=1, response tokens only.
+  Sources SNI / RLVR-IFeval / SQuAD at 50/30/20, 5,000 steps, global batch 16,
+  peak LR 1e-4 (100-step warmup, cosine to 1e-5), clip 1.0, last 3 layers +
+  LM_head + Embedding2 trainable.
+- User decisions (2026-09-30): keep 50/30/20 but shrink the total (RLVR too small)
+  and train multi-epoch (fresh permutation per epoch); RLVR decontamination by
+  13-gram on task text only; exclude All Lowercase + All Uppercase instruction types.
+- Data (commit 1dee1c3): 20,754 train, held-out A 256, held-out B 128 (unseen SNI
+  tasks), CAP 208 (p95 203.25). Generation ran as 3 shards on 2026-09-30; shard 2
+  OOM'd on GPU 2 (another user's process) and was re-run as 4 sub-shards.
+- Smoke test (2026-10-01, original serial code, GPU 7): 20 steps, exit 0. Last
+  night's smoke had died silently in the step-0 eval (session ended, no error).
+  Step-0 eval: held-out A recovery 0.1363 (KL_gist 3.19 vs no-gist 3.71), B 0.104,
+  swap-own +0.69, cross-cos 0.195, entropy 2.98, gist attention 7%. Timing: 38.4
+  s/step, 420 s per full eval -> ~62 h for the full run. Grad norms 1e2-1e5 at
+  startup, clipping on at every step.
+- Speed fix (2026-10-01, user asked): GPU was ~22% busy because rollout_gists ran
+  generate_softprompt one example at a time. New `rollout_gists` in common.py is
+  the same math on a LEFT-padded batch with attention mask + position ids; the
+  old one is kept as `rollout_gists_serial`. New `--micro-batch N` (accum = 16/N;
+  resume refuses a different micro-batch). Result at --micro-batch 4: 12.2
+  s/step, 84 s per eval (3.2x / 5x faster). Step-0 eval matches the serial run.
+  Memory: ~1.5 GB per example in the batched rollout (serial ~0.25) -- micro-batch
+  8 untested, may not fit.
+- Check (e) added (step2_checks.json): (e1) swapping the pad token gives
+  bit-identical gists, entropy, top-1 and grads (under deterministic algorithms);
+  (e2) first soft token vs an unpadded batch of copies within 4e-6. Why not
+  "batched == serial": see MEMORY.md "Numerics of the gist rollout".
+- Loss definition changed (user chose "option 3", 2026-10-01): KD is now the
+  token-weighted mean over ALL response tokens of the step's 16 examples (was: token
+  mean per micro-batch, averaged over micro-batches, which made the objective
+  depend on the micro-batch size). Verified: step loss 1.2393 / 1.2396 / 1.2402 at
+  micro 1 / 2 / 4. Speed unaffected. Logged train_kd is this step-wide mean, so it
+  is NOT comparable to the 2026-10-01 serial smoke numbers.
+- Smoke logs (gitignored): logs/warmstart_smoke.out (serial, 20 steps),
+  logs/warmstart_smoke_mb4.out (batched, 6 steps, before the loss change).

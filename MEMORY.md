@@ -55,6 +55,12 @@ ideas are often non-standard; see AGENT.md.
   and `diagnostics_gist/` (`_gist_common.py`, t1-t8).
 - Reports: `report.md` (flat-loss diagnosis), `stability_report.md`,
   `RUN_NOTES_3layer.md`, `gist_health_report.md`.
+- `warmstart/` (since 2026-09-30): "fill in the removed part" gist pretraining.
+  `common.py` (sequence construction, mid-sequence receiver, batched
+  `rollout_gists` + per-example `rollout_gists_serial`), `prepare_data.py`
+  (build / gen / klscore / finalize; data in /data/a84460786/warmstart_data/),
+  `train_warmstart.py` (trainer; `--checks-only` runs checks (a)-(e) and writes
+  `step2_checks.json`; `--smoke`; `--micro-batch`; `--resume`).
 
 ## Conventions & Decisions
 
@@ -75,6 +81,29 @@ ideas are often non-standard; see AGENT.md.
   say "only Embedding2 trainable" in places. Since 2026-09-22 the untied
   LM_head and the last decoder layer are also trainable (train_3layer.py
   unfreezes the last 3 layers).
+
+- Warm-start KD loss (user decision 2026-10-01): token-weighted mean over all
+  response tokens of the optimizer step (all micro-batches together), so the
+  objective does not depend on the micro-batch size.
+
+## Numerics of the gist rollout (found 2026-10-01)
+
+- The continuous 16-step rollout + BPTT is badly conditioned: per-example grad
+  norms span ~1e-1 to ~1e5, and one example often dominates a step's gradient.
+  fp32 rounding differences of ~1e-6 grow to percent level in gists and up to
+  tens of percent in grads (serial fp32 vs fp64 reached 62% on one micro-batch;
+  gradient direction still cos >= 0.99999 per micro-batch).
+- Consequences: batched and per-example rollouts can never agree exactly, and
+  changing the batch shape changes the step gradient (cos ~0.95-0.97 between
+  micro-batch 1 and 4 on one step). Test batching via invariances at fixed
+  shapes (pad-token swap), not via agreement with the serial version.
+- transformers 5.17 `Qwen3RMSNorm` computes in fp32 even when the model is fp64,
+  so ".double()" models are not a true fp64 reference (batch 1 vs batch 4 of
+  identical inputs differ by 2.7e-7 in "fp64").
+- GPU backward is not bit-reproducible (~4e-6 run to run); use
+  `torch.use_deterministic_algorithms(True)` with
+  `CUBLAS_WORKSPACE_CONFIG=:4096:8` (set before CUDA init) for exactness tests.
+- Eager attention gives NaN on fully-masked (left-pad) query rows; sdpa is fine.
 
 ## Key Terminology / Domain Notes
 
@@ -249,4 +278,7 @@ project should default to `softmax(logits) @ W`, not raw logits.**
   diagnostics (report.md) and stability grid (stability_report.md).
   EdgeAlign venv lost, new venv on /data. 3-layer long run launched.
 - 2026-09-30: 3-layer run stopped at step 3029 (best 0.0105 @ 2600). Gist
-  health check (gist_health_report.md).
+  health check (gist_health_report.md). Warm-start pretraining data + trainer
+  (warmstart/).
+- 2026-10-01: Warm-start smoke test passed; batched gist rollout (3.2x faster
+  steps), check (e), step-wide token-weighted KD loss. Full run not yet started.
