@@ -276,6 +276,13 @@ project should default to `softmax(logits) @ W`, not raw logits.**
 - **3-layer run (RUN_NOTES_3layer.md):** L=16, peak LR 1e-4 with warmup,
   global batch 16, clip 1.0. Best held-out 0.0105 @ step 2600 (from
   0.393). Unstable after step ~2000; stopped by the user at step 3029.
+- **Warm-start (warmstart_collapse_report.md):** the "fill in the removed part" objective did NOT
+  prevent collapse. By step 90 (LR 9e-5, in warmup) every input gave `' prompt'` x16. Main cause:
+  recovery is measured against DELETING the span, so a generic placeholder earns large
+  "recovery" (a learned constant prefix reached 0.39 on held-out A vs 0.14 for the informative
+  init gist). Once the rollout is one-hot, the Embedding2 row of the token trains as a constant
+  soft prompt. Loss and recovery both look like progress after the collapse; only swap minus
+  own, cross-gist cosine and entropy reveal it.
 - **Gist health (gist_health_report.md):** from step 1000 on, the generator
   is collapsed to one prompt-independent one-hot token sequence, but the gist
   is "alive": it beats naive prefixes 14-16x, is more noise-sensitive than
@@ -306,4 +313,5 @@ project should default to `softmax(logits) @ W`, not raw logits.**
   (warmstart/).
 - 2026-10-01: Warm-start smoke test passed; batched gist rollout (3.2x faster
   steps), check (e), step-wide token-weighted KD loss. 2-GPU data parallel
-  (7.05 s/step on GPUs 6+4, NCCL P2P disabled). Full run launched on GPUs 6+4.
+  (7.05 s/step on GPUs 6+4, NCCL P2P disabled). Full run on GPUs 6+4 collapsed by
+  step 90 to `' prompt'` x16; stopped at step 1353 (warmstart_collapse_report.md).

@@ -6,28 +6,24 @@ once something becomes durable project knowledge instead of active state.
 
 ## >>> CURRENT STATUS (updated 2026-10-01 17:30 UTC) -- read this first <<<
 
-**RUNNING: warm-start full run (5,000 steps) on GPUs 6 + 4, started 2026-10-01 17:25 UTC.**
-- Launched by the watcher in logs/gpu_hold/ (it held GPU 6 with hug.py until GPU 4 freed up,
-  then released it and started the run). Hold and watcher have exited.
-- Command: `cd warmstart && OMP_NUM_THREADS=14 CUDA_VISIBLE_DEVICES=6,4 setsid nohup
-  /data/a84460786/venvs/testfolder/bin/torchrun --standalone --nproc_per_node=2
-  train_warmstart.py --micro-batch 4 > ../logs/warmstart.out` (code = commit 8b57a57).
-- ~7 s/step + 78 evals x ~80 s -> ~11.5 h, expected to end ~05:00 UTC 2026-10-02.
-- Check: `ps -u a84460786 -o pid,etime,cmd | grep train_warmstart`; `tail logs/warmstart.out`;
-  logs/warmstart_train.jsonl, logs/warmstart_eval.jsonl; plots warmstart_loss_curve.png and
-  warmstart_recovery.png at the repo root. Checkpoints: /data/a84460786/testfolder_checkpoints/
-  warmstart/ (latest.pt each eval, best.pt by held-out A recovery, step_0X000.pt).
-- If it dies: relaunch the same command with `--resume` (same --micro-batch 4; GPU count may differ).
-- Step 0: held-out A recovery 0.1363, B 0.1024; step 1 kd 1.24016.
-- Next per TASK_PROMPT.md: after step 300 commit logs + plots + RUN_NOTES_warmstart.md and push; at
-  the end write warmstart_report.md.
+**Warm-start full run STOPPED by the user at step 1353/5000 (2026-10-01 20:37 UTC). Nothing is running.**
+- It ran on GPUs 6 + 4 from 17:25 UTC (2-GPU torchrun, code 8b57a57). Final logs and plots are committed.
+- RESULT: the gist COLLAPSED by step 90 to `' prompt'` x16 for every input (entropy 0, cosine 1,
+  swap minus own 0). After that, the Embedding2 row of `' prompt'` trained as a constant soft
+  prompt: held-out A recovery 0.393 and B 0.331 at step 1300, vs 0.136 / 0.102 for the step-0 gist.
+- Full write-up: `warmstart_collapse_report.md` (pipeline, collapse, causes, options, full tables).
+- Checkpoints: /data/a84460786/testfolder_checkpoints/warmstart/ (step_01000.pt, latest.pt =
+  best.pt = step 1300), ~4.3 GB each.
+- Next steps are the user's call (report section 6): placeholder baseline instead of deletion,
+  anti-saturation (entropy coefficient / frozen LM_head / logit cap), per-example clipping,
+  alerts on swap minus own ~ 0.
 
 Everything else is committed and pushed to `origin/main`
 (https://github.com/ArchAngleOfAI/EdgeAlign0.2). Pushing works without a prompt: a GitHub
 token is stored in `~/.git-credentials`.
 
 **Latest state of the research (newest first):**
-0. **Warm-start pretraining: full run RUNNING since 2026-10-01 17:25 UTC** (see below).
+0. **Warm-start pretraining: full run stopped at step 1353; gist collapsed to `' prompt'` x16** (see `warmstart_collapse_report.md`).
 1. **Gist health check, done:** `gist_health_report.md`, `diagnostics_gist/`.
    The best 3-layer generator (step 2600) is COLLAPSED BUT ALIVE. It emits the
    same 16-vector gist for every prompt (' it', 'gle', 'gle', ' it' x13), yet
@@ -38,7 +34,7 @@ token is stored in `~/.git-credentials`.
 3. **Stability vs soft-prompt length, done:** `stability_report.md`.
 4. **Flat-KD-loss diagnosis, done:** `report.md`.
 
-**Next step: monitor the warm-start run.** Older candidates the
+**Next steps: the user's call** (see warmstart_collapse_report.md section 6). Older candidates the
 reports raise, none started (warm-start evals already log swap test,
 cross-prompt cos, rollout entropy and gist attention):
 - monitor gist collapse during training (swap test, cross-prompt cos, rollout
