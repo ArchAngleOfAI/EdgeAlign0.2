@@ -1,0 +1,101 @@
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:00<00:00, 63.03it/s]
+=== full_lenient on train (120 tasks)
+[full/ft] 1/120 multi_turn_base_4 valid=False turns=[0, 0, 0] calls=3 (0 ok, 38.7 s/ep)
+[full/ft] 2/120 multi_turn_base_2 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 52.4 s/ep)
+[full/ft] 3/120 multi_turn_base_6 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 72.5 s/ep)
+[full/ft] 4/120 multi_turn_base_7 valid=False turns=[0, 0, 0] calls=4 (0 ok, 64.4 s/ep)
+[full/ft] 5/120 multi_turn_base_9 valid=False turns=[0, 0, 0] calls=3 (0 ok, 77.6 s/ep)
+[full/ft] 6/120 multi_turn_base_8 valid=False turns=[0, 0, 0, 0] calls=5 (0 ok, 72.5 s/ep)
+[full/ft] 7/120 multi_turn_base_11 valid=False turns=[0, 0] calls=2 (0 ok, 67.5 s/ep)
+[full/ft] 8/120 multi_turn_base_13 valid=False turns=[0, 0] calls=3 (0 ok, 75.6 s/ep)
+[full/ft] 9/120 multi_turn_base_1 valid=False turns=[1, 0, 0, 0] calls=21 (0 ok, 89.5 s/ep)
+[full/ft] 10/120 multi_turn_base_5 valid=False turns=[0, 0, 0, 0] calls=21 (0 ok, 80.6 s/ep)
+[full/ft] 11/120 multi_turn_base_12 valid=False turns=[0, 0, 0] calls=23 (0 ok, 141.9 s/ep)
+[full/ft] 12/120 multi_turn_base_14 valid=False turns=[0, 0, 0, 0] calls=21 (0 ok, 137.4 s/ep)
+[full/ft] 13/120 multi_turn_base_21 valid=False turns=[0, 0, 0] calls=3 (0 ok, 130.3 s/ep)
+[full/ft] 14/120 multi_turn_base_17 valid=False turns=[1, 0, 0] calls=21 (0 ok, 131.3 s/ep)
+[full/ft] 15/120 multi_turn_base_22 valid=False turns=[0, 0, 0, 0] calls=4 (0 ok, 122.6 s/ep)
+[full/ft] 16/120 multi_turn_base_19 valid=False turns=[1, 0, 0] calls=23 (0 ok, 119.6 s/ep)
+[full/ft] 17/120 multi_turn_base_28 valid=False turns=[0, 0, 0] calls=3 (0 ok, 113.8 s/ep)
+[full/ft] 18/120 multi_turn_base_29 valid=False turns=[0, 0, 0] calls=3 (0 ok, 107.5 s/ep)
+[full/ft] 19/120 multi_turn_base_33 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 108.8 s/ep)
+[full/ft] 20/120 multi_turn_base_34 valid=False turns=[1, 0] calls=7 (0 ok, 106.1 s/ep)
+[full/ft] 21/120 multi_turn_base_26 valid=False turns=[0, 0, 0] calls=21 (0 ok, 110.6 s/ep)
+[full/ft] 22/120 multi_turn_base_38 valid=False turns=[0, 0] calls=10 (0 ok, 105.6 s/ep)
+[full/ft] 23/120 multi_turn_base_32 valid=False turns=[0, 0] calls=21 (0 ok, 107.6 s/ep)
+[full/ft] 24/120 multi_turn_base_41 valid=False turns=[0, 0] calls=16 (0 ok, 117.5 s/ep)
+[full/ft] 25/120 multi_turn_base_44 valid=False turns=[0, 0, 0] calls=3 (0 ok, 116.5 s/ep)
+[full/ft] 26/120 multi_turn_base_42 valid=False turns=[0, 0, 0] calls=21 (0 ok, 114.6 s/ep)
+[full/ft] 27/120 multi_turn_base_39 valid=False turns=[0, 0, 0, 0] calls=31 (0 ok, 112.8 s/ep)
+[full/ft] 28/120 multi_turn_base_45 valid=False turns=[0, 0] calls=4 (0 ok, 108.7 s/ep)
+[full/ft] 29/120 multi_turn_base_46 valid=False turns=[0] calls=3 (0 ok, 106.0 s/ep)
+[full/ft] 30/120 multi_turn_base_50 valid=True turns=[1] calls=2 (1 ok, 103.4 s/ep)
+[full/ft] 31/120 multi_turn_base_43 valid=False turns=[1, 0, 0, 0] calls=21 (1 ok, 101.2 s/ep)
+[full/ft] 32/120 multi_turn_base_47 valid=False turns=[0, 0, 0] calls=3 (1 ok, 98.1 s/ep)
+[full/ft] 33/120 multi_turn_base_51 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 96.2 s/ep)
+[full/ft] 34/120 multi_turn_base_53 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 94.2 s/ep)
+[full/ft] 35/120 multi_turn_base_57 valid=False turns=[0, 0] calls=3 (1 ok, 91.5 s/ep)
+
+[full/ft] 36/120 multi_turn_base_58 valid=False turns=[0, 0, 0, 0] calls=6 (1 ok, 93.6 s/ep)
+[full/ft] 37/120 multi_turn_base_59 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 91.1 s/ep)
+
+
+
+[full/ft] 38/120 multi_turn_base_63 valid=False turns=[0, 0, 0] calls=3 (1 ok, 92.1 s/ep)
+[full/ft] 39/120 multi_turn_base_65 valid=False turns=[0, 0] calls=3 (1 ok, 89.8 s/ep)
+
+
+
+
+
+[full/ft] 40/120 multi_turn_base_67 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 91.7 s/ep)
+
+
+
+
+[full/ft] 41/120 multi_turn_base_69 valid=False turns=[0, 0] calls=4 (1 ok, 93.8 s/ep)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[full/ft] 42/120 multi_turn_base_54 valid=False turns=[1, 0, 0] calls=21 (1 ok, 92.9 s/ep)
+[full/ft] 43/120 multi_turn_base_60 valid=False turns=[0, 0, 0, 0, 0] calls=18 (1 ok, 90.7 s/ep)
+[full/ft] 44/120 multi_turn_base_71 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 95.0 s/ep)
+[full/ft] 45/120 multi_turn_base_78 valid=False turns=[0, 0] calls=4 (1 ok, 97.2 s/ep)
+[W1002 16:52:08.327775633 CUDACachingAllocator.cpp:528] expandable_segments: memory mapping failed with OOM on device 0 while trying to map 20971520 bytes (free: 11075584, total: 42405855232).
+[W1002 16:53:13.132857019 CUDACachingAllocator.cpp:528] expandable_segments: memory mapping failed with OOM on device 0 while trying to map 20971520 bytes (free: 19464192, total: 42405855232).
+[W1002 16:53:15.462100897 CUDACachingAllocator.cpp:528] expandable_segments: memory mapping failed with OOM on device 0 while trying to map 20971520 bytes (free: 2686976, total: 42405855232).
+[W1002 16:53:15.466155135 CUDACachingAllocator.cpp:528] expandable_segments: memory mapping failed with OOM on device 0 while trying to map 20971520 bytes (free: 2686976, total: 42405855232).
+Traceback (most recent call last):
+  File "/home/a84460786/testfolder/icae_rl/run_stage1.py", line 120, in <module>
+    main()
+  File "/home/a84460786/testfolder/icae_rl/run_stage1.py", line 101, in main
+    eps = rollout.run_episodes(m, tasks, ids, cond, adapter, batch_size=args.batch_size,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/a84460786/testfolder/icae_rl/rollout.py", line 168, in run_episodes
+    outs = model.generate(inputs, greedy=greedy, temperature=temperature, top_p=top_p,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/a84460786/venvs/icae_rl/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/a84460786/testfolder/icae_rl/icae_model.py", line 201, in generate
+    cache = DynamicCache(ddp_cache_data=list(zip(K, V)))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/a84460786/venvs/icae_rl/lib/python3.12/site-packages/transformers/cache_utils.py", line 993, in __init__
+    _, _ = layers[layer_idx].update(key_states, value_states)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/a84460786/venvs/icae_rl/lib/python3.12/site-packages/transformers/cache_utils.py", line 120, in update
+    self.values = torch.cat([self.values, value_states], dim=-2)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 190.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 62.56 MiB is free. Including non-PyTorch memory, this process has 39.42 GiB memory in use. Of the allocated memory 38.82 GiB is allocated by PyTorch, and 115.16 MiB is reserved by PyTorch but unallocated.

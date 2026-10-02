@@ -1,0 +1,29 @@
+{
+ "note": "BFCL multi_turn_base, split by task id 60/40 seed 0. RL trains on TRAIN, so these scores are NOT comparable to the public leaderboard.",
+ "runs": {
+  "full/train": {
+   "n": 120,
+   "success": 1,
+   "success_rate": 0.008333333333333333,
+   "mean_turn_pass_frac": 0.0735515873015873,
+   "force_quit": 0,
+   "mean_calls_per_ep": 4.375,
+   "mean_hist_tokens_per_call": 0,
+   "mean_slots_per_call": 0,
+   "mean_hist_tokens_per_call_with_hist": 0,
+   "mean_slots_per_call_with_hist": 0,
+   "max_hist_tokens": 0,
+   "mean_decoder_len": 8839.068571428572,
+   "mean_gen_tokens": 121.26285714285714,
+   "mean_wall_s_per_ep_concurrent": 158.10169394810995,
+   "throughput_s_per_ep": 26.64671870271365,
+   "batch_size": 6,
+   "error_types": {
+    "None": 0,
+    "multi_turn:empty_turn_model_response": 82,
+    "multi_turn:execution_response_mismatch": 16,
+    "multi_turn:instance_state_mismatch": 21
+   }
+  }
+ }
+}

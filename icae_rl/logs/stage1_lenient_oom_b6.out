@@ -1,0 +1,54 @@
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:00<00:00, 62.49it/s]
+=== full_lenient on train (120 tasks)
+[W1002 15:20:10.766025245 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 283115520 bytes (free: 78184448, total: 42405855232).
+[full/ft] 1/120 multi_turn_base_4 valid=False turns=[0, 0, 0] calls=3 (0 ok, 70.8 s/ep)
+[W1002 15:20:51.453604125 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 123731968 bytes (free: 55115776, total: 42405855232).
+[full/ft] 2/120 multi_turn_base_7 valid=False turns=[0, 0, 0] calls=4 (0 ok, 55.9 s/ep)
+[full/ft] 3/120 multi_turn_base_2 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 54.7 s/ep)
+[full/ft] 4/120 multi_turn_base_6 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 41.0 s/ep)
+[W1002 15:22:24.289752954 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 125829120 bytes (free: 99155968, total: 42405855232).
+[W1002 15:23:02.943703793 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 128516096, total: 42405855232).
+[full/ft] 5/120 multi_turn_base_9 valid=False turns=[0, 0, 0] calls=3 (0 ok, 50.1 s/ep)
+[full/ft] 6/120 multi_turn_base_11 valid=False turns=[0, 0] calls=2 (0 ok, 41.7 s/ep)
+[full/ft] 7/120 multi_turn_base_8 valid=False turns=[0, 0, 0, 0] calls=5 (0 ok, 42.0 s/ep)
+[W1002 15:25:18.257263880 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 138412032 bytes (free: 115933184, total: 42405855232).
+[full/ft] 8/120 multi_turn_base_12 valid=False turns=[0, 0, 0] calls=5 (0 ok, 47.5 s/ep)
+[full/ft] 9/120 multi_turn_base_13 valid=False turns=[0, 0] calls=3 (0 ok, 42.2 s/ep)
+[W1002 15:26:01.785671048 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 142606336 bytes (free: 8978432, total: 42405855232).
+[W1002 15:26:40.504888806 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 144703488 bytes (free: 25755648, total: 42405855232).
+[W1002 15:27:23.512138784 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 148897792 bytes (free: 55115776, total: 42405855232).
+[W1002 15:27:32.446546952 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 591396864 bytes (free: 176750592, total: 42405855232).
+[full/ft] 10/120 multi_turn_base_21 valid=False turns=[0, 0, 0] calls=3 (0 ok, 52.2 s/ep)
+[W1002 15:28:24.902528448 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 153092096 bytes (free: 73990144, total: 42405855232).
+[W1002 15:29:12.103789468 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 159383552 bytes (free: 61407232, total: 42405855232).
+[W1002 15:29:25.156018202 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 635437056 bytes (free: 304676864, total: 42405855232).
+[W1002 15:30:22.617336259 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 165675008 bytes (free: 145293312, total: 42405855232).
+[W1002 15:30:27.766841391 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 662700032 bytes (free: 237568000, total: 42405855232).
+[W1002 15:31:14.751797805 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 402653184 bytes (free: 273219584, total: 42405855232).
+[W1002 15:31:27.776593328 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 687865856 bytes (free: 212402176, total: 42405855232).
+[full/ft] 11/120 multi_turn_base_22 valid=False turns=[0, 0, 0, 0] calls=4 (0 ok, 70.1 s/ep)
+[W1002 15:32:23.759130940 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 417333248 bytes (free: 122224640, total: 42405855232).
+[W1002 15:32:34.695717867 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 180355072 bytes (free: 42532864, total: 42405855232).
+[W1002 15:32:34.695980831 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 180355072 bytes (free: 42532864, total: 42405855232).
+Traceback (most recent call last):
+  File "/home/a84460786/testfolder/icae_rl/run_stage1.py", line 120, in <module>
+    main()
+  File "/home/a84460786/testfolder/icae_rl/run_stage1.py", line 101, in main
+    eps = rollout.run_episodes(m, tasks, ids, cond, adapter, batch_size=args.batch_size,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/a84460786/testfolder/icae_rl/rollout.py", line 168, in run_episodes
+    outs = model.generate(inputs, greedy=greedy, temperature=temperature, top_p=top_p,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/a84460786/venvs/icae_rl/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/a84460786/testfolder/icae_rl/icae_model.py", line 201, in generate
+    cache = DynamicCache(ddp_cache_data=list(zip(K, V)))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/a84460786/venvs/icae_rl/lib/python3.12/site-packages/transformers/cache_utils.py", line 993, in __init__
+    _, _ = layers[layer_idx].update(key_states, value_states)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/a84460786/venvs/icae_rl/lib/python3.12/site-packages/transformers/cache_utils.py", line 120, in update
+    self.values = torch.cat([self.values, value_states], dim=-2)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 172.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 40.56 MiB is free. Including non-PyTorch memory, this process has 39.45 GiB memory in use. Of the allocated memory 35.49 GiB is allocated by PyTorch, and 3.46 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)

@@ -1,0 +1,30 @@
+{
+ "full_train": {
+  "n_calls": 525,
+  "kinds": {
+   "fail_call_plus_extra_text": 100,
+   "fail_prose_no_call": 39,
+   "fail_json_style_call": 18,
+   "decoded_positional_args_dropped": 10,
+   "fail_escaped_underscore": 157,
+   "decoded_ok": 66,
+   "fail_other": 135
+  },
+  "frac": {
+   "fail_call_plus_extra_text": 0.19047619047619047,
+   "fail_prose_no_call": 0.07428571428571429,
+   "fail_json_style_call": 0.03428571428571429,
+   "decoded_positional_args_dropped": 0.01904761904761905,
+   "fail_escaped_underscore": 0.29904761904761906,
+   "decoded_ok": 0.12571428571428572,
+   "fail_other": 0.2571428571428571
+  },
+  "errors": {
+   "multi_turn:empty_turn_model_response": 82,
+   "multi_turn:instance_state_mismatch": 21,
+   "multi_turn:execution_response_mismatch": 16,
+   "None": 1
+  },
+  "any_turn_pass": 31
+ }
+}

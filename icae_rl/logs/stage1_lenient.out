@@ -1,0 +1,26 @@
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:00<00:00, 63.12it/s]
+=== full_lenient on train (120 tasks, 0 resumed)
+[full/ft] 1/120 multi_turn_base_4 valid=False turns=[0, 0, 0] calls=3 (0 ok, 39.2 s/ep)
+[full/ft] 2/120 multi_turn_base_2 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 40.8 s/ep)
+[full/ft] 3/120 multi_turn_base_6 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 55.7 s/ep)
+[full/ft] 4/120 multi_turn_base_7 valid=False turns=[0, 0, 0] calls=4 (0 ok, 50.1 s/ep)
+[full/ft] 5/120 multi_turn_base_9 valid=False turns=[0, 0, 0] calls=3 (0 ok, 65.4 s/ep)
+[full/ft] 6/120 multi_turn_base_8 valid=False turns=[0, 0, 0, 0] calls=5 (0 ok, 63.3 s/ep)
+[full/ft] 7/120 multi_turn_base_11 valid=False turns=[0, 0] calls=2 (0 ok, 60.8 s/ep)
+[full/ft] 8/120 multi_turn_base_13 valid=False turns=[0, 0] calls=3 (0 ok, 71.3 s/ep)
+[full/ft] 9/120 multi_turn_base_1 valid=False turns=[1, 0, 0, 0] calls=21 (0 ok, 87.8 s/ep)
+[full/ft] 10/120 multi_turn_base_5 valid=False turns=[0, 0, 0, 0] calls=21 (0 ok, 79.1 s/ep)
+[full/ft] 11/120 multi_turn_base_12 valid=False turns=[0, 0, 0] calls=8 (0 ok, 71.9 s/ep)
+[full/ft] 12/120 multi_turn_base_21 valid=False turns=[0, 0, 0] calls=3 (0 ok, 70.0 s/ep)
+[full/ft] 13/120 multi_turn_base_17 valid=False turns=[1, 0, 0] calls=5 (0 ok, 69.9 s/ep)
+[full/ft] 14/120 multi_turn_base_22 valid=False turns=[0, 0, 0, 0] calls=4 (0 ok, 68.8 s/ep)
+[full/ft] 15/120 multi_turn_base_28 valid=False turns=[0, 0, 0] calls=3 (0 ok, 71.2 s/ep)
+[full/ft] 16/120 multi_turn_base_19 valid=False turns=[1, 0, 0] calls=12 (0 ok, 70.2 s/ep)
+[full/ft] 17/120 multi_turn_base_29 valid=False turns=[0, 0, 0] calls=3 (0 ok, 68.2 s/ep)
+[full/ft] 18/120 multi_turn_base_14 valid=False turns=[0, 0, 0, 0] calls=21 (0 ok, 75.2 s/ep)
+[full/ft] 19/120 multi_turn_base_33 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 74.3 s/ep)
+[full/ft] 20/120 multi_turn_base_26 valid=False turns=[0, 0, 0] calls=16 (0 ok, 79.2 s/ep)
+[full/ft] 21/120 multi_turn_base_32 valid=False turns=[0, 0] calls=21 (0 ok, 117.1 s/ep)
+
+
+

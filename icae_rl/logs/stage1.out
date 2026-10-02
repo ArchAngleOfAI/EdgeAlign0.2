@@ -1,0 +1,429 @@
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:00<00:00, 64.16it/s]
+=== full on train (120 tasks)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[W1002 13:41:36.278691868 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 121634816 bytes (free: 118030336, total: 42405855232).
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:4: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:4: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:6: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:4: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:4: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:6: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:4: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:4: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:5: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:6: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 1/120 multi_turn_base_4 valid=False turns=[0, 0, 0] calls=3 (0 ok, 61.3 s/ep)
+[W1002 13:42:07.707217276 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 123731968 bytes (free: 34144256, total: 42405855232).
+[full/ft] 2/120 multi_turn_base_1 valid=False turns=[0, 0, 0, 0] calls=4 (0 ok, 50.6 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 3/120 multi_turn_base_7 valid=False turns=[0, 0, 0] calls=4 (0 ok, 33.8 s/ep)
+[full/ft] 4/120 multi_turn_base_2 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 35.9 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 5/120 multi_turn_base_5 valid=False turns=[0, 0, 0, 0] calls=5 (0 ok, 28.7 s/ep)
+[full/ft] 6/120 multi_turn_base_6 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 23.9 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[W1002 13:43:32.962241928 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 125829120 bytes (free: 53018624, total: 42405855232).
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 7/120 multi_turn_base_11 valid=False turns=[0, 0] calls=2 (0 ok, 25.0 s/ep)
+[W1002 13:44:05.615014873 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 520093696 bytes (free: 224985088, total: 42405855232).
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 8/120 multi_turn_base_8 valid=False turns=[0, 0, 0, 0] calls=4 (0 ok, 27.4 s/ep)
+[full/ft] 9/120 multi_turn_base_9 valid=False turns=[0, 0, 0] calls=3 (0 ok, 24.4 s/ep)
+[full/ft] 10/120 multi_turn_base_12 valid=False turns=[0, 0, 0] calls=3 (0 ok, 24.6 s/ep)
+[full/ft] 11/120 multi_turn_base_13 valid=False turns=[0, 0] calls=3 (0 ok, 22.3 s/ep)
+[full/ft] 12/120 multi_turn_base_14 valid=False turns=[0, 0, 0, 0] calls=5 (0 ok, 27.3 s/ep)
+[full/ft] 13/120 multi_turn_base_17 valid=False turns=[1, 0, 0] calls=4 (0 ok, 25.2 s/ep)
+[full/ft] 14/120 multi_turn_base_21 valid=False turns=[0, 0, 0] calls=3 (0 ok, 23.4 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 15/120 multi_turn_base_19 valid=False turns=[1, 0, 0] calls=4 (0 ok, 23.7 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 16/120 multi_turn_base_26 valid=False turns=[0, 0, 0] calls=3 (0 ok, 22.2 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 17/120 multi_turn_base_22 valid=False turns=[0, 0, 0, 0] calls=4 (0 ok, 23.0 s/ep)
+[full/ft] 18/120 multi_turn_base_28 valid=False turns=[0, 0, 0] calls=3 (0 ok, 24.3 s/ep)
+[full/ft] 19/120 multi_turn_base_29 valid=False turns=[0, 0, 0] calls=3 (0 ok, 23.1 s/ep)
+[full/ft] 20/120 multi_turn_base_32 valid=False turns=[0, 0] calls=3 (0 ok, 21.9 s/ep)
+[full/ft] 21/120 multi_turn_base_34 valid=False turns=[0, 0] calls=2 (0 ok, 20.9 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 22/120 multi_turn_base_38 valid=False turns=[0, 0] calls=3 (0 ok, 22.3 s/ep)
+[full/ft] 23/120 multi_turn_base_33 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 22.8 s/ep)
+[full/ft] 24/120 multi_turn_base_41 valid=False turns=[0, 0] calls=3 (0 ok, 21.9 s/ep)
+[full/ft] 25/120 multi_turn_base_39 valid=False turns=[1, 0, 0, 0] calls=5 (0 ok, 24.2 s/ep)
+[full/ft] 26/120 multi_turn_base_43 valid=False turns=[1, 0, 0, 0] calls=5 (0 ok, 23.3 s/ep)
+[full/ft] 27/120 multi_turn_base_44 valid=False turns=[0, 0, 0] calls=3 (0 ok, 22.4 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 28/120 multi_turn_base_46 valid=False turns=[0] calls=2 (0 ok, 21.6 s/ep)
+[W1002 13:51:13.015870008 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 337641472 bytes (free: 325648384, total: 42405855232).
+[full/ft] 29/120 multi_turn_base_42 valid=False turns=[0, 0, 0] calls=6 (0 ok, 21.8 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 30/120 multi_turn_base_45 valid=False turns=[0, 0] calls=3 (0 ok, 21.1 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[W1002 13:51:45.537960767 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 146800640 bytes (free: 2686976, total: 42405855232).
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 31/120 multi_turn_base_50 valid=True turns=[1] calls=2 (1 ok, 21.7 s/ep)
+[W1002 13:52:25.602111957 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 148897792 bytes (free: 40435712, total: 42405855232).
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 32/120 multi_turn_base_47 valid=False turns=[0, 0, 0] calls=3 (1 ok, 22.7 s/ep)
+[W1002 13:53:21.791720966 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 150994944 bytes (free: 46727168, total: 42405855232).
+[W1002 13:53:25.788832865 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 601882624 bytes (free: 375980032, total: 42405855232).
+[full/ft] 33/120 multi_turn_base_51 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 23.5 s/ep)
+[full/ft] 34/120 multi_turn_base_53 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 22.8 s/ep)
+[full/ft] 35/120 multi_turn_base_54 valid=False turns=[0, 0, 0] calls=3 (1 ok, 22.2 s/ep)
+[full/ft] 36/120 multi_turn_base_57 valid=False turns=[0, 0] calls=3 (1 ok, 21.6 s/ep)
+[W1002 13:54:55.321810355 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 157286400 bytes (free: 46727168, total: 42405855232).
+[full/ft] 37/120 multi_turn_base_58 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 23.8 s/ep)
+[full/ft] 38/120 multi_turn_base_65 valid=False turns=[0, 0] calls=2 (1 ok, 23.2 s/ep)
+[full/ft] 39/120 multi_turn_base_63 valid=False turns=[0, 0, 0] calls=3 (1 ok, 24.0 s/ep)
+[full/ft] 40/120 multi_turn_base_59 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 24.8 s/ep)
+[full/ft] 41/120 multi_turn_base_67 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 25.0 s/ep)
+[W1002 13:58:24.445648612 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 627048448 bytes (free: 231276544, total: 42405855232).
+[full/ft] 42/120 multi_turn_base_60 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 25.3 s/ep)
+[full/ft] 43/120 multi_turn_base_69 valid=False turns=[0, 0] calls=4 (1 ok, 24.7 s/ep)
+[full/ft] 44/120 multi_turn_base_70 valid=False turns=[0, 0] calls=3 (1 ok, 24.2 s/ep)
+[W1002 13:59:36.654661242 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 157286400 bytes (free: 153681920, total: 42405855232).
+[W1002 13:59:40.765483758 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 631242752 bytes (free: 269025280, total: 42405855232).
+[full/ft] 45/120 multi_turn_base_68 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 25.4 s/ep)
+[full/ft] 46/120 multi_turn_base_75 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 25.4 s/ep)
+[full/ft] 47/120 multi_turn_base_78 valid=False turns=[0, 0] calls=3 (1 ok, 24.9 s/ep)
+[full/ft] 48/120 multi_turn_base_86 valid=False turns=[0, 0, 0] calls=3 (1 ok, 24.4 s/ep)
+[full/ft] 49/120 multi_turn_base_71 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 24.3 s/ep)
+[full/ft] 50/120 multi_turn_base_82 valid=False turns=[0, 0, 0] calls=4 (1 ok, 23.8 s/ep)
+[full/ft] 51/120 multi_turn_base_87 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 25.1 s/ep)
+[full/ft] 52/120 multi_turn_base_88 valid=False turns=[0, 0, 0] calls=3 (1 ok, 24.6 s/ep)
+[full/ft] 53/120 multi_turn_base_93 valid=False turns=[0, 0, 0] calls=3 (1 ok, 24.7 s/ep)
+[full/ft] 54/120 multi_turn_base_89 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 24.9 s/ep)
+[full/ft] 55/120 multi_turn_base_96 valid=False turns=[0, 0] calls=2 (1 ok, 24.5 s/ep)
+[full/ft] 56/120 multi_turn_base_92 valid=False turns=[1, 0, 0, 0, 0] calls=6 (1 ok, 24.6 s/ep)
+[full/ft] 57/120 multi_turn_base_94 valid=False turns=[0, 0, 0] calls=6 (1 ok, 24.8 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 58/120 multi_turn_base_95 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 24.9 s/ep)
+[full/ft] 59/120 multi_turn_base_100 valid=False turns=[0, 0] calls=3 (1 ok, 24.4 s/ep)
+[full/ft] 60/120 multi_turn_base_101 valid=False turns=[0, 0, 0] calls=3 (1 ok, 24.6 s/ep)
+[full/ft] 61/120 multi_turn_base_104 valid=False turns=[0, 0] calls=2 (1 ok, 24.2 s/ep)
+[full/ft] 62/120 multi_turn_base_97 valid=False turns=[0, 0, 0, 0, 0, 0] calls=6 (1 ok, 24.2 s/ep)
+[full/ft] 63/120 multi_turn_base_99 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 23.8 s/ep)
+[full/ft] 64/120 multi_turn_base_105 valid=False turns=[0, 0] calls=3 (1 ok, 23.8 s/ep)
+[full/ft] 65/120 multi_turn_base_106 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 23.9 s/ep)
+[full/ft] 66/120 multi_turn_base_108 valid=False turns=[1, 0, 0, 0, 0] calls=6 (1 ok, 25.1 s/ep)
+[full/ft] 67/120 multi_turn_base_112 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 24.7 s/ep)
+[full/ft] 68/120 multi_turn_base_115 valid=False turns=[1, 0, 0] calls=4 (1 ok, 24.4 s/ep)
+[full/ft] 69/120 multi_turn_base_109 valid=False turns=[0, 0, 0, 0, 0, 0, 0] calls=7 (1 ok, 24.3 s/ep)
+[full/ft] 70/120 multi_turn_base_110 valid=False turns=[1, 0, 0, 0, 0, 0] calls=7 (1 ok, 24.5 s/ep)
+[full/ft] 71/120 multi_turn_base_116 valid=False turns=[1, 0, 0, 0, 0, 0] calls=7 (1 ok, 24.6 s/ep)
+[full/ft] 72/120 multi_turn_base_119 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 24.5 s/ep)
+[full/ft] 73/120 multi_turn_base_118 valid=False turns=[1, 0, 0, 0, 0] calls=6 (1 ok, 24.4 s/ep)
+[full/ft] 74/120 multi_turn_base_121 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 24.0 s/ep)
+[full/ft] 75/120 multi_turn_base_117 valid=False turns=[0, 0, 0, 0, 0, 0] calls=7 (1 ok, 24.1 s/ep)
+[full/ft] 76/120 multi_turn_base_123 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 23.7 s/ep)
+[full/ft] 77/120 multi_turn_base_127 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 24.3 s/ep)
+[full/ft] 78/120 multi_turn_base_132 valid=False turns=[1, 0] calls=3 (1 ok, 24.0 s/ep)
+[full/ft] 79/120 multi_turn_base_128 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 24.2 s/ep)
+[full/ft] 80/120 multi_turn_base_134 valid=False turns=[0, 0, 0] calls=4 (1 ok, 24.4 s/ep)
+[full/ft] 81/120 multi_turn_base_135 valid=False turns=[0, 1, 0, 0] calls=6 (1 ok, 25.0 s/ep)
+[full/ft] 82/120 multi_turn_base_131 valid=False turns=[1, 0, 0, 0, 0, 0, 0] calls=8 (1 ok, 25.2 s/ep)
+[full/ft] 83/120 multi_turn_base_137 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 24.9 s/ep)
+[full/ft] 84/120 multi_turn_base_138 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 24.6 s/ep)
+[full/ft] 85/120 multi_turn_base_144 valid=False turns=[1, 0] calls=3 (1 ok, 24.3 s/ep)
+[full/ft] 86/120 multi_turn_base_142 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 24.7 s/ep)
+[full/ft] 87/120 multi_turn_base_147 valid=False turns=[0, 0] calls=3 (1 ok, 24.8 s/ep)
+[full/ft] 88/120 multi_turn_base_150 valid=False turns=[0, 0] calls=3 (1 ok, 24.5 s/ep)
+[full/ft] 89/120 multi_turn_base_152 valid=False turns=[0, 0, 0] calls=3 (1 ok, 24.2 s/ep)
+[full/ft] 90/120 multi_turn_base_146 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 24.3 s/ep)
+[full/ft] 91/120 multi_turn_base_148 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 24.5 s/ep)
+[full/ft] 92/120 multi_turn_base_159 valid=False turns=[0, 0, 0] calls=4 (1 ok, 24.9 s/ep)
+[full/ft] 93/120 multi_turn_base_160 valid=False turns=[0, 0, 0] calls=4 (1 ok, 24.7 s/ep)
+[full/ft] 94/120 multi_turn_base_153 valid=False turns=[1, 0, 0, 0, 0] calls=6 (1 ok, 24.9 s/ep)
+[full/ft] 95/120 multi_turn_base_162 valid=False turns=[0, 0, 0, 0, 0, 0] calls=6 (1 ok, 25.2 s/ep)
+[full/ft] 96/120 multi_turn_base_165 valid=False turns=[1, 0, 0, 0, 0] calls=6 (1 ok, 25.6 s/ep)
+[full/ft] 97/120 multi_turn_base_166 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 25.8 s/ep)
+[full/ft] 98/120 multi_turn_base_169 valid=False turns=[0, 0] calls=3 (1 ok, 25.5 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 99/120 multi_turn_base_167 valid=False turns=[0, 0, 0, 0, 1] calls=6 (1 ok, 26.0 s/ep)
+[full/ft] 100/120 multi_turn_base_168 valid=False turns=[1, 0, 0, 0, 0] calls=6 (1 ok, 25.7 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 101/120 multi_turn_base_171 valid=False turns=[0, 0, 0] calls=3 (1 ok, 25.5 s/ep)
+[W1002 14:25:12.058254850 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 620756992 bytes (free: 8978432, total: 42405855232).
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 102/120 multi_turn_base_170 valid=False turns=[0, 0, 0, 0, 0, 0] calls=6 (1 ok, 26.4 s/ep)
+[full/ft] 103/120 multi_turn_base_173 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 26.1 s/ep)
+[full/ft] 104/120 multi_turn_base_176 valid=False turns=[0, 0] calls=2 (1 ok, 25.9 s/ep)
+[full/ft] 105/120 multi_turn_base_172 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 26.0 s/ep)
+[W1002 14:26:41.115503584 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 155189248 bytes (free: 25755648, total: 42405855232).
+[W1002 14:27:33.477675680 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 157286400 bytes (free: 151584768, total: 42405855232).
+[full/ft] 106/120 multi_turn_base_174 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 26.7 s/ep)
+[full/ft] 107/120 multi_turn_base_179 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 26.4 s/ep)
+[full/ft] 108/120 multi_turn_base_182 valid=False turns=[1, 0] calls=3 (1 ok, 26.2 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:3: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:3: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 109/120 multi_turn_base_180 valid=False turns=[0, 0, 0, 1, 1, 0] calls=6 (1 ok, 26.9 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:3: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:3: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:3: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:3: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 110/120 multi_turn_base_181 valid=False turns=[1, 0, 0, 0, 0] calls=6 (1 ok, 26.7 s/ep)
+[full/ft] 111/120 multi_turn_base_183 valid=False turns=[1, 0, 0, 0, 0, 0] calls=7 (1 ok, 27.1 s/ep)
+[full/ft] 112/120 multi_turn_base_187 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 26.8 s/ep)
+[full/ft] 113/120 multi_turn_base_184 valid=False turns=[0, 0, 0, 0, 0, 0] calls=6 (1 ok, 26.8 s/ep)
+[full/ft] 114/120 multi_turn_base_189 valid=False turns=[0, 0, 0] calls=3 (1 ok, 26.6 s/ep)
+[full/ft] 115/120 multi_turn_base_188 valid=False turns=[0, 0, 0, 0, 0, 0] calls=7 (1 ok, 26.8 s/ep)
+[full/ft] 116/120 multi_turn_base_192 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 26.9 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 117/120 multi_turn_base_193 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 27.2 s/ep)
+[full/ft] 118/120 multi_turn_base_197 valid=False turns=[0, 0, 0] calls=4 (1 ok, 27.0 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[full/ft] 119/120 multi_turn_base_196 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 26.9 s/ep)
+[full/ft] 120/120 multi_turn_base_199 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 26.6 s/ep)
+=== full on train: 1/120 valid, 3198 s
+=== icae_ft on train (120 tasks)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 1/120 multi_turn_base_2 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 86.2 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 2/120 multi_turn_base_4 valid=False turns=[0, 0, 0] calls=5 (0 ok, 43.1 s/ep)
+[icae/ft] 3/120 multi_turn_base_6 valid=False turns=[0, 0, 0, 0, 0] calls=5 (0 ok, 28.7 s/ep)
+[icae/ft] 4/120 multi_turn_base_5 valid=False turns=[0, 0, 0, 0] calls=6 (0 ok, 26.9 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 5/120 multi_turn_base_7 valid=False turns=[0, 0, 0] calls=7 (0 ok, 25.1 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 6/120 multi_turn_base_11 valid=False turns=[0, 0] calls=3 (0 ok, 23.7 s/ep)
+[icae/ft] 7/120 multi_turn_base_8 valid=False turns=[0, 0, 0, 0] calls=4 (0 ok, 22.1 s/ep)
+[icae/ft] 8/120 multi_turn_base_9 valid=False turns=[0, 0, 0] calls=4 (0 ok, 19.3 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 9/120 multi_turn_base_12 valid=False turns=[0, 0, 0] calls=4 (0 ok, 18.4 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 10/120 multi_turn_base_21 valid=False turns=[0, 0, 0] calls=3 (0 ok, 20.7 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 11/120 multi_turn_base_22 valid=False turns=[0, 0, 0, 0] calls=4 (0 ok, 24.3 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 12/120 multi_turn_base_14 valid=False turns=[0, 0, 0, 0] calls=11 (0 ok, 26.9 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 13/120 multi_turn_base_26 valid=False turns=[0, 0, 0] calls=3 (0 ok, 28.3 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 14/120 multi_turn_base_17 valid=False turns=[1, 0, 0] calls=12 (0 ok, 29.5 s/ep)
+[icae/ft] 15/120 multi_turn_base_19 valid=False turns=[1, 0, 0] calls=12 (0 ok, 27.5 s/ep)
+[icae/ft] 16/120 multi_turn_base_1 valid=False turns=[0, 0, 0, 0] calls=22 (0 ok, 27.0 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 17/120 multi_turn_base_28 valid=False turns=[0, 0, 0] calls=3 (0 ok, 25.4 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 18/120 multi_turn_base_29 valid=False turns=[0, 0, 0] calls=3 (0 ok, 25.1 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 19/120 multi_turn_base_32 valid=False turns=[0, 0] calls=4 (0 ok, 25.6 s/ep)
+[icae/ft] 20/120 multi_turn_base_34 valid=False turns=[0, 0] calls=3 (0 ok, 24.4 s/ep)
+[icae/ft] 21/120 multi_turn_base_38 valid=False turns=[0, 0] calls=3 (0 ok, 23.2 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 22/120 multi_turn_base_13 valid=False turns=[0, 0] calls=19 (0 ok, 22.9 s/ep)
+[icae/ft] 23/120 multi_turn_base_33 valid=False turns=[0, 0, 0, 0, 0] calls=6 (0 ok, 22.4 s/ep)
+[icae/ft] 24/120 multi_turn_base_42 valid=False turns=[0, 0, 0] calls=4 (0 ok, 22.3 s/ep)
+[icae/ft] 25/120 multi_turn_base_45 valid=False turns=[0, 0] calls=2 (0 ok, 21.4 s/ep)
+[icae/ft] 26/120 multi_turn_base_46 valid=False turns=[0] calls=1 (0 ok, 21.0 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 27/120 multi_turn_base_41 valid=False turns=[0, 0] calls=7 (0 ok, 21.2 s/ep)
+[icae/ft] 28/120 multi_turn_base_44 valid=False turns=[0, 0, 0] calls=7 (0 ok, 21.0 s/ep)
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\_'
+[icae/ft] 29/120 multi_turn_base_47 valid=False turns=[0, 0, 0] calls=4 (0 ok, 20.3 s/ep)
+[icae/ft] 30/120 multi_turn_base_43 valid=False turns=[1, 0, 0, 0] calls=11 (0 ok, 21.8 s/ep)
+[icae/ft] 31/120 multi_turn_base_50 valid=True turns=[1] calls=7 (1 ok, 21.6 s/ep)
+[icae/ft] 32/120 multi_turn_base_53 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 21.0 s/ep)
+[icae/ft] 33/120 multi_turn_base_57 valid=False turns=[0, 0] calls=4 (1 ok, 22.0 s/ep)
+[icae/ft] 34/120 multi_turn_base_58 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 21.8 s/ep)
+[icae/ft] 35/120 multi_turn_base_59 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 21.9 s/ep)
+[icae/ft] 36/120 multi_turn_base_63 valid=False turns=[0, 0, 0] calls=3 (1 ok, 22.5 s/ep)
+[icae/ft] 37/120 multi_turn_base_65 valid=False turns=[0, 0] calls=2 (1 ok, 21.9 s/ep)
+[icae/ft] 38/120 multi_turn_base_51 valid=False turns=[0, 0, 0, 0] calls=13 (1 ok, 21.8 s/ep)
+[icae/ft] 39/120 multi_turn_base_54 valid=False turns=[0, 0, 0] calls=13 (1 ok, 21.7 s/ep)
+[icae/ft] 40/120 multi_turn_base_67 valid=False turns=[0, 0, 0, 0] calls=6 (1 ok, 23.1 s/ep)
+[icae/ft] 41/120 multi_turn_base_70 valid=False turns=[0, 0] calls=4 (1 ok, 22.6 s/ep)
+[icae/ft] 42/120 multi_turn_base_69 valid=False turns=[0, 0] calls=6 (1 ok, 22.4 s/ep)
+[icae/ft] 43/120 multi_turn_base_39 valid=False turns=[1, 0, 0, 0] calls=30 (1 ok, 22.8 s/ep)
+[icae/ft] 44/120 multi_turn_base_75 valid=False turns=[0, 0, 0, 0] calls=9 (1 ok, 25.4 s/ep)
+[icae/ft] 45/120 multi_turn_base_60 valid=False turns=[0, 0, 0, 0, 0] calls=21 (1 ok, 25.7 s/ep)
+[icae/ft] 46/120 multi_turn_base_68 valid=False turns=[0, 0, 0, 0, 0] calls=17 (1 ok, 25.1 s/ep)
+[icae/ft] 47/120 multi_turn_base_78 valid=False turns=[0, 0] calls=10 (1 ok, 24.6 s/ep)
+[icae/ft] 48/120 multi_turn_base_82 valid=False turns=[0, 0, 0] calls=11 (1 ok, 25.5 s/ep)
+[icae/ft] 49/120 multi_turn_base_88 valid=False turns=[0, 0, 0] calls=3 (1 ok, 25.0 s/ep)
+[icae/ft] 50/120 multi_turn_base_86 valid=False turns=[0, 0, 0] calls=8 (1 ok, 25.5 s/ep)
+[icae/ft] 51/120 multi_turn_base_93 valid=False turns=[0, 0, 0] calls=3 (1 ok, 25.0 s/ep)
+[icae/ft] 52/120 multi_turn_base_71 valid=False turns=[0, 0, 0, 0, 0] calls=23 (1 ok, 26.3 s/ep)
+[icae/ft] 53/120 multi_turn_base_94 valid=False turns=[0, 0, 0] calls=6 (1 ok, 25.8 s/ep)
+[icae/ft] 54/120 multi_turn_base_87 valid=False turns=[0, 1, 0, 0] calls=14 (1 ok, 26.3 s/ep)
+[icae/ft] 55/120 multi_turn_base_95 valid=False turns=[0, 0, 0, 0, 0] calls=8 (1 ok, 25.8 s/ep)
+[icae/ft] 56/120 multi_turn_base_89 valid=False turns=[0, 0, 1, 0] calls=15 (1 ok, 25.6 s/ep)
+[icae/ft] 57/120 multi_turn_base_97 valid=False turns=[0, 0, 0, 0, 0, 0] calls=6 (1 ok, 26.2 s/ep)
+[icae/ft] 58/120 multi_turn_base_101 valid=False turns=[0, 0, 0] calls=3 (1 ok, 25.7 s/ep)
+[icae/ft] 59/120 multi_turn_base_100 valid=False turns=[0, 0] calls=5 (1 ok, 25.5 s/ep)
+[icae/ft] 60/120 multi_turn_base_96 valid=False turns=[0, 0] calls=8 (1 ok, 25.3 s/ep)
+[icae/ft] 61/120 multi_turn_base_104 valid=False turns=[0, 0] calls=2 (1 ok, 24.9 s/ep)
+[icae/ft] 62/120 multi_turn_base_99 valid=False turns=[0, 0, 0, 0] calls=7 (1 ok, 24.8 s/ep)
+[icae/ft] 63/120 multi_turn_base_105 valid=False turns=[0, 0] calls=3 (1 ok, 24.4 s/ep)
+[icae/ft] 64/120 multi_turn_base_92 valid=False turns=[1, 0, 0, 0, 0] calls=22 (1 ok, 24.9 s/ep)
+[icae/ft] 65/120 multi_turn_base_110 valid=False turns=[1, 0, 0, 0, 0, 0] calls=11 (1 ok, 26.1 s/ep)
+[icae/ft] 66/120 multi_turn_base_115 valid=False turns=[1, 1, 0] calls=7 (1 ok, 25.7 s/ep)
+[icae/ft] 67/120 multi_turn_base_112 valid=False turns=[1, 0, 0, 0] calls=13 (1 ok, 25.7 s/ep)
+[icae/ft] 68/120 multi_turn_base_106 valid=False turns=[0, 0, 0, 0] calls=20 (1 ok, 26.2 s/ep)
+[icae/ft] 69/120 multi_turn_base_108 valid=False turns=[1, 0, 0, 0, 0] calls=21 (1 ok, 26.2 s/ep)
+[icae/ft] 70/120 multi_turn_base_109 valid=False turns=[0, 1, 0, 0, 0, 0, 0] calls=24 (1 ok, 26.3 s/ep)
+[icae/ft] 71/120 multi_turn_base_117 valid=False turns=[0, 0, 0, 0, 0, 0] calls=15 (1 ok, 26.4 s/ep)
+[icae/ft] 72/120 multi_turn_base_119 valid=False turns=[0, 0, 1, 0] calls=18 (1 ok, 27.5 s/ep)
+[icae/ft] 73/120 multi_turn_base_123 valid=False turns=[0, 0, 0, 0] calls=15 (1 ok, 27.4 s/ep)
+[icae/ft] 74/120 multi_turn_base_116 valid=False turns=[1, 1, 0, 1, 0, 0] calls=28 (1 ok, 27.2 s/ep)
+[icae/ft] 75/120 multi_turn_base_127 valid=False turns=[1, 0, 0, 0] calls=13 (1 ok, 26.8 s/ep)
+[icae/ft] 76/120 multi_turn_base_118 valid=False turns=[1, 0, 0, 0, 0] calls=27 (1 ok, 26.6 s/ep)
+[icae/ft] 77/120 multi_turn_base_121 valid=False turns=[1, 0, 0, 0] calls=21 (1 ok, 26.5 s/ep)
+[icae/ft] 78/120 multi_turn_base_134 valid=False turns=[0, 0, 0] calls=6 (1 ok, 26.9 s/ep)
+[icae/ft] 79/120 multi_turn_base_132 valid=False turns=[1, 0] calls=15 (1 ok, 28.0 s/ep)
+[icae/ft] 80/120 multi_turn_base_138 valid=False turns=[0, 0, 0, 0, 0] calls=11 (1 ok, 27.9 s/ep)
+[icae/ft] 81/120 multi_turn_base_128 valid=False turns=[1, 0, 0, 0] calls=21 (1 ok, 27.7 s/ep)
+[icae/ft] 82/120 multi_turn_base_135 valid=False turns=[0, 1, 0, 0] calls=18 (1 ok, 27.5 s/ep)
+[icae/ft] 83/120 multi_turn_base_131 valid=False turns=[1, 0, 0, 0, 0, 0, 0] calls=21 (1 ok, 27.4 s/ep)
+[icae/ft] 84/120 multi_turn_base_144 valid=False turns=[1, 0] calls=3 (1 ok, 27.1 s/ep)
+[icae/ft] 85/120 multi_turn_base_137 valid=False turns=[1, 1, 0, 0] calls=19 (1 ok, 27.0 s/ep)
+[icae/ft] 86/120 multi_turn_base_147 valid=False turns=[0, 0] calls=4 (1 ok, 27.2 s/ep)
+[icae/ft] 87/120 multi_turn_base_146 valid=False turns=[1, 0, 0, 0] calls=6 (1 ok, 27.0 s/ep)
+[icae/ft] 88/120 multi_turn_base_150 valid=False turns=[0, 0] calls=4 (1 ok, 26.7 s/ep)
+[icae/ft] 89/120 multi_turn_base_142 valid=False turns=[0, 0, 0, 0, 0] calls=13 (1 ok, 27.3 s/ep)
+[icae/ft] 90/120 multi_turn_base_152 valid=False turns=[0, 0, 0] calls=9 (1 ok, 27.4 s/ep)
+[icae/ft] 91/120 multi_turn_base_159 valid=False turns=[0, 0, 0] calls=7 (1 ok, 27.3 s/ep)
+[icae/ft] 92/120 multi_turn_base_148 valid=False turns=[0, 0, 0, 0, 0] calls=13 (1 ok, 27.4 s/ep)
+[icae/ft] 93/120 multi_turn_base_153 valid=False turns=[1, 0, 0, 0, 0] calls=12 (1 ok, 27.7 s/ep)
+[icae/ft] 94/120 multi_turn_base_160 valid=False turns=[0, 0, 0] calls=13 (1 ok, 27.8 s/ep)
