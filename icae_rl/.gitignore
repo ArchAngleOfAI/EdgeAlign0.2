@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+# large outputs live under /data/a84460786/edgealign_icae_rl/
+*.pt
+*.safetensors

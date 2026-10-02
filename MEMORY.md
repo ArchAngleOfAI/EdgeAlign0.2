@@ -33,7 +33,13 @@ ideas are often non-standard; see AGENT.md.
   `nvidia-smi` and set `CUDA_VISIBLE_DEVICES` before every run.
   **GPU 0 is faulty** ("invalid access of peer GPU memory ... hardware error"
   on 2026-09-29); GPU 2 shows a permanently-100% vLLM worker from another
-  user but works. GPUs 5 and 2 have been used successfully.
+  user but works. GPUs 5, 2, 7, 6 and 4 have been used successfully (6 + 4 for
+  the 2-GPU run). Ownership by other users changes within hours; check
+  `nvidia-smi` plus the process owner right before launching.
+- **Long runs must be launched fully detached** (`setsid nohup ... < /dev/null &`).
+  The 2026-09-30 warm-start smoke run died silently when its session ended.
+- torchrun sets OMP_NUM_THREADS=1 per process; the warm-start full run used
+  OMP_NUM_THREADS=14 (not shown to matter).
 - **GPU topology:** no NVLink. Two PCIe groups, one per CPU socket: GPUs 0-3
   (NUMA 0) and GPUs 4-7 (NUMA 1). Pairs inside a group share a PCIe switch;
   pairs across groups go over the socket link.
@@ -53,8 +59,10 @@ ideas are often non-standard; see AGENT.md.
   https://github.com/ArchAngleOfAI/EdgeAlign0.2 (same GitHub account as the
   old EdgeAlign repo). Auth uses a token stored via `credential.helper
   store` in `~/.git-credentials`; pushes work non-interactively.
-- `.gitignore`: `__pycache__/`, `*.pyc`, `checkpoints/`, `*.pt`, and `logs/*`
-  except `logs/train_3layer.jsonl` and `logs/eval_3layer.jsonl` (tracked).
+- `.gitignore`: `__pycache__/`, `*.pyc`, `checkpoints/`, `*.pt`, `*.pt.tmp`, and `logs/*`
+  except `logs/train_3layer.jsonl`, `logs/eval_3layer.jsonl`, `logs/warmstart_train.jsonl`,
+  `logs/warmstart_eval.jsonl` and `logs/warmstart.out` (tracked). Checkpoints live outside the
+  repo under /data/a84460786/testfolder_checkpoints/.
 - Core code: `smoke_train.py` (FineWeb-Edu loader `fineweb_edu_batches`),
   `qwen_dual_embedding.py` (`build_softprompt_generator`),
   `distill_softprompt.py` (`generate_softprompt`, `receiver_forward`, original
@@ -64,7 +72,8 @@ ideas are often non-standard; see AGENT.md.
   `forward_loss`, verbatim `kd_loss`; tests 1-7; `stability_vs_length.py`)
   and `diagnostics_gist/` (`_gist_common.py`, t1-t8).
 - Reports: `report.md` (flat-loss diagnosis), `stability_report.md`,
-  `RUN_NOTES_3layer.md`, `gist_health_report.md`.
+  `RUN_NOTES_3layer.md`, `gist_health_report.md`, `warmstart_collapse_report.md`
+  (warm-start run: pipeline, collapse, causes, options, full tables for steps 0-1353).
 - `warmstart/` (since 2026-09-30): "fill in the removed part" gist pretraining.
   `common.py` (sequence construction, mid-sequence receiver, batched
   `rollout_gists` + per-example `rollout_gists_serial`), `prepare_data.py`
@@ -279,15 +288,30 @@ project should default to `softmax(logits) @ W`, not raw logits.**
 - **Warm-start (warmstart_collapse_report.md):** the "fill in the removed part" objective did NOT
   prevent collapse. By step 90 (LR 9e-5, in warmup) every input gave `' prompt'` x16. Main cause:
   recovery is measured against DELETING the span, so a generic placeholder earns large
-  "recovery" (a learned constant prefix reached 0.39 on held-out A vs 0.14 for the informative
-  init gist). Once the rollout is one-hot, the Embedding2 row of the token trains as a constant
-  soft prompt. Loss and recovery both look like progress after the collapse; only swap minus
-  own, cross-gist cosine and entropy reveal it.
+  "recovery" (a learned constant prefix reached 0.393 on held-out A and 0.331 on held-out B at
+  step 1300 vs 0.136 / 0.102 for the informative step-0 gist). Once the rollout is one-hot, the
+  Embedding2 row of the token trains as a constant soft prompt. Loss and recovery both look like
+  progress after the collapse; only swap minus own, cross-gist cosine and entropy reveal it.
+  Stopped by the user at step 1353 of 5,000 (2026-10-01).
 - **Gist health (gist_health_report.md):** from step 1000 on, the generator
   is collapsed to one prompt-independent one-hot token sequence, but the gist
   is "alive": it beats naive prefixes 14-16x, is more noise-sensitive than
   real text, and is steerable. Attention to gist positions 2-16 falls across
   training (0.125 -> 0.0035). KD loss alone did not reveal the collapse.
+
+## Lessons from the gist runs (durable)
+
+- **Recovery against deletion rewards placeholders.** Deleting the removed span leaves a
+  malformed prompt, so a content-free placeholder earns large "recovery". Always compare a gist
+  against a constant-prefix / placeholder baseline (the collapsed warm-start run gives one: 0.393
+  on held-out A), not only against deletion.
+- **Watch the collapse indicators, not loss/recovery.** Swap minus own ~ 0, cross-example
+  cosine ~ 1 and rollout entropy ~ 0 are the signals; KD loss and recovery kept improving
+  after both collapses (3-layer and warm-start).
+- **The one-hot state is absorbing.** Once softmax(logits) saturates (top-1/top-2 gap ~14+),
+  almost no gradient flows through the rollout, and `onehot @ Embedding2` makes the single
+  Embedding2 row of the emitted token the only thing that trains, i.e. prefix-tuning of one
+  constant vector.
 
 ## Changelog (durable, high-level only)
 
@@ -314,4 +338,5 @@ project should default to `softmax(logits) @ W`, not raw logits.**
 - 2026-10-01: Warm-start smoke test passed; batched gist rollout (3.2x faster
   steps), check (e), step-wide token-weighted KD loss. 2-GPU data parallel
   (7.05 s/step on GPUs 6+4, NCCL P2P disabled). Full run on GPUs 6+4 collapsed by
-  step 90 to `' prompt'` x16; stopped at step 1353 (warmstart_collapse_report.md).
+  step 90 to `' prompt'` x16; stopped by the user at step 1353 (warmstart_collapse_report.md).
+  Warm-start logs and plots now tracked in git (commit 39b00ee).

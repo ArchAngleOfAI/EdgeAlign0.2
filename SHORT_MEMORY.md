@@ -4,21 +4,38 @@ Running log of current tasks and conversation state. Read this first on
 restart to pick up where things left off. Prune/archive into `MEMORY.md`
 once something becomes durable project knowledge instead of active state.
 
-## >>> CURRENT STATUS (updated 2026-10-01 17:30 UTC) -- read this first <<<
+## >>> ICAE + RL TASK (branch `icae-rl`, started 2026-10-02) -- read this first <<<
 
-**Warm-start full run STOPPED by the user at step 1353/5000 (2026-10-01 20:37 UTC). Nothing is running.**
-- It ran on GPUs 6 + 4 from 17:25 UTC (2-GPU torchrun, code 8b57a57). Final logs and plots are committed.
-- RESULT: the gist COLLAPSED by step 90 to `' prompt'` x16 for every input (entropy 0, cosine 1,
-  swap minus own 0). After that, the Embedding2 row of `' prompt'` trained as a constant soft
-  prompt: held-out A recovery 0.393 and B 0.331 at step 1300, vs 0.136 / 0.102 for the step-0 gist.
-- Full write-up: `warmstart_collapse_report.md` (pipeline, collapse, causes, options, full tables).
+Work happens ONLY on branch `icae-rl` (never commit/push main). Spec: `icae_rl/TASK_PROMPT.md`
+(verbatim). Running notes: `icae_rl/NOTES.md`. Big files: /data/a84460786/edgealign_icae_rl/.
+Venv: /data/a84460786/venvs/icae_rl (torch 2.14, transformers 4.57.6, peft 0.21.2, bfcl_eval editable).
+- Stage 0 DONE (2026-10-02): ICAE cloned, weights downloaded, base = Mistral-7B-Instruct-v0.2
+  (weights identical to the March-2024 revision), sanity check passed (FT QA correct, pretrained
+  reconstruction exact on prose, lossy on a tool trace). Committed + pushed on icae-rl.
+- NEXT: Stage 1 feasibility on BFCL multi_turn_base (200 tasks; gorilla @ 6ea5797), gate, report.
+
+## >>> CURRENT STATUS (updated 2026-10-01 ~21:00 UTC) -- read this first <<<
+
+**Nothing is running.** The warm-start full run (5,000 planned steps) was STOPPED by the user at
+step 1353 (2026-10-01 20:37 UTC). No background processes (the gpu_hold scripts have exited too).
+- It ran on GPUs 6 + 4 from 17:25 UTC (2-GPU torchrun, code 8b57a57, OMP_NUM_THREADS=14).
+- RESULT: the gist COLLAPSED by step 90 (LR 9e-5, in warmup) to `' prompt'` x16 for every input
+  (entropy 0, cosine 1.000, swap minus own 0.000) and never recovered. After that, the Embedding2
+  row of `' prompt'` trained as one constant soft prompt repeated 16 times: held-out A recovery
+  0.393 (ratio of means 0.498, gap KL 3.71 -> 1.86) and B 0.331 at step 1300, vs 0.136 / 0.102
+  for the input-specific step-0 gist. Loss and recovery looked like progress; only swap minus
+  own, cosine and entropy showed the collapse.
+- Full write-up: `warmstart_collapse_report.md` (pipeline, collapse, causes, options, full
+  metric/loss tables for steps 0-1353).
 - Checkpoints: /data/a84460786/testfolder_checkpoints/warmstart/ (step_01000.pt, latest.pt =
-  best.pt = step 1300), ~4.3 GB each.
-- Next steps are the user's call (report section 6): placeholder baseline instead of deletion,
-  anti-saturation (entropy coefficient / frozen LM_head / logit cap), per-example clipping,
-  alerts on swap minus own ~ 0.
+  best.pt = step 1300), ~4.3 GB each. "best" is by recovery, i.e. the best constant prefix.
+- Next steps are the user's call, none started (report section 6): measure/train against a
+  placeholder or constant-prefix baseline instead of deletion; anti-saturation (--entropy-coef,
+  frozen LM_head, logit cap, noise); per-example gradient clipping; alerts on swap minus own ~ 0
+  and cosine ~ 1.
 
-Everything else is committed and pushed to `origin/main`
+Everything is committed and pushed to `origin/main` (latest commit 39b00ee, "Warm-start run
+stopped at step 1353: final logs, plots, report, memory"; working tree clean after it)
 (https://github.com/ArchAngleOfAI/EdgeAlign0.2). Pushing works without a prompt: a GitHub
 token is stored in `~/.git-credentials`.
 
@@ -39,7 +56,9 @@ reports raise, none started (warm-start evals already log swap test,
 cross-prompt cos, rollout entropy and gist attention):
 - monitor gist collapse during training (swap test, cross-prompt cos, rollout
   entropy)
-- test a single learned constant prefix against 0.0105
+- test a single learned constant prefix against 0.0105 -- effectively answered for the
+  warm-start objective: the collapsed run trained one (`' prompt'` row of Embedding2) and it
+  reached 0.39 recovery on held-out A (not tested for the 3-layer objective)
 - test whether gist positions 2-16 matter
 - a lower LR / LR decay to address the late instability
 
@@ -54,8 +73,16 @@ cross-prompt cos, rollout entropy and gist attention):
 - Old checkpoint `checkpoints/embedding2_step10000.pt` (1.8 GB, from the
   flat 17k run, Embedding2 only). report.md test 5 uses it. Kept; the user was
   told about it and has not asked to delete it.
-- GPUs: 0 is faulty (CUDA hardware error). 5, 2, 6 and 7 have worked. Others are
-  usually busy with other users' jobs, so check `nvidia-smi` first.
+- GPUs: 0 is faulty (CUDA hardware error). 5, 2, 6, 7 and 4 have worked; 6 + 4 worked well
+  for the 2-GPU run. Ownership by other users changes within hours, so check `nvidia-smi` plus
+  the process owner right before launching.
+- Warm-start checkpoints (~4.3 GB each, outside git):
+  /data/a84460786/testfolder_checkpoints/warmstart/ (step_01000.pt, latest.pt = best.pt = step
+  1300; best = best recovery = best constant prefix). Smoke-run checkpoints:
+  /data/a84460786/testfolder_checkpoints/warmstart_smoke/.
+- logs/gpu_hold/ (gitignored): hug.py (reserves almost all free GPU memory and sleeps) and
+  watch_and_launch.sh (checked GPU 4 every 10 min, launched the run when it freed). Used at the
+  user's request on 2026-10-01; both processes have exited.
 - Warm-start data (outside git): /data/a84460786/warmstart_data/ (train.jsonl,
   heldout_a.jsonl, heldout_b.jsonl, data_stats.json; raw/ = SNI clone @55a3656 + HF
   parquets). A 30-example sample + stats are committed in warmstart/.
@@ -279,7 +306,7 @@ cross-prompt cos, rollout entropy and gist attention):
   learned constant prefix matches 0.0105; test whether gist positions 2-16
   matter at all.
 
-## Warm-start gist pretraining (2026-09-30 -> 2026-10-01, ready to launch)
+## Warm-start gist pretraining (2026-09-30 -> 2026-10-01, full run collapsed, stopped at step 1353)
 
 - Spec (user-pasted): "fill in the removed part" -- the generator reads only the
   removed span of a user message and rolls out L=16 gist vectors; the receiver sees
@@ -330,3 +357,19 @@ cross-prompt cos, rollout entropy and gist attention):
   exclusion; batched rollout departs from "reuse generate_softprompt" / right padding; final config
   never had a 20-step smoke (user then said skip it); instruct checkpoint confirmed but was never
   reported before; responses generated in bf16.
+- Full run (2026-10-01): launched 17:25 UTC on GPUs 6 + 4 (2-GPU torchrun, --micro-batch 4, code
+  8b57a57), fully detached (`setsid nohup ... < /dev/null &`); GPU 4 was taken at first, so a
+  watcher (logs/gpu_hold/) launched it when it freed. Logs now tracked in git:
+  logs/warmstart_train.jsonl, logs/warmstart_eval.jsonl, logs/warmstart.out; plots
+  warmstart_loss_curve.png, warmstart_recovery.png.
+- Collapse: by step 90 (LR 9e-5, warmup) the gist was `' prompt'` x16 for every input (entropy 0,
+  cosine 1.000, swap minus own 0.000); never recovered. Afterwards only the Embedding2 row of
+  `' prompt'` trained (constant soft prompt): held-out A recovery 0.393 / B 0.331 at step 1300.
+  Weights moved ~0.3-0.4% per tensor; the `' prompt'` row was the most-changed row in LM_head
+  (4.3%) and Embedding2 (7.9%); next LM_head rows '>>\n', ' instruction', 'Prompt', ' instructions'.
+- Causes (report section 5): main = recovery measured against DELETING the span (malformed
+  prompt), so a generic placeholder earns large "recovery". Supporting: huge clipped gradients
+  dominated by one example; softmax saturation makes one-hot absorbing (top-1/top-2 gap
+  1.2 -> 14 -> 23, max logit 18 -> 73); LR rise as the timing trigger (untested).
+- Stopped by the user at step 1353 (20:37 UTC). Report: warmstart_collapse_report.md. Final
+  logs/plots/report/memory committed and pushed as 39b00ee.

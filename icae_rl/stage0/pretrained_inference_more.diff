@@ -1,0 +1,12 @@
+37a38,40
+> lines = lines + ["The quick brown fox jumps over the lazy dog. It was a sunny Tuesday afternoon in Paris, and Marie had just finished her third cup of coffee.",
+>  "[INST] Move 'final_report.pdf' from 'documents' into 'temp'. [/INST] [cd(folder='documents'), mv(source='final_report.pdf', destination='temp')]</s>[INST] [{'role': 'tool', 'name': \"cd(folder='documents')\", 'content': \"{'current_working_directory': 'documents'}\"}, {'role': 'tool', 'name': \"mv(source='final_report.pdf', destination='temp')\", 'content': \"{'result': 'final_report.pdf moved to temp'}\"}] [/INST]"]
+> 
+41c44
+<     with open("tmp.out", "w") as f:
+---
+>     with open("tmp_more.out", "w") as f:
+85c88
+<                 "output": generated_text
+---
+>                 "input": line, "output": generated_text
