@@ -28,39 +28,39 @@ def summarize():
     out = {"note": "BFCL multi_turn_base, split by task id 60/40 seed 0. RL trains on TRAIN, so "
                    "these scores are NOT comparable to the public leaderboard.", "runs": {}}
     for cond, adapter in RUNS:
-        name = run_name(cond, adapter)
-        for sp in ("train", "test"):
-            f = ROLL / f"{name}_{sp}.jsonl"
-            if not f.exists():
-                continue
-            eps = [json.loads(l) for l in f.open()]
-            if len(eps) != len(split[sp]):
-                continue
-            calls = [c for e in eps for c in e["calls"]]
-            hist_calls = [c for c in calls if c["hist_tokens"] > 0]
-            meta = json.loads((ROLL / f"{name}_{sp}.meta.json").read_text())
-            out["runs"][f"{name}/{sp}"] = {
-                "n": len(eps),
-                "success": sum(e["valid"] for e in eps),
-                "success_rate": sum(e["valid"] for e in eps) / len(eps),
-                "mean_turn_pass_frac": statistics.mean(e["turn_pass_frac"] for e in eps),
-                "force_quit": sum(e["force_quit"] for e in eps),
-                "mean_calls_per_ep": statistics.mean(e["n_calls"] for e in eps),
-                "mean_hist_tokens_per_call": statistics.mean(c["hist_tokens"] for c in calls),
-                "mean_slots_per_call": statistics.mean(c["slots"] for c in calls),
-                "mean_hist_tokens_per_call_with_hist": (statistics.mean(
-                    c["hist_tokens"] for c in hist_calls) if hist_calls else 0),
-                "mean_slots_per_call_with_hist": (statistics.mean(
-                    c["slots"] for c in hist_calls) if hist_calls else 0),
-                "max_hist_tokens": max(c["hist_tokens"] for c in calls),
-                "mean_decoder_len": statistics.mean(c["dec_len"] for c in calls),
-                "mean_gen_tokens": statistics.mean(len(c["gen_ids"]) for c in calls),
-                "mean_wall_s_per_ep_concurrent": statistics.mean(e["seconds"] for e in eps),
-                "throughput_s_per_ep": meta["wall_s"] / max(1, len(eps) - meta.get("n_resumed", 0)),
-                "batch_size": meta["batch_size"],
-                "error_types": {k: sum(e.get("error_type") == k for e in eps)
-                                for k in sorted({str(e.get("error_type")) for e in eps})},
-            }
+        for name in (run_name(cond, adapter), run_name(cond, adapter) + "_lenient"):
+            for sp in ("train", "test"):
+                f = ROLL / f"{name}_{sp}.jsonl"
+                if not f.exists():
+                    continue
+                eps = [json.loads(l) for l in f.open()]
+                if len(eps) != len(split[sp]):
+                    continue
+                calls = [c for e in eps for c in e["calls"]]
+                hist_calls = [c for c in calls if c["hist_tokens"] > 0]
+                meta = json.loads((ROLL / f"{name}_{sp}.meta.json").read_text())
+                out["runs"][f"{name}/{sp}"] = {
+                    "n": len(eps),
+                    "success": sum(e["valid"] for e in eps),
+                    "success_rate": sum(e["valid"] for e in eps) / len(eps),
+                    "mean_turn_pass_frac": statistics.mean(e["turn_pass_frac"] for e in eps),
+                    "force_quit": sum(e["force_quit"] for e in eps),
+                    "mean_calls_per_ep": statistics.mean(e["n_calls"] for e in eps),
+                    "mean_hist_tokens_per_call": statistics.mean(c["hist_tokens"] for c in calls),
+                    "mean_slots_per_call": statistics.mean(c["slots"] for c in calls),
+                    "mean_hist_tokens_per_call_with_hist": (statistics.mean(
+                        c["hist_tokens"] for c in hist_calls) if hist_calls else 0),
+                    "mean_slots_per_call_with_hist": (statistics.mean(
+                        c["slots"] for c in hist_calls) if hist_calls else 0),
+                    "max_hist_tokens": max(c["hist_tokens"] for c in calls),
+                    "mean_decoder_len": statistics.mean(c["dec_len"] for c in calls),
+                    "mean_gen_tokens": statistics.mean(len(c["gen_ids"]) for c in calls),
+                    "mean_wall_s_per_ep_concurrent": statistics.mean(e["seconds"] for e in eps),
+                    "throughput_s_per_ep": meta["wall_s"] / max(1, len(eps) - meta.get("n_resumed", 0)),
+                    "batch_size": meta["batch_size"],
+                    "error_types": {k: sum(e.get("error_type") == k for e in eps)
+                                    for k in sorted({str(e.get("error_type")) for e in eps})},
+                }
     # FULL-context history length (what ICAE has to compress), from the full run
     (HERE / "stage1").mkdir(exist_ok=True)
     (HERE / "stage1" / "summary.json").write_text(json.dumps(out, indent=1))

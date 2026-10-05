@@ -313,6 +313,22 @@ project should default to `softmax(logits) @ W`, not raw logits.**
   Embedding2 row of the emitted token the only thing that trains, i.e. prefix-tuning of one
   constant vector.
 
+## ICAE + RL on BFCL (branch `icae-rl`, 2026-10-02 -> 2026-10-05)
+
+- Separate line of work from the gist project, on branch `icae-rl` only. Code in `icae_rl/`
+  (`bfcl_env.py`, `icae_model.py`, `rollout.py`, `run_stage1.py`, `analyze_stage1.py`), report
+  `icae_rl_feasibility_report.md`, spec `icae_rl/TASK_PROMPT.md`.
+- Env: venv `/data/a84460786/venvs/icae_rl` (torch 2.14, transformers 4.57.6, peft 0.21.2, bfcl_eval
+  editable from gorilla @ 6ea5797). Large files: `/data/a84460786/edgealign_icae_rl/`.
+- Released ICAE v2 = Mistral-7B-Instruct-v0.2 + LoRA r=512 (q,v) + memory_token_embed[131];
+  128 slots per <=512-token segment; decoder = same weights with the adapter disabled.
+- Result: gate failed. Mistral-7B-Instruct-v0.2 gets 0.8% on BFCL multi_turn_base TRAIN with full
+  context (1.7% with a forgiving parser), so there is nothing for RL on the compressor to recover.
+- Engineering lessons: transformers' `DynamicCache(ddp_cache_data=...)` / `DynamicLayer.update` copy
+  via torch.cat, doubling a padded batch KV cache (hand layers over one at a time). BFCL keeps tool
+  instances in `multi_turn_utils` module globals keyed by model name + task id: use a unique name per
+  episode and delete them afterwards. BFCL's prompting parser drops positional arguments.
+
 ## Changelog (durable, high-level only)
 
 - 2026-09-18: Repo initialized (`git init`, branch renamed to `main`).
@@ -340,3 +356,5 @@ project should default to `softmax(logits) @ W`, not raw logits.**
   (7.05 s/step on GPUs 6+4, NCCL P2P disabled). Full run on GPUs 6+4 collapsed by
   step 90 to `' prompt'` x16; stopped by the user at step 1353 (warmstart_collapse_report.md).
   Warm-start logs and plots now tracked in git (commit 39b00ee).
+- 2026-10-02 -> 10-05 (branch icae-rl): ICAE + RL feasibility on BFCL multi_turn_base. Gate failed
+  (FULL 0.8% on TRAIN); Stage 2 not started. Report: icae_rl_feasibility_report.md.

@@ -57,7 +57,8 @@ Project scaffolding initialized on 2026-09-18. As of 2026-10-01 the project
 is soft-prompt ("gist") distillation research on Qwen3-0.6B. The latest work is
 the warm-start gist pretraining run, which collapsed and was stopped at step
 1353 (`warmstart_collapse_report.md`); nothing is running and next steps are
-the user's call. See `MEMORY.md`
+the user's call. On branch `icae-rl` (2026-10-02 -> 10-05): ICAE + RL feasibility
+on BFCL; the gate failed and RL was not started (`icae_rl_feasibility_report.md`). See `MEMORY.md`
 for the durable picture and the CURRENT STATUS block at the top of
 `SHORT_MEMORY.md` for where work stands. On restart, read those two files
 before doing anything else.

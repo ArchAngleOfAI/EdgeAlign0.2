@@ -4,30 +4,21 @@ Running log of current tasks and conversation state. Read this first on
 restart to pick up where things left off. Prune/archive into `MEMORY.md`
 once something becomes durable project knowledge instead of active state.
 
-## >>> ICAE + RL TASK (branch `icae-rl`, started 2026-10-02) -- read this first <<<
+## >>> ICAE + RL TASK (branch `icae-rl`, 2026-10-02 -> 2026-10-05) -- read this first <<<
 
-Work happens ONLY on branch `icae-rl` (never commit/push main). Spec: `icae_rl/TASK_PROMPT.md`
-(verbatim). Running notes: `icae_rl/NOTES.md`. Big files: /data/a84460786/edgealign_icae_rl/.
-Venv: /data/a84460786/venvs/icae_rl (torch 2.14, transformers 4.57.6, peft 0.21.2, bfcl_eval editable).
-- Stage 0 DONE (2026-10-02): ICAE cloned, weights downloaded, base = Mistral-7B-Instruct-v0.2
-  (weights identical to the March-2024 revision), sanity check passed (FT QA correct, pretrained
-  reconstruction exact on prose, lossy on a tool trace). Committed + pushed on icae-rl.
-- Stage 1 (2026-10-02): FULL on TRAIN (strict BFCL parser) = 1/120 (0.8%), per-turn pass 7.1%
-  -> gate (a) (>=15%) FAILS. Only 14.5% of calls parse (30% escape `\_`, 19% add prose after the call).
-  Saved: /data/a84460786/edgealign_icae_rl/rollouts/stage1/full_train.jsonl; icae_rl/stage1/.
-- USER DECISION (2026-10-02 ~15:20 UTC): STOP the remaining Stage 1 runs (icae_ft/TRAIN was at 77/120,
-  1 success, 7.8% turn pass, only in logs/stage1.out) and run a LENIENT-PARSER diagnostic instead:
-  FULL on TRAIN with `--parser lenient` (bfcl_env.lenient_decode: un-escape `\_`, first parsable
-  bracketed call list; NOT BFCL's parser). Offline re-parse of the strict responses: 14.5% -> 55.6%.
-  Purpose: separate "bad at BFCL format" from "bad at the task".
-- Lenient run: two OOM crashes (batch 6, batch 4; logs/stage1_lenient_oom_*.out). Fixed in
-  icae_model.generate (DynamicCache init copied the padded KV -> per-layer handover; chunked prefill)
-  + OOM fallback (one prompt at a time) + per-episode .partial.jsonl with resume. RUNNING since
-  ~16:40 UTC on GPU 3, batch 4, log icae_rl/logs/stage1_lenient.out. Rerun the same command to resume:
-  `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True CUDA_VISIBLE_DEVICES=3 python run_stage1.py
-  --batch-size 4 --runs full/ft --splits train --parser lenient`
-- NEXT: compare lenient vs strict FULL; report to user; then write icae_rl_feasibility_report.md
-  (gate failed) and push. The user decides whether any more Stage 1 runs happen.
+**STOPPED at the gate (gate FAILED). Nothing is running. Stage 2 (RL) was NOT started.**
+Work happens ONLY on branch `icae-rl` (never commit/push main). Spec: `icae_rl/TASK_PROMPT.md`.
+Report: `icae_rl_feasibility_report.md` (repo root, on icae-rl). Notes: `icae_rl/NOTES.md`.
+- Stage 0 done: base = Mistral-7B-Instruct-v0.2; ICAE re-implementation matches their outputs exactly.
+- Stage 1 (TRAIN only): FULL = 1/120 (0.8%), 7.1% turn pass -> gate (a) (>=15%) fails. Forgiving
+  parser diagnostic (user request, not BFCL's parser): 2/120 (1.7%), 12.5% turn pass; model loops
+  (40 force-terminated). ICAE-ft stopped at 94/120 by the user: 1/94, 9.0% turns vs FULL 1/94, 6.6%
+  on the same tasks -> no measurable compression cost (gate (b) fails too).
+- Not run (user stopped them): pretrained ICAE, nohist, icae_turn, all TEST numbers.
+  `icae_rl/run_stage1.py` runs them (resumable per episode, ~6-7 h on one A100).
+- Next steps are the user's call (report section 7): a stronger tool-using decoder (needs our own
+  ICAE training) or an easier environment. Big files: /data/a84460786/edgealign_icae_rl/;
+  venv /data/a84460786/venvs/icae_rl.
 
 ## >>> CURRENT STATUS (updated 2026-10-01 ~21:00 UTC) -- read this first <<<
 

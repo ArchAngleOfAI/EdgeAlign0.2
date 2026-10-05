@@ -24,3 +24,163 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[full/ft] 22/120 multi_turn_base_34 valid=False turns=[0, 0] calls=25 (0 ok, 133.3 s/ep)
+[full/ft] 23/120 multi_turn_base_38 valid=False turns=[0, 0] calls=24 (0 ok, 127.5 s/ep)
+[full/ft] 24/120 multi_turn_base_39 valid=False turns=[1, 0, 0, 0] calls=21 (0 ok, 122.2 s/ep)
+[full/ft] 25/120 multi_turn_base_44 valid=False turns=[0, 0, 0] calls=3 (0 ok, 119.9 s/ep)
+[full/ft] 26/120 multi_turn_base_41 valid=False turns=[0, 0] calls=15 (0 ok, 119.0 s/ep)
+[full/ft] 27/120 multi_turn_base_45 valid=False turns=[0, 0] calls=3 (0 ok, 114.6 s/ep)
+[full/ft] 28/120 multi_turn_base_46 valid=False turns=[0] calls=3 (0 ok, 113.0 s/ep)
+[full/ft] 29/120 multi_turn_base_47 valid=False turns=[0, 0, 0] calls=3 (0 ok, 109.1 s/ep)
+[full/ft] 30/120 multi_turn_base_50 valid=True turns=[1] calls=2 (1 ok, 107.1 s/ep)
+[full/ft] 31/120 multi_turn_base_51 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 105.5 s/ep)
+[full/ft] 32/120 multi_turn_base_53 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 103.8 s/ep)
+[full/ft] 33/120 multi_turn_base_57 valid=False turns=[0, 0] calls=3 (1 ok, 103.1 s/ep)
+[full/ft] 34/120 multi_turn_base_42 valid=False turns=[0, 0, 0] calls=21 (1 ok, 102.9 s/ep)
+[full/ft] 35/120 multi_turn_base_43 valid=False turns=[1, 0, 0, 0] calls=21 (1 ok, 100.0 s/ep)
+
+
+[full/ft] 36/120 multi_turn_base_58 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 99.5 s/ep)
+
+[full/ft] 37/120 multi_turn_base_59 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 100.8 s/ep)
+
+
+[full/ft] 38/120 multi_turn_base_65 valid=False turns=[0, 0] calls=3 (1 ok, 103.5 s/ep)
+
+
+
+
+
+
+
+
+
+[full/ft] 39/120 multi_turn_base_54 valid=False turns=[1, 0, 0] calls=21 (1 ok, 108.5 s/ep)
+[full/ft] 40/120 multi_turn_base_67 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 105.7 s/ep)
+[full/ft] 41/120 multi_turn_base_69 valid=False turns=[0, 0] calls=3 (1 ok, 106.7 s/ep)
+[full/ft] 42/120 multi_turn_base_60 valid=False turns=[0, 0, 0, 0, 0] calls=18 (1 ok, 106.0 s/ep)
+[full/ft] 43/120 multi_turn_base_68 valid=False turns=[0, 0, 0, 0, 0] calls=10 (1 ok, 108.2 s/ep)
+[full/ft] 44/120 multi_turn_base_71 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 106.4 s/ep)
+[full/ft] 45/120 multi_turn_base_63 valid=False turns=[1, 0, 0] calls=23 (1 ok, 104.8 s/ep)
+[full/ft] 46/120 multi_turn_base_78 valid=False turns=[0, 0] calls=4 (1 ok, 104.3 s/ep)
+[full/ft] 47/120 multi_turn_base_86 valid=False turns=[0, 0, 0] calls=7 (1 ok, 110.9 s/ep)
+[full/ft] 48/120 multi_turn_base_70 valid=False turns=[0, 0] calls=21 (1 ok, 111.5 s/ep)
+[full/ft] 49/120 multi_turn_base_75 valid=False turns=[1, 0, 0, 0] calls=21 (1 ok, 122.1 s/ep)
+[full/ft] 50/120 multi_turn_base_82 valid=False turns=[0, 0, 0] calls=28 (1 ok, 136.2 s/ep)
+[full/ft] 51/120 multi_turn_base_87 valid=False turns=[1, 0, 0, 0] calls=21 (1 ok, 136.4 s/ep)
+[full/ft] 52/120 multi_turn_base_88 valid=False turns=[0, 0, 0] calls=21 (1 ok, 135.0 s/ep)
+[full/ft] 53/120 multi_turn_base_92 valid=False turns=[1, 0, 0, 0, 0] calls=6 (1 ok, 133.3 s/ep)
+[full/ft] 54/120 multi_turn_base_93 valid=False turns=[0, 0, 0] calls=3 (1 ok, 130.9 s/ep)
+[full/ft] 55/120 multi_turn_base_94 valid=False turns=[0, 0, 0] calls=6 (1 ok, 131.8 s/ep)
+[full/ft] 56/120 multi_turn_base_95 valid=False turns=[0, 0, 0, 0, 0] calls=5 (1 ok, 129.5 s/ep)
+[full/ft] 57/120 multi_turn_base_89 valid=False turns=[0, 0, 1, 0] calls=26 (1 ok, 133.5 s/ep)
+[full/ft] 58/120 multi_turn_base_97 valid=False turns=[0, 0, 0, 0, 0, 0] calls=6 (1 ok, 131.2 s/ep)
+[full/ft] 59/120 multi_turn_base_101 valid=False turns=[0, 0, 0] calls=3 (1 ok, 131.0 s/ep)
+[full/ft] 60/120 multi_turn_base_100 valid=False turns=[1, 0] calls=6 (1 ok, 130.0 s/ep)
+[full/ft] 61/120 multi_turn_base_105 valid=False turns=[0, 0] calls=3 (1 ok, 129.7 s/ep)
+[full/ft] 62/120 multi_turn_base_96 valid=False turns=[0, 0] calls=21 (1 ok, 128.4 s/ep)
+[full/ft] 63/120 multi_turn_base_99 valid=False turns=[0, 0, 0, 0] calls=16 (1 ok, 126.4 s/ep)
+[full/ft] 64/120 multi_turn_base_106 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 126.4 s/ep)
+[full/ft] 65/120 multi_turn_base_110 valid=False turns=[1, 0, 0, 0, 0, 0] calls=7 (1 ok, 129.4 s/ep)
+[full/ft] 66/120 multi_turn_base_109 valid=False turns=[1, 1, 1, 1, 1, 1, 0] calls=13 (1 ok, 129.7 s/ep)
+[full/ft] 67/120 multi_turn_base_104 valid=False turns=[1, 0] calls=21 (1 ok, 128.3 s/ep)
+[full/ft] 68/120 multi_turn_base_112 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 126.9 s/ep)
+[full/ft] 69/120 multi_turn_base_115 valid=False turns=[1, 0, 0] calls=4 (1 ok, 125.7 s/ep)
+[full/ft] 70/120 multi_turn_base_108 valid=False turns=[1, 0, 0, 0, 0] calls=21 (1 ok, 126.4 s/ep)
+[full/ft] 71/120 multi_turn_base_116 valid=False turns=[1, 1, 1, 0, 0, 0] calls=9 (1 ok, 125.6 s/ep)
+[full/ft] 72/120 multi_turn_base_118 valid=False turns=[1, 0, 0, 0, 0] calls=6 (1 ok, 123.9 s/ep)
+[full/ft] 73/120 multi_turn_base_119 valid=False turns=[0, 0, 1, 0] calls=6 (1 ok, 124.1 s/ep)
+[full/ft] 74/120 multi_turn_base_127 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 125.4 s/ep)
+[full/ft] 75/120 multi_turn_base_117 valid=False turns=[0, 0, 0, 0, 0, 0] calls=21 (1 ok, 126.5 s/ep)
+[full/ft] 76/120 multi_turn_base_128 valid=False turns=[1, 0, 0, 0] calls=6 (1 ok, 125.6 s/ep)
+[full/ft] 77/120 multi_turn_base_132 valid=False turns=[1, 0] calls=3 (1 ok, 125.2 s/ep)
+[full/ft] 78/120 multi_turn_base_121 valid=False turns=[1, 0, 0, 0] calls=21 (1 ok, 125.2 s/ep)
+[full/ft] 79/120 multi_turn_base_123 valid=False turns=[0, 0, 0, 0] calls=21 (1 ok, 123.6 s/ep)
+[full/ft] 80/120 multi_turn_base_131 valid=False turns=[1, 0, 0, 0, 0, 0, 0] calls=8 (1 ok, 122.0 s/ep)
+[full/ft] 81/120 multi_turn_base_134 valid=False turns=[0, 0, 0] calls=21 (1 ok, 128.5 s/ep)
+[full/ft] 82/120 multi_turn_base_135 valid=False turns=[1, 0, 0, 0] calls=21 (1 ok, 128.2 s/ep)
+[full/ft] 83/120 multi_turn_base_137 valid=False turns=[1, 0, 0, 0] calls=21 (1 ok, 126.7 s/ep)
+[full/ft] 84/120 multi_turn_base_144 valid=False turns=[1, 0] calls=3 (1 ok, 126.3 s/ep)
+[full/ft] 85/120 multi_turn_base_138 valid=False turns=[1, 0, 0, 0, 0] calls=25 (1 ok, 125.3 s/ep)
+[full/ft] 86/120 multi_turn_base_146 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 124.2 s/ep)
+[full/ft] 87/120 multi_turn_base_148 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 125.3 s/ep)
+[full/ft] 88/120 multi_turn_base_152 valid=False turns=[0, 0, 0] calls=3 (1 ok, 126.0 s/ep)
+[full/ft] 89/120 multi_turn_base_147 valid=False turns=[0, 0] calls=21 (1 ok, 135.6 s/ep)
+[full/ft] 90/120 multi_turn_base_142 valid=False turns=[1, 1, 1, 0, 0] calls=28 (1 ok, 134.7 s/ep)
+[full/ft] 91/120 multi_turn_base_150 valid=False turns=[0, 0] calls=21 (1 ok, 133.9 s/ep)
+[full/ft] 92/120 multi_turn_base_159 valid=False turns=[0, 0, 0] calls=4 (1 ok, 133.2 s/ep)
+[full/ft] 93/120 multi_turn_base_160 valid=False turns=[0, 0, 0] calls=7 (1 ok, 133.7 s/ep)
+[full/ft] 94/120 multi_turn_base_162 valid=False turns=[0, 0, 0, 0, 0, 0] calls=6 (1 ok, 132.3 s/ep)
+[full/ft] 95/120 multi_turn_base_153 valid=False turns=[0, 0, 0, 0, 0] calls=21 (1 ok, 132.1 s/ep)
+[full/ft] 96/120 multi_turn_base_166 valid=False turns=[0, 0, 0, 0, 0] calls=6 (1 ok, 132.3 s/ep)
+[full/ft] 97/120 multi_turn_base_165 valid=False turns=[1, 1, 0, 0, 0] calls=25 (1 ok, 144.8 s/ep)
+[full/ft] 98/120 multi_turn_base_168 valid=False turns=[1, 0, 0, 0, 0] calls=21 (1 ok, 145.4 s/ep)
+[full/ft] 99/120 multi_turn_base_169 valid=False turns=[0, 0] calls=21 (1 ok, 147.8 s/ep)
+[full/ft] 100/120 multi_turn_base_171 valid=False turns=[0, 0, 0] calls=4 (1 ok, 146.3 s/ep)
+[full/ft] 101/120 multi_turn_base_167 valid=False turns=[1, 0, 0, 0, 0] calls=30 (1 ok, 147.0 s/ep)
+[full/ft] 102/120 multi_turn_base_173 valid=False turns=[0, 0, 0, 0] calls=4 (1 ok, 146.1 s/ep)
+[full/ft] 103/120 multi_turn_base_172 valid=False turns=[1, 0, 0, 0] calls=5 (1 ok, 145.2 s/ep)
+[full/ft] 104/120 multi_turn_base_176 valid=False turns=[0, 0] calls=2 (1 ok, 144.3 s/ep)
+[full/ft] 105/120 multi_turn_base_179 valid=False turns=[0, 0, 0, 0] calls=5 (1 ok, 145.6 s/ep)
+[full/ft] 106/120 multi_turn_base_180 valid=False turns=[0, 0, 0, 1, 1, 0] calls=6 (1 ok, 145.2 s/ep)
+[full/ft] 107/120 multi_turn_base_170 valid=False turns=[0, 0, 0, 0, 0, 0] calls=21 (1 ok, 145.4 s/ep)
+[full/ft] 108/120 multi_turn_base_182 valid=True turns=[1, 1] calls=4 (2 ok, 144.6 s/ep)
+[full/ft] 109/120 multi_turn_base_174 valid=False turns=[0, 0, 0, 0, 0] calls=21 (2 ok, 149.8 s/ep)
+[full/ft] 110/120 multi_turn_base_184 valid=False turns=[0, 0, 0, 0, 0, 0] calls=9 (2 ok, 148.9 s/ep)
+[full/ft] 111/120 multi_turn_base_181 valid=False turns=[1, 0, 0, 0, 0] calls=16 (2 ok, 147.9 s/ep)
+[full/ft] 112/120 multi_turn_base_187 valid=False turns=[1, 1, 0, 0] calls=9 (2 ok, 152.5 s/ep)
+[full/ft] 113/120 multi_turn_base_183 valid=False turns=[1, 0, 0, 0, 0, 0] calls=19 (2 ok, 152.0 s/ep)
+[full/ft] 114/120 multi_turn_base_192 valid=False turns=[0, 0, 1, 0, 0] calls=7 (2 ok, 154.4 s/ep)
+[full/ft] 115/120 multi_turn_base_188 valid=False turns=[0, 0, 0, 0, 0, 0] calls=21 (2 ok, 158.3 s/ep)
+[full/ft] 116/120 multi_turn_base_196 valid=False turns=[0, 0, 0, 0, 0] calls=6 (2 ok, 157.0 s/ep)
+[full/ft] 117/120 multi_turn_base_197 valid=False turns=[0, 0, 0] calls=5 (2 ok, 158.9 s/ep)
+[full/ft] 118/120 multi_turn_base_199 valid=False turns=[0, 0, 0, 0, 0] calls=5 (2 ok, 157.6 s/ep)
+[full/ft] 119/120 multi_turn_base_189 valid=False turns=[0, 0, 0] calls=27 (2 ok, 157.2 s/ep)
+[full/ft] 120/120 multi_turn_base_193 valid=False turns=[0, 0, 0, 0] calls=25 (2 ok, 156.6 s/ep)
+=== full_lenient on train: 2/120 valid, 18790 s
+{
+ "note": "BFCL multi_turn_base, split by task id 60/40 seed 0. RL trains on TRAIN, so these scores are NOT comparable to the public leaderboard.",
+ "runs": {
+  "full/train": {
+   "n": 120,
+   "success": 1,
+   "success_rate": 0.008333333333333333,
+   "mean_turn_pass_frac": 0.0735515873015873,
+   "force_quit": 0,
+   "mean_calls_per_ep": 4.375,
+   "mean_hist_tokens_per_call": 0,
+   "mean_slots_per_call": 0,
+   "mean_hist_tokens_per_call_with_hist": 0,
+   "mean_slots_per_call_with_hist": 0,
+   "max_hist_tokens": 0,
+   "mean_decoder_len": 8839.068571428572,
+   "mean_gen_tokens": 121.26285714285714,
+   "mean_wall_s_per_ep_concurrent": 158.10169394810995,
+   "throughput_s_per_ep": 26.64671870271365,
+   "batch_size": 6,
+   "error_types": {
+    "None": 0,
+    "multi_turn:empty_turn_model_response": 82,
+    "multi_turn:execution_response_mismatch": 16,
+    "multi_turn:instance_state_mismatch": 21
+   }
+  }
+ }
+}

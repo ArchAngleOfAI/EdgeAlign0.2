@@ -91,3 +91,9 @@ Pretrained ICAE reconstruction (`[slots][AE]`, greedy):
   output ends with a stray `[`. Early sign that the released ICAE is weaker on tool traces than
   on prose.
 Raw outputs: `icae_rl/stage0/`.
+
+## Stage 1 (summary; details in icae_rl_feasibility_report.md)
+
+- FULL TRAIN strict 1/120; forgiving parser 2/120; ICAE-ft stopped at 94/120 (1/94). Gate failed.
+- The user stopped the remaining Stage 1 runs on 2026-10-02 and asked for the forgiving-parser
+  diagnostic instead. Lenient run OOM'd twice before the generate() memory fix (logs/stage1_lenient_oom_*).

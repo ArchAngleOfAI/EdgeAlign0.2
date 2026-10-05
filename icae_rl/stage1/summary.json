@@ -24,6 +24,31 @@
     "multi_turn:execution_response_mismatch": 16,
     "multi_turn:instance_state_mismatch": 21
    }
+  },
+  "full_lenient/train": {
+   "n": 120,
+   "success": 2,
+   "success_rate": 0.016666666666666666,
+   "mean_turn_pass_frac": 0.12236111111111111,
+   "force_quit": 40,
+   "mean_calls_per_ep": 11.383333333333333,
+   "mean_hist_tokens_per_call": 0,
+   "mean_slots_per_call": 0,
+   "mean_hist_tokens_per_call_with_hist": 0,
+   "mean_slots_per_call_with_hist": 0,
+   "max_hist_tokens": 0,
+   "mean_decoder_len": 11072.243777452415,
+   "mean_gen_tokens": 226.0900439238653,
+   "mean_wall_s_per_ep_concurrent": 622.4333247323831,
+   "throughput_s_per_ep": 156.5828346769015,
+   "batch_size": 4,
+   "error_types": {
+    "None": 0,
+    "multi_turn:empty_turn_model_response": 45,
+    "multi_turn:execution_response_mismatch": 17,
+    "multi_turn:force_terminated": 37,
+    "multi_turn:instance_state_mismatch": 19
+   }
   }
  }
 }

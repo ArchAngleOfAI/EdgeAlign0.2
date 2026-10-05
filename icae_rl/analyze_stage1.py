@@ -43,7 +43,7 @@ def main():
     OUT.mkdir(exist_ok=True)
     analysis, ex = {}, ["# Stage 1 example episodes (greedy)\n",
                         "Truncated transcripts. `valid` = BFCL success; `turns` = per-turn pass.\n"]
-    for f in sorted(ROLL.glob("*.jsonl")):
+    for f in sorted(p for p in ROLL.glob("*.jsonl") if not p.name.endswith(".partial.jsonl")):
         eps = [json.loads(l) for l in f.open()]
         kinds = Counter(call_kind(c["text"]) for e in eps for c in e["calls"])
         n = sum(kinds.values())
